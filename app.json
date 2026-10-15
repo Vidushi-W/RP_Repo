@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "Aware",
+    "slug": "signlanka-environmental-awareness",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true
+  }
+}
