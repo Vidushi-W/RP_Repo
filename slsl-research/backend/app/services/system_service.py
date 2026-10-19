@@ -70,7 +70,7 @@ class SystemService:
             features={
                 "dataset_import": "available",
                 "training": "available",
-                "evaluation": "planned",
+                "evaluation": "available",
                 "playground_recognition": "planned",
                 "hardware_gloves": "not_connected",
             },

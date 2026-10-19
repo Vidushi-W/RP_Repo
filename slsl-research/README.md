@@ -2,13 +2,12 @@
 
 Local-first research application for **Intelligent Continuous Sri Lankan Sign Language Understanding Using Multimodal AI**.
 
-## Step 3 status (complete)
+## Step 4 status (complete)
 
-- CPU PyTorch CNN–BiLSTM–CTC continuous sign recognizer
-- Separate sklearn motion-based emotion classifier (neutral/angry)
-- Subprocess training jobs with persistent metrics, cancellation, and model bundles
-- Training page: New Training, Training Runs, Models registry, workspace reset
-- Evaluation and playground inference are planned for Step 4
+- Model evaluation on held-out test recordings with real WER and exact-sequence accuracy
+- Sensor-only inference; labels compared after decoding (data-leakage tests included)
+- Evaluation page: 5-stage workflow, prediction table, alignment detail, experiment history
+- Playground live recognition is planned for Step 5
 
 ## Requirements
 
@@ -64,6 +63,15 @@ See `docs/DATASETS.md` for CSV/manifest schema details.
 5. When complete, activate the model under **Models**. Use **Reset Workspace** only when moving from synthetic to real data.
 
 See `docs/TRAINING.md` for architecture and bundle format.
+
+## Evaluation workflow
+
+1. Train or register a model under **Training** → **Models**.
+2. Open **Evaluation** → choose model and dataset with a held-out **test** split.
+3. Review compatibility warnings (vocabulary, signer overlap, split isolation).
+4. **Run Evaluation** and inspect WER, per-recording predictions, and token alignments.
+
+See `docs/EVALUATION.md` for metrics definitions and limitations.
 
 ## Tests
 

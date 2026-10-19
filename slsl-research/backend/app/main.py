@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import datasets, health, system, training
+from app.api.routes import datasets, evaluation, health, system, training
 from app.core.config import settings
 from app.core.database import SessionLocal
 from app.services.training_service import TrainingService
@@ -32,3 +32,4 @@ app.include_router(health.router, prefix=api)
 app.include_router(system.router, prefix=api)
 app.include_router(datasets.router, prefix=api)
 app.include_router(training.router, prefix=api)
+app.include_router(evaluation.router, prefix=api)
