@@ -2,12 +2,12 @@
 
 Local-first research application for **Intelligent Continuous Sri Lankan Sign Language Understanding Using Multimodal AI**.
 
-## Step 4 status (complete)
+## Step 5 status (complete)
 
-- Model evaluation on held-out test recordings with real WER and exact-sequence accuracy
-- Sensor-only inference; labels compared after decoding (data-leakage tests included)
-- Evaluation page: 5-stage workflow, prediction table, alignment detail, experiment history
-- Playground live recognition is planned for Step 5
+- Playground: Recognition (CSV upload), Live Input (CSV playback), Dictionary
+- Chat-style UI with genuine CNN–BiLSTM–CTC inference — not an LLM chatbot
+- Controlled sentence generation from predicted glosses; emotion from motion classifier
+- Hardware glove adapter stub with documented contract for future ESP32 integration
 
 ## Requirements
 

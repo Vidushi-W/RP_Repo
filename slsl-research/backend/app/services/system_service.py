@@ -71,7 +71,7 @@ class SystemService:
                 "dataset_import": "available",
                 "training": "available",
                 "evaluation": "available",
-                "playground_recognition": "planned",
+                "playground_recognition": "available",
                 "hardware_gloves": "not_connected",
             },
         )

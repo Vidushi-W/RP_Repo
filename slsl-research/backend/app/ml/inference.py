@@ -143,12 +143,6 @@ def predict_emotion(sensor: SensorRecording, bundle: LoadedBundle) -> EmotionRes
 
 
 def gloss_to_english(gloss_tokens: list[str]) -> str:
-    if not gloss_tokens:
-        return ""
-    words = [t.lower() if t.isupper() and len(t) > 1 else t for t in gloss_tokens]
-    sentence = " ".join(words)
-    if sentence:
-        sentence = sentence[0].upper() + sentence[1:]
-    if sentence and sentence[-1] not in ".!?":
-        sentence += "."
-    return sentence
+    from app.ml.sentence_generator import generate_english_sentence
+
+    return generate_english_sentence(gloss_tokens).english
