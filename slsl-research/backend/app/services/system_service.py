@@ -68,8 +68,8 @@ class SystemService:
             setup_complete=dataset_count > 0 and model_count > 0,
             hardware_gloves_connected=HardwareGloveSource.is_available(),
             features={
-                "dataset_import": "planned",
-                "training": "planned",
+                "dataset_import": "available",
+                "training": "available",
                 "evaluation": "planned",
                 "playground_recognition": "planned",
                 "hardware_gloves": "not_connected",

@@ -2,9 +2,13 @@
 
 Local-first research application for **Intelligent Continuous Sri Lankan Sign Language Understanding Using Multimodal AI**.
 
-## Step 2 status
+## Step 3 status (complete)
 
-Dataset management is implemented: import wizard, synthetic generator, annotations, sensor visualization, split management, and validation. Training, evaluation, and playground inference are planned for later steps.
+- CPU PyTorch CNN–BiLSTM–CTC continuous sign recognizer
+- Separate sklearn motion-based emotion classifier (neutral/angry)
+- Subprocess training jobs with persistent metrics, cancellation, and model bundles
+- Training page: New Training, Training Runs, Models registry, workspace reset
+- Evaluation and playground inference are planned for Step 4
 
 ## Requirements
 
@@ -50,6 +54,16 @@ cd slsl-research
 4. Run **Validation** from the dataset detail page.
 
 See `docs/DATASETS.md` for CSV/manifest schema details.
+
+## Training workflow
+
+1. Open **Datasets** → generate or import a dataset with train/val/test splits.
+2. Open **Training** → **New Training** → select dataset → **Review Settings**.
+3. Confirm train/val counts, vocabulary, and warnings (test split is never used).
+4. **Start Training** — job runs in a background subprocess; monitor under **Training Runs**.
+5. When complete, activate the model under **Models**. Use **Reset Workspace** only when moving from synthetic to real data.
+
+See `docs/TRAINING.md` for architecture and bundle format.
 
 ## Tests
 

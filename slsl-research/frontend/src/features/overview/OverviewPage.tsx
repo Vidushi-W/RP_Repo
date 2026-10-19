@@ -125,8 +125,8 @@ export function OverviewPage() {
                 </ul>
 
                 <div className="mt-6 space-y-2">
-                  <Button asChild className="w-full" variant="secondary" disabled>
-                    <span><Database className="h-4 w-4" /> Start Training (Step 2)</span>
+                  <Button asChild className="w-full" variant="secondary">
+                    <Link to="/training"><Database className="h-4 w-4" /> Start Training</Link>
                   </Button>
                   <Button asChild className="w-full" variant="secondary">
                     <Link to="/playground"><Play className="h-4 w-4" /> Open Playground <ArrowRight className="h-4 w-4" /></Link>
