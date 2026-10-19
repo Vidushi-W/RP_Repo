@@ -16,6 +16,7 @@ from torch.utils.data import DataLoader
 from app.core.config import FEATURE_COLUMNS, RANDOM_SEED, SENSOR_COLUMNS
 from app.ml.data_loader import RecordingSequenceDataset, collate_sequences
 from app.ml.decoder import torch_greedy_decode
+from app.ml.metrics import word_error_rate as token_wer
 from app.ml.emotion import train_emotion_model
 from app.ml.models import CtcSignModel
 from app.ml.preprocessing import NormalizationConfig, fit_normalization, resample_recording, smooth_features
@@ -39,20 +40,6 @@ class TrainingConfig:
     training_mode: str = "fresh"
     source_bundle_path: str | None = None
     torch_threads: int = 2
-
-
-def word_error_rate(pred: list[str], ref: list[str]) -> float:
-    r, p = ref, pred
-    d = np.zeros((len(r) + 1, len(p) + 1))
-    for i in range(len(r) + 1):
-        d[i, 0] = i
-    for j in range(len(p) + 1):
-        d[0, j] = j
-    for i in range(1, len(r) + 1):
-        for j in range(1, len(p) + 1):
-            cost = 0 if r[i - 1] == p[j - 1] else 1
-            d[i, j] = min(d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + cost)
-    return float(d[len(r), len(p)] / max(len(r), 1))
 
 
 def validate_time_resolution(recordings: list[Recording]) -> list[str]:
@@ -149,7 +136,7 @@ def run_training(
                 logits, ol = model(tensor, input_lengths=in_len)
                 pred, _ = torch_greedy_decode(logits[0, : int(ol[0])], blank_index=0, id_to_label=id_to_label)
                 ref = [vocab["id_to_label"][str(t)] for t in item.targets.tolist()]
-                all_wer.append(word_error_rate(pred, ref))
+                all_wer.append(token_wer(ref, pred))
 
         avg_train = float(np.mean(train_losses)) if train_losses else 0.0
         avg_val = float(np.mean(val_losses)) if val_losses else 0.0

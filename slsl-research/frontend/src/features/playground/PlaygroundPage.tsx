@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -52,21 +52,32 @@ function MessageBlock({ msg }: { msg: ChatMessage | RecognitionMessage }) {
 }
 
 function RecognitionTab() {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const qc = useQueryClient()
   const [modelId, setModelId] = useState<number | null>(null)
   const [pendingFile, setPendingFile] = useState<File | null>(null)
   const [fileMeta, setFileMeta] = useState<{ name: string; size: number } | null>(null)
 
   const { data: status } = useQuery({ queryKey: ['playground-status'], queryFn: playgroundApi.status })
   const { data: models = [] } = useQuery({ queryKey: ['models'], queryFn: () => trainingApi.listModels(false) })
+  const { data: history = [] } = useQuery({ queryKey: ['playground-history'], queryFn: playgroundApi.history })
+
+  const messages: ChatMessage[] = history.map((m, i) => ({
+    ...m,
+    id: String((m as ChatMessage).id ?? `${m.timestamp}-${i}`),
+  }))
 
   const recognizeMutation = useMutation({
     mutationFn: () => playgroundApi.recognize(pendingFile!, modelId ?? undefined),
-    onSuccess: (msg) => {
-      setMessages((prev) => [...prev, { ...msg, id: `${msg.timestamp}-${prev.length}` }])
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['playground-history'] })
       setPendingFile(null)
       setFileMeta(null)
     },
+  })
+
+  const clearMutation = useMutation({
+    mutationFn: () => playgroundApi.clearHistory(),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['playground-history'] }),
   })
 
   const onFile = (f: File | null) => {
@@ -117,7 +128,7 @@ function RecognitionTab() {
             <Button disabled={!pendingFile || recognizeMutation.isPending} onClick={() => recognizeMutation.mutate()}>
               <Zap className="h-4 w-4" /> Recognize
             </Button>
-            <Button variant="secondary" onClick={() => setMessages([])}>Clear Conversation</Button>
+            <Button variant="secondary" onClick={() => clearMutation.mutate()} disabled={clearMutation.isPending}>Clear Conversation</Button>
           </div>
           {recognizeMutation.error && <p className="mt-2 text-xs text-rose-600">{(recognizeMutation.error as Error).message}</p>}
         </div>

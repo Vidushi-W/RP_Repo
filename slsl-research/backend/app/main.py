@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.routes import datasets, evaluation, health, playground, system, training
+from app.api.routes import settings as settings_routes
 from app.core.config import settings
 from app.core.database import SessionLocal
 from app.services.training_service import TrainingService
@@ -34,3 +35,4 @@ app.include_router(datasets.router, prefix=api)
 app.include_router(training.router, prefix=api)
 app.include_router(evaluation.router, prefix=api)
 app.include_router(playground.router, prefix=api)
+app.include_router(settings_routes.router, prefix=api)

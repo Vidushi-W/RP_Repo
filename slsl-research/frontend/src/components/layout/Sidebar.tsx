@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { useHealth, useSystemStatus } from '@/hooks/useSystemStatus'
+import { SettingsDialog } from './SettingsDialog'
 
 const nav = [
   { to: '/', label: 'Overview', icon: LayoutDashboard },
@@ -47,6 +48,10 @@ export function Sidebar() {
           </NavLink>
         ))}
       </nav>
+
+      <div className="px-3 pb-2">
+        <SettingsDialog />
+      </div>
 
       <div className="border-t border-[var(--color-border)] px-4 py-4 text-xs text-[var(--color-muted)]">
         <div className="flex items-center justify-between">

@@ -1,77 +1,91 @@
 # SLSL AI Studio
 
-Local-first research application for **Intelligent Continuous Sri Lankan Sign Language Understanding Using Multimodal AI**.
+Local-first research application for **Intelligent Continuous Sri Lankan Sign Language Understanding** using two-glove sensor input, CTC sign recognition, and motion-based emotion detection.
 
-## Step 5 status (complete)
+## Features
 
-- Playground: Recognition (CSV upload), Live Input (CSV playback), Dictionary
-- Chat-style UI with genuine CNN–BiLSTM–CTC inference — not an LLM chatbot
-- Controlled sentence generation from predicted glosses; emotion from motion classifier
-- Hardware glove adapter stub with documented contract for future ESP32 integration
+| Section | Purpose |
+|---------|---------|
+| **Overview** | System health, setup checklist, recent activity |
+| **Datasets** | Import, label, split, synthetic generation |
+| **Training** | CNN–BiLSTM–CTC training, model registry, workspace reset |
+| **Evaluation** | Held-out WER and per-recording analysis |
+| **Playground** | CSV recognition, live playback, vocabulary dictionary |
 
-## Requirements
+## Prerequisites
 
 - Python 3.11+
 - Node.js 20+
 
-## Setup
-
-### Backend
+## Installation
 
 ```powershell
 cd slsl-research\backend
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+pip install torch --index-url https://download.pytorch.org/whl/cpu
 copy ..\.env.example .env
 alembic upgrade head
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
-```
 
-### Frontend
-
-```powershell
-cd slsl-research\frontend
+cd ..\frontend
 npm install
-npm run dev
 ```
 
-Open http://localhost:5173
-
-### Convenient launcher (Windows)
+## Launch
 
 ```powershell
 cd slsl-research
 .\scripts\start-dev.ps1
 ```
 
-## Dataset workflow
+Opens http://localhost:5173 (checks venv and node_modules; does not reinstall packages).
 
-1. Open **Datasets** → **Generate Synthetic** (≈400 recordings) or **Import Dataset**.
-2. Open a dataset → review recordings table and splits.
-3. Click a recording → inspect sensor charts and edit annotations.
-4. Run **Validation** from the dataset detail page.
+Manual start:
 
-See `docs/DATASETS.md` for CSV/manifest schema details.
+```powershell
+# Terminal 1 — backend
+cd backend && uvicorn app.main:app --reload --port 8000
 
-## Training workflow
+# Terminal 2 — frontend
+cd frontend && npm run dev
+```
 
-1. Open **Datasets** → generate or import a dataset with train/val/test splits.
-2. Open **Training** → **New Training** → select dataset → **Review Settings**.
-3. Confirm train/val counts, vocabulary, and warnings (test split is never used).
-4. **Start Training** — job runs in a background subprocess; monitor under **Training Runs**.
-5. When complete, activate the model under **Models**. Use **Reset Workspace** only when moving from synthetic to real data.
+## Typical workflow
 
-See `docs/TRAINING.md` for architecture and bundle format.
+1. **Datasets** → Generate Synthetic or import CSV recordings with manifest.
+2. Assign **train / val / test** splits on the dataset detail page.
+3. **Training** → Review settings → Start Fresh Training → monitor job → Activate model.
+4. **Evaluation** → Select model + dataset → Run on **test** split.
+5. **Playground** → Upload unknown CSV → view English + gloss + emotion.
 
-## Evaluation workflow
+### Synthetic → real transition
 
-1. Train or register a model under **Training** → **Models**.
-2. Open **Evaluation** → choose model and dataset with a held-out **test** split.
-3. Review compatibility warnings (vocabulary, signer overlap, split isolation).
-4. **Run Evaluation** and inspect WER, per-recording predictions, and token alignments.
+1. Import real glove recordings as a new dataset (`provenance: real`).
+2. **Start Fresh Training** on the real dataset (do not fine-tune from synthetic unless intentional).
+3. Activate the new model — no code changes required.
+4. Optionally **Reset Workspace** to archive synthetic models (type `RESET`; real data preserved).
 
-See `docs/EVALUATION.md` for metrics definitions and limitations.
+## Settings
+
+Open **Settings** in the sidebar footer:
+
+- Storage paths (read-only, from `.env`)
+- CPU thread preference
+- Uncertainty threshold
+- Export research metadata JSON
+
+## Sensor schema
+
+23-column CSV: `timestamp_ms` + 22 features (flex, acc, gyro per hand). Labels live in the database/manifest only — never in sensor files. See `docs/DATASETS.md`.
+
+## Model bundles
+
+See `docs/MODEL_BUNDLE.md`. Checkpoints live in `artifacts/models/`.
+
+## Hardware gloves (future)
+
+Not connected in this release. See `docs/HARDWARE_CONTRACT.md` for the adapter contract.
 
 ## Tests
 
@@ -85,10 +99,21 @@ npm run typecheck
 npm run build
 ```
 
-## Navigation
+End-to-end lifecycle: `pytest tests/test_lifecycle_e2e.py -q`
 
-1. Overview
-2. Datasets
-3. Training
-4. Evaluation
-5. Playground
+## Limitations
+
+- Prototype trained on **synthetic** motion patterns; real SLSL accuracy requires real collected data.
+- Decoder scores are **uncalibrated** — not correctness probabilities.
+- Live streaming uses provisional predictions; BiLSTM requires bidirectional context.
+- Emotion model uses motion features only — not text content.
+- Single-user local deployment; no authentication.
+
+## Documentation
+
+- `docs/ARCHITECTURE.md` — module map and adapter guide
+- `docs/DATASETS.md` — import schema
+- `docs/TRAINING.md` — training engine
+- `docs/EVALUATION.md` — metrics
+- `docs/PLAYGROUND.md` — inference UI
+- `docs/HARDWARE_CONTRACT.md` — future ESP32 integration

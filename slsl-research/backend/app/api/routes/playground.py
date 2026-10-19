@@ -22,6 +22,16 @@ def playground_status(db: Session = Depends(get_db)) -> PlaygroundStatus:
     return PlaygroundStatus(**PlaygroundService(db).get_status())
 
 
+@router.get("/playground/history")
+def recognition_history(limit: int = 50, db: Session = Depends(get_db)) -> list[dict]:
+    return PlaygroundService(db).list_history(limit)
+
+
+@router.delete("/playground/history")
+def clear_history(db: Session = Depends(get_db)) -> dict:
+    return {"cleared": PlaygroundService(db).clear_history()}
+
+
 @router.post("/playground/recognize", response_model=RecognitionMessage)
 async def recognize_upload(
     file: UploadFile = File(...),

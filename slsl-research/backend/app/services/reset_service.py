@@ -24,6 +24,13 @@ class ResetService:
             "models_to_archive": [],
             "jobs_to_clear": [],
             "datasets_to_remove": [],
+            "warnings": [],
+            "safe_defaults": {
+                "archive_models": True,
+                "clear_jobs": False,
+                "delete_checkpoints": False,
+                "remove_synthetic_datasets": False,
+            },
         }
         for m in self.db.scalars(select(MLModel).where(MLModel.status == "active")):
             affected["active_models"].append({"id": m.id, "name": m.name})
@@ -61,5 +68,11 @@ class ResetService:
                     if p.is_dir() and p.name.startswith("job_"):
                         import shutil
                         shutil.rmtree(p, ignore_errors=True)
+        from app.repositories.dataset import DatasetRepository
+
+        DatasetRepository(self.db).add_activity(
+            "workspace_reset",
+            f"Reset workspace — deactivated {result['deactivated_models']}, archived {result['archived_models']}",
+        )
         self.db.commit()
         return result

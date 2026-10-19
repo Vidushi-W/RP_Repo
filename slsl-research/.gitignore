@@ -10,13 +10,26 @@ __pycache__/
 frontend/node_modules/
 frontend/dist/
 
-# Local data & artifacts
+# Local env & database
 backend/.env
+.env
 *.db
+**/slsl_studio.db
+
+# Artifacts & generated data
 artifacts/models/*
 !artifacts/models/.gitkeep
 artifacts/evaluations/*
 !artifacts/evaluations/.gitkeep
+artifacts/studio_settings.json
+
+data/datasets/
+data/imports/staging/
+data/recordings/*.csv
+!data/recordings/.gitkeep
+
+# Legacy prototype models (use artifacts/models/)
+models/
 
 # IDE / OS
 .idea/
@@ -24,9 +37,3 @@ artifacts/evaluations/*
 .DS_Store
 Thumbs.db
 *.log
-
-# Large generated recordings (regenerate locally)
-data/recordings/*.csv
-!data/recordings/.gitkeep
-data/datasets/
-data/imports/staging/

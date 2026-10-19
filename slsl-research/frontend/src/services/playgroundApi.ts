@@ -18,6 +18,8 @@ export const playgroundApi = {
   },
   dictionary: (modelId?: number) =>
     request<DictionaryResponse>(`/playground/dictionary${modelId ? `?model_id=${modelId}` : ''}`),
+  history: () => request<RecognitionMessage[]>('/playground/history'),
+  clearHistory: () => request<{ cleared: number }>('/playground/history', { method: 'DELETE' }),
   createLiveSession: (sourceType: string) =>
     request<{ session_id: string; source_type: string }>('/playground/live/session', {
       method: 'POST',

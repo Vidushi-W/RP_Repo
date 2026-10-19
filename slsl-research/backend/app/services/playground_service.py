@@ -7,9 +7,11 @@ import time
 from pathlib import Path
 from typing import Any
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
+from app.models.recognition import RecognitionMessage
 from app.ml.inference import load_bundle, predict_emotion, recognize_sensor
 from app.ml.preprocessing import validate_recording
 from app.ml.sentence_generator import generate_english_sentence, list_sentence_patterns
@@ -51,8 +53,9 @@ class PlaygroundService:
         sensor = load_csv_to_recording(file_bytes, source_name=filename)
         validation = validate_recording(sensor)
 
-        recognition = recognize_sensor(sensor, load_bundle(bundle_dir))
-        emotion = predict_emotion(sensor, load_bundle(bundle_dir))
+        bundle = load_bundle(bundle_dir)
+        recognition = recognize_sensor(sensor, bundle)
+        emotion = predict_emotion(sensor, bundle)
         sentence = generate_english_sentence(
             recognition.predicted_signs,
             decoder_score=recognition.decoder_score,
@@ -66,7 +69,7 @@ class PlaygroundService:
             if uncertain or not recognition.predicted_signs:
                 display_english = " | ".join(recognition.predicted_signs) if recognition.predicted_signs else ""
 
-        return {
+        result = {
             "filename": filename,
             "validation": validation.to_dict(),
             "english": display_english,
@@ -88,6 +91,47 @@ class PlaygroundService:
             "feedback": feedback.__dict__ if feedback else None,
             "no_ground_truth_used": True,
         }
+        self._save_message(result)
+        return result
+
+    def list_history(self, limit: int = 50) -> list[dict[str, Any]]:
+        rows = self.db.scalars(
+            select(RecognitionMessage).order_by(RecognitionMessage.created_at.desc()).limit(limit)
+        )
+        return [self._message_to_dict(r) for r in rows]
+
+    def clear_history(self) -> int:
+        count = len(self.db.scalars(select(RecognitionMessage)).all())
+        for row in self.db.scalars(select(RecognitionMessage)):
+            self.db.delete(row)
+        self.db.commit()
+        return count
+
+    def _save_message(self, payload: dict[str, Any]) -> None:
+        msg = RecognitionMessage(
+            source="playground",
+            filename=payload["filename"],
+            model_id=payload["model_id"],
+            model_name=payload["model_name"],
+            model_version=payload["model_version"],
+            english=payload["english"],
+            gloss_sequence_json=json.dumps(payload["gloss_sequence"]),
+            emotion=payload.get("emotion"),
+            decoder_score=payload.get("decoder_score"),
+            inference_ms=payload.get("inference_ms"),
+            uncertain=payload.get("uncertain", False),
+            payload_json=json.dumps(payload),
+        )
+        self.db.add(msg)
+        self.dataset_repo.add_activity("recognition", f"Recognized upload '{payload['filename']}'")
+        self.db.commit()
+
+    def _message_to_dict(self, row: RecognitionMessage) -> dict[str, Any]:
+        payload = json.loads(row.payload_json or "{}")
+        payload.setdefault("id", row.id)
+        payload.setdefault("gloss_sequence", json.loads(row.gloss_sequence_json or "[]"))
+        payload.setdefault("timestamp", row.created_at.timestamp() if row.created_at else 0)
+        return payload
 
     def get_dictionary(self, model_id: int | None = None) -> dict[str, Any]:
         model, bundle_dir = self._resolve_model(model_id)

@@ -8,13 +8,8 @@ from pathlib import Path
 from typing import Any
 
 from app.core.config import settings
-from app.ml.inference import (
-    LoadedBundle,
-    gloss_to_english,
-    load_bundle,
-    predict_emotion,
-    recognize_from_csv,
-)
+from app.ml.inference import LoadedBundle, load_bundle, predict_emotion, recognize_from_csv
+from app.ml.sentence_generator import generate_english_sentence
 from app.ml.metrics import (
     aggregate_wer,
     emotion_classification_metrics,
@@ -84,7 +79,7 @@ def evaluate_recordings(
             "reference_signs": ref_signs,
             "predicted_signs": recognition.predicted_signs,
             "reference_english": rec.reference_english_sentence or None,
-            "generated_english": gloss_to_english(recognition.predicted_signs),
+            "generated_english": generate_english_sentence(recognition.predicted_signs, recognition.decoder_score).english,
             "reference_emotion": ref_emotion,
             "predicted_emotion": emotion.predicted_emotion,
             "emotion_confidence": emotion.confidence,

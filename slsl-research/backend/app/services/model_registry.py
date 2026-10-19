@@ -39,6 +39,9 @@ class ModelRegistryService:
         for m in self.db.scalars(select(MLModel).where(MLModel.status == "active")):
             m.status = "inactive"
         model.status = "active"
+        from app.repositories.dataset import DatasetRepository
+
+        DatasetRepository(self.db).add_activity("model_activated", f"Activated model '{model.name}' v{model.version}")
         self.db.commit()
         self.db.refresh(model)
         return model
@@ -70,9 +73,16 @@ class ModelRegistryService:
         import_dir.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(zip_path, "r") as zf:
             for member in zf.infolist():
-                if ".." in member.filename:
+                if ".." in member.filename or member.filename.startswith("/"):
+                    raise ValueError("Unsafe path in bundle")
+                target = (import_dir / member.filename).resolve()
+                if not str(target).startswith(str(import_dir.resolve())):
                     raise ValueError("Unsafe path in bundle")
                 zf.extract(member, import_dir)
+        allowed_suffixes = {".pt", ".json", ".pkl"}
+        for f in import_dir.rglob("*"):
+            if f.is_file() and f.suffix not in allowed_suffixes:
+                raise ValueError(f"Unexpected file type in bundle: {f.name}")
         required = ["model.pt", "vocabulary.json", "preprocessing.json"]
         for f in required:
             if not (import_dir / f).exists():
