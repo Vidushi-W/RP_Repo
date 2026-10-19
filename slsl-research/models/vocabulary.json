@@ -1,0 +1,30 @@
+{
+  "label_to_id": {
+    "<blank>": 0,
+    "I": 1,
+    "YOU": 2,
+    "NEED": 3,
+    "WANT": 4,
+    "WATER": 5,
+    "FOOD": 6,
+    "HELP": 7,
+    "GO": 8,
+    "HOME": 9,
+    "STOP": 10
+  },
+  "id_to_label": {
+    "0": "<blank>",
+    "1": "I",
+    "2": "YOU",
+    "3": "NEED",
+    "4": "WANT",
+    "5": "WATER",
+    "6": "FOOD",
+    "7": "HELP",
+    "8": "GO",
+    "9": "HOME",
+    "10": "STOP"
+  },
+  "blank_index": 0,
+  "blank_token": "<blank>"
+}
