@@ -1,21 +1,22 @@
 """Sensor source adapter interfaces."""
 
 from abc import ABC, abstractmethod
-from typing import AsyncIterator, Iterator
+from typing import AsyncIterator, Iterator, Optional
 
-from app.sensors.frame import SensorFrame
+from app.sensors.frame import SensorFrame, SensorRecording
 
 
 class SensorSource(ABC):
-    """Produces normalized SensorFrame objects from CSV, playback, or hardware."""
-
     @abstractmethod
     def source_type(self) -> str:
         ...
 
     @abstractmethod
-    def iter_frames(self) -> Iterator[SensorFrame]:
+    def read_recording(self) -> SensorRecording:
         ...
+
+    def iter_frames(self) -> Iterator[SensorFrame]:
+        return iter(self.read_recording().frames)
 
     async def stream_frames(self) -> AsyncIterator[SensorFrame]:
         for frame in self.iter_frames():
@@ -25,42 +26,37 @@ class SensorSource(ABC):
         pass
 
 
-class CsvRecordingSource(SensorSource):
-    """CSV file recording adapter — implementation deferred to Step 2."""
-
-    def __init__(self, filepath: str) -> None:
-        self.filepath = filepath
-
-    def source_type(self) -> str:
-        return "csv_recording"
-
-    def iter_frames(self) -> Iterator[SensorFrame]:
-        raise NotImplementedError("CSV import is not implemented in Step 1.")
-
-
-class CsvPlaybackSource(SensorSource):
-    """Timed CSV playback adapter — implementation deferred to Step 2."""
-
-    def __init__(self, filepath: str, speed: float = 1.0) -> None:
-        self.filepath = filepath
+class PlaybackSensorSource(SensorSource):
+    def __init__(self, recording: SensorRecording, speed: float = 1.0) -> None:
+        self._recording = recording
         self.speed = speed
+        self._index = 0
+        self._paused = False
+        self._stopped = False
+
+    def read_recording(self) -> SensorRecording:
+        return self._recording
 
     def source_type(self) -> str:
         return "csv_playback"
 
-    def iter_frames(self) -> Iterator[SensorFrame]:
-        raise NotImplementedError("CSV playback is not implemented in Step 1.")
+    def reset(self) -> None:
+        self._index = 0
+        self._paused = False
+        self._stopped = False
 
+    def pause(self) -> None:
+        self._paused = True
 
-class HardwareGloveSource(SensorSource):
-    """Future physical glove adapter — not connected."""
+    def resume(self) -> None:
+        self._paused = False
 
-    def source_type(self) -> str:
-        return "hardware_gloves"
+    def stop(self) -> None:
+        self._stopped = True
 
-    def iter_frames(self) -> Iterator[SensorFrame]:
-        raise NotImplementedError("Physical glove adapter is not connected.")
-
-    @staticmethod
-    def is_available() -> bool:
-        return False
+    def next_frame(self) -> Optional[SensorFrame]:
+        if self._stopped or self._index >= len(self._recording.frames):
+            return None
+        frame = self._recording.frames[self._index]
+        self._index += 1
+        return frame

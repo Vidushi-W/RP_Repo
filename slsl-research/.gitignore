@@ -28,3 +28,5 @@ Thumbs.db
 # Large generated recordings (regenerate locally)
 data/recordings/*.csv
 !data/recordings/.gitkeep
+data/datasets/
+data/imports/staging/

@@ -1,4 +1,4 @@
-from app.sensors.base import HardwareGloveSource
+from app.sensors.csv_source import HardwareSensorSource as HardwareGloveSource
 from app.sensors.frame import NUM_FEATURES, SensorFrame
 
 

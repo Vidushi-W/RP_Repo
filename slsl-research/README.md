@@ -2,9 +2,9 @@
 
 Local-first research application for **Intelligent Continuous Sri Lankan Sign Language Understanding Using Multimodal AI**.
 
-## Step 1 status
+## Step 2 status
 
-This milestone delivers the application foundation: professional UI shell, FastAPI backend, SQLite schema, sensor interfaces, and real empty states. Dataset import, training, evaluation, and inference are **not** implemented yet.
+Dataset management is implemented: import wizard, synthetic generator, annotations, sensor visualization, split management, and validation. Training, evaluation, and playground inference are planned for later steps.
 
 ## Requirements
 
@@ -41,6 +41,15 @@ Open http://localhost:5173
 cd slsl-research
 .\scripts\start-dev.ps1
 ```
+
+## Dataset workflow
+
+1. Open **Datasets** → **Generate Synthetic** (≈400 recordings) or **Import Dataset**.
+2. Open a dataset → review recordings table and splits.
+3. Click a recording → inspect sensor charts and edit annotations.
+4. Run **Validation** from the dataset detail page.
+
+See `docs/DATASETS.md` for CSV/manifest schema details.
 
 ## Tests
 

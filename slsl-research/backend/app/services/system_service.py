@@ -8,7 +8,7 @@ from app.schemas.system import (
     SystemStatusResponse,
     TrainingJobSummary,
 )
-from app.sensors.base import HardwareGloveSource
+from app.sensors.csv_source import HardwareSensorSource as HardwareGloveSource
 
 
 class SystemService:
