@@ -137,7 +137,7 @@ class LiveSessionStore:
         if len(session.buffer) >= MIN_FRAMES_FOR_INFERENCE and session.bundle:
             provisional = self._provisional_inference(session)
 
-        if session.rest_frame_count >= REST_FRAMES and len(session.buffer) >= MIN_FRAMES_FOR_INFERENCE:
+        if session.status == "stopped" and len(session.buffer) >= 4:
             final = self.finalize(session_id)
             return {**self._status_payload(session, provisional=None), "auto_finalized": final}
 
@@ -145,7 +145,7 @@ class LiveSessionStore:
 
     def finalize(self, session_id: str) -> dict[str, Any]:
         session = self._require(session_id)
-        if not session.bundle or len(session.buffer) < MIN_FRAMES_FOR_INFERENCE:
+        if not session.bundle or len(session.buffer) < 4:
             raise ValueError("Insufficient buffered frames for final recognition.")
         recording = SensorRecording(frames=list(session.buffer), source_name=session.filename or "live")
         recognition = recognize_sensor(recording, session.bundle)

@@ -28,6 +28,22 @@ def _sample_csv_rows(n: int = 30) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def test_import_sets_recording_count(client, tmp_path):
+    df = _sample_csv_rows()
+    buf = io.BytesIO()
+    df.to_csv(buf, index=False)
+    create = client.post("/api/datasets", json={"name": "Count DS", "provenance": "synthetic"})
+    ds_id = create.json()["id"]
+    client.post(
+        f"/api/datasets/{ds_id}/import",
+        files={"files": ("rec_count.csv", buf.getvalue(), "text/csv")},
+    )
+    ds = client.get(f"/api/datasets/{ds_id}").json()
+    assert ds["recording_count"] == 1
+    recs = client.get(f"/api/datasets/{ds_id}/recordings").json()
+    assert len(recs) == 1
+
+
 def test_valid_csv_import(client, tmp_path):
     df = _sample_csv_rows()
     buf = io.BytesIO()
@@ -43,6 +59,13 @@ def test_valid_csv_import(client, tmp_path):
     assert res.json()["imported"] == 1
     recs = client.get(f"/api/datasets/{ds_id}/recordings")
     assert len(recs.json()) == 1
+
+
+def test_import_requires_files(client):
+    create = client.post("/api/datasets", json={"name": "Empty Import"})
+    ds_id = create.json()["id"]
+    res = client.post(f"/api/datasets/{ds_id}/import", data={"bump_version": "false"})
+    assert res.status_code == 422 or res.status_code == 400
 
 
 def test_invalid_csv_rejected(client):

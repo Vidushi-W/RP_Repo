@@ -17,7 +17,24 @@ export const trainingApi = {
   activateModel: (id: number) => request<ModelRecord>(`/models/${id}/activate`, { method: 'POST' }),
   archiveModel: (id: number) => request<ModelRecord>(`/models/${id}/archive`, { method: 'POST' }),
   resetPreview: (body: Record<string, boolean>) =>
-    request<Record<string, unknown>>('/training/reset/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }),
+    request<{
+      active_models: { id: number; name: string }[]
+      models_to_archive: { id: number; name: string }[]
+      jobs_to_clear: { id: number; name: string; status: string }[]
+      datasets_to_remove: { id: number; name: string }[]
+      warnings: string[]
+    }>('/training/reset/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }),
   resetExecute: (body: Record<string, unknown>) =>
     request<Record<string, unknown>>('/training/reset/execute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }),
+  exportModel: async (id: number) => {
+    const res = await fetch(`/api/models/${id}/export`)
+    if (!res.ok) throw new Error(await res.text() || `Error ${res.status}`)
+    const blob = await res.blob()
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `slsl_model_${id}.zip`
+    a.click()
+    URL.revokeObjectURL(url)
+  },
 }

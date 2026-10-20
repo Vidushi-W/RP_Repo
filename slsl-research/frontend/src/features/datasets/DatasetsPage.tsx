@@ -3,7 +3,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { FolderOpen, Sparkles, Upload } from 'lucide-react'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { EmptyState } from '@/components/shared/EmptyState'
+import { LoadingSpinner } from '@/components/shared/LoadingState'
+import { Alert } from '@/components/ui/alert'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogBody, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { datasetApi } from '@/services/datasetApi'
 import { DatasetList } from './DatasetList'
@@ -11,6 +15,7 @@ import { ImportWizard } from './ImportWizard'
 
 export function DatasetsPage() {
   const [showImport, setShowImport] = useState(false)
+  const [importKey, setImportKey] = useState(0)
   const qc = useQueryClient()
   const { data: datasets = [], isLoading } = useQuery({ queryKey: ['datasets'], queryFn: datasetApi.list })
   const { data: imports = [] } = useQuery({ queryKey: ['imports'], queryFn: datasetApi.listImports })
@@ -29,6 +34,11 @@ export function DatasetsPage() {
     },
   })
 
+  const openImport = () => {
+    setImportKey((k) => k + 1)
+    setShowImport(true)
+  }
+
   return (
     <div>
       <PageHeader
@@ -39,7 +49,7 @@ export function DatasetsPage() {
             <Button variant="secondary" onClick={() => synthMutation.mutate()} disabled={synthMutation.isPending}>
               <Sparkles className="h-4 w-4" /> Generate Synthetic
             </Button>
-            <Button onClick={() => setShowImport(true)}>
+            <Button onClick={openImport}>
               <Upload className="h-4 w-4" /> Import Dataset
             </Button>
           </div>
@@ -47,18 +57,18 @@ export function DatasetsPage() {
       />
 
       {synthMutation.isError && (
-        <p className="mb-4 text-sm text-rose-700">{(synthMutation.error as Error).message}</p>
+        <Alert variant="danger" className="mb-4">{(synthMutation.error as Error).message}</Alert>
       )}
 
       <Tabs defaultValue="library">
         <TabsList>
           <TabsTrigger value="library">Library</TabsTrigger>
-          <TabsTrigger value="imports">Imports</TabsTrigger>
+          <TabsTrigger value="imports">Import history</TabsTrigger>
         </TabsList>
 
         <TabsContent value="library">
           {isLoading ? (
-            <p className="text-sm text-[var(--color-muted)]">Loading datasets…</p>
+            <LoadingSpinner label="Loading datasets…" />
           ) : datasets.length === 0 ? (
             <EmptyState
               icon={FolderOpen}
@@ -67,7 +77,7 @@ export function DatasetsPage() {
               action={
                 <div className="flex gap-2">
                   <Button variant="secondary" onClick={() => synthMutation.mutate()} disabled={synthMutation.isPending}>Generate Synthetic</Button>
-                  <Button onClick={() => setShowImport(true)}>Import Dataset</Button>
+                  <Button onClick={openImport}>Import Dataset</Button>
                 </div>
               }
             />
@@ -82,9 +92,12 @@ export function DatasetsPage() {
           ) : (
             <div className="space-y-2">
               {imports.map((job) => (
-                <div key={job.id} className="rounded-lg border border-[var(--color-border)] bg-white px-4 py-3 text-sm">
-                  <div className="flex justify-between"><span className="font-medium">{job.source_name}</span><span>{job.status}</span></div>
-                  <p className="text-xs text-[var(--color-muted)]">{new Date(job.created_at).toLocaleString()}</p>
+                <div key={job.id} className="flex items-center justify-between rounded-xl border border-border bg-surface px-4 py-3 text-sm shadow-sm">
+                  <div>
+                    <p className="font-medium">{job.source_name}</p>
+                    <p className="text-xs text-muted">{new Date(job.created_at).toLocaleString()}</p>
+                  </div>
+                  <Badge variant={job.status === 'completed' ? 'success' : 'secondary'}>{job.status}</Badge>
                 </div>
               ))}
             </div>
@@ -92,11 +105,17 @@ export function DatasetsPage() {
         </TabsContent>
       </Tabs>
 
-      {showImport && (
-        <div className="mt-6">
-          <ImportWizard onClose={() => setShowImport(false)} />
-        </div>
-      )}
+      <Dialog open={showImport} onOpenChange={setShowImport}>
+        <DialogContent className="max-w-3xl">
+          <DialogHeader>
+            <DialogTitle>Import dataset</DialogTitle>
+            <DialogDescription>Upload sensor CSV files or a ZIP package with optional manifest metadata.</DialogDescription>
+          </DialogHeader>
+          <DialogBody className="pt-0">
+            <ImportWizard key={importKey} embedded onClose={() => setShowImport(false)} />
+          </DialogBody>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

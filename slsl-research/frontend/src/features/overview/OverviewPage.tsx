@@ -1,21 +1,13 @@
-import { ArrowRight, CheckCircle2, Circle, Database, Play, Upload } from 'lucide-react'
+import { Activity, ArrowRight, Brain, CheckCircle2, Circle, Database, Play, Upload } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
+import { LoadingCardGrid } from '@/components/shared/LoadingState'
+import { StatCard } from '@/components/shared/StatCard'
+import { Alert } from '@/components/ui/alert'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
 import { useHealth, useSystemStatus } from '@/hooks/useSystemStatus'
-
-function Stat({ label, value, hint }: { label: string; value: string; hint?: string }) {
-  return (
-    <div className="rounded-lg border border-[var(--color-border)] bg-white px-4 py-3">
-      <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-muted)]">{label}</p>
-      <p className="mt-1 text-2xl font-semibold text-[var(--color-foreground)]">{value}</p>
-      {hint && <p className="mt-1 text-xs text-[var(--color-muted)]">{hint}</p>}
-    </div>
-  )
-}
 
 export function OverviewPage() {
   const { data: health, isLoading: healthLoading, isError: healthError } = useHealth()
@@ -40,25 +32,21 @@ export function OverviewPage() {
         }
       />
 
-      {(isLoading || healthLoading) && (
-        <div className="grid gap-4 md:grid-cols-4">
-          {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24" />)}
-        </div>
-      )}
+      {(isLoading || healthLoading) && <LoadingCardGrid />}
 
       {(isError || healthError) && (
-        <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+        <Alert variant="warning" className="mb-6">
           Backend is not reachable. Start the API server on port 8000, then refresh this page.
-        </div>
+        </Alert>
       )}
 
       {status && (
         <>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <Stat label="Active model" value={status.active_model?.name ?? 'None'} hint={status.active_model?.version ?? 'No trained model yet'} />
-            <Stat label="Datasets" value={String(status.dataset_count)} hint="Registered in SQLite" />
-            <Stat label="Models" value={String(status.model_count)} hint="Stored model records" />
-            <Stat label="Backend" value={health?.status === 'ok' ? 'Healthy' : 'Unavailable'} hint={health?.service} />
+            <StatCard label="Active model" value={status.active_model?.name ?? 'None'} hint={status.active_model?.version ?? 'No trained model yet'} icon={Brain} tone="accent" />
+            <StatCard label="Datasets" value={String(status.dataset_count)} hint="Registered in SQLite" icon={Database} />
+            <StatCard label="Models" value={String(status.model_count)} hint="Stored model records" icon={Brain} />
+            <StatCard label="Backend" value={health?.status === 'ok' ? 'Healthy' : 'Unavailable'} hint={health?.service} icon={Activity} tone={health?.status === 'ok' ? 'success' : 'warning'} />
           </div>
 
           <div className="mt-6 grid gap-4 xl:grid-cols-[1.4fr_1fr]">
@@ -68,36 +56,28 @@ export function OverviewPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-lg bg-slate-50 px-4 py-3">
-                    <p className="text-xs text-[var(--color-muted)]">Latest training job</p>
-                    <p className="mt-1 text-sm font-medium">
-                      {status.latest_training_job?.name ?? 'No training jobs yet'}
-                    </p>
-                    <Badge variant="secondary" className="mt-2">
-                      {status.latest_training_job?.status ?? 'not_started'}
-                    </Badge>
+                  <div className="rounded-lg border border-border bg-surface-muted px-4 py-3">
+                    <p className="text-xs text-muted">Latest training job</p>
+                    <p className="mt-1 text-sm font-medium">{status.latest_training_job?.name ?? 'No training jobs yet'}</p>
+                    <Badge variant="secondary" className="mt-2">{status.latest_training_job?.status ?? 'not_started'}</Badge>
                   </div>
-                  <div className="rounded-lg bg-slate-50 px-4 py-3">
-                    <p className="text-xs text-[var(--color-muted)]">Latest evaluation</p>
-                    <p className="mt-1 text-sm font-medium">
-                      {status.latest_evaluation?.name ?? 'No evaluations yet'}
-                    </p>
-                    <Badge variant="secondary" className="mt-2">
-                      {status.latest_evaluation?.status ?? 'not_started'}
-                    </Badge>
+                  <div className="rounded-lg border border-border bg-surface-muted px-4 py-3">
+                    <p className="text-xs text-muted">Latest evaluation</p>
+                    <p className="mt-1 text-sm font-medium">{status.latest_evaluation?.name ?? 'No evaluations yet'}</p>
+                    <Badge variant="secondary" className="mt-2">{status.latest_evaluation?.status ?? 'not_started'}</Badge>
                   </div>
                 </div>
 
                 <div>
-                  <p className="mb-2 text-xs font-medium uppercase tracking-wide text-[var(--color-muted)]">Recent activity</p>
+                  <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted">Recent activity</p>
                   {status.recent_activity.length === 0 ? (
-                    <p className="text-sm text-[var(--color-muted)]">No activity recorded yet. Actions will appear here as you import data and run jobs.</p>
+                    <p className="text-sm text-muted">No activity recorded yet. Actions will appear here as you import data and run jobs.</p>
                   ) : (
                     <ul className="space-y-2 text-sm">
                       {status.recent_activity.map((item) => (
-                        <li key={item.id} className="flex items-start justify-between gap-3 border-b border-[var(--color-border)] pb-2 last:border-0">
+                        <li key={item.id} className="flex items-start justify-between gap-3 border-b border-border pb-2 last:border-0">
                           <span>{item.message}</span>
-                          <span className="shrink-0 text-xs text-[var(--color-muted)]">{new Date(item.created_at).toLocaleString()}</span>
+                          <span className="shrink-0 text-xs text-muted">{new Date(item.created_at).toLocaleString()}</span>
                         </li>
                       ))}
                     </ul>
@@ -115,11 +95,11 @@ export function OverviewPage() {
                   {checklist.map((item) => (
                     <li key={item.label} className="flex items-center gap-3 text-sm">
                       {item.done ? (
-                        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                        <CheckCircle2 className="h-4 w-4 text-success" />
                       ) : (
-                        <Circle className="h-4 w-4 text-slate-300" />
+                        <Circle className="h-4 w-4 text-border-strong" />
                       )}
-                      <span className={item.done ? 'text-[var(--color-foreground)]' : 'text-[var(--color-muted)]'}>{item.label}</span>
+                      <span className={item.done ? 'text-foreground' : 'text-muted'}>{item.label}</span>
                     </li>
                   ))}
                 </ul>
@@ -128,7 +108,7 @@ export function OverviewPage() {
                   <Button asChild className="w-full" variant="secondary">
                     <Link to="/training"><Database className="h-4 w-4" /> Start Training</Link>
                   </Button>
-                  <Button asChild className="w-full" variant="secondary">
+                  <Button asChild className="w-full">
                     <Link to="/playground"><Play className="h-4 w-4" /> Open Playground <ArrowRight className="h-4 w-4" /></Link>
                   </Button>
                 </div>

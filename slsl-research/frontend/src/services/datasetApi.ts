@@ -6,14 +6,22 @@ import type {
   RecordingDetail,
   RecordingSummary,
 } from '@/types/dataset'
+import { readApiError } from '@/lib/apiError'
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`/api${path}`, init)
-  if (!res.ok) {
-    const text = await res.text()
-    throw new Error(text || `Request failed: ${res.status}`)
-  }
+  if (!res.ok) throw new Error(await readApiError(res))
   return res.json() as Promise<T>
+}
+
+export function classifyImportFiles(files: File[]) {
+  const zips = files.filter((f) => f.name.toLowerCase().endsWith('.zip'))
+  const manifestInFiles = files.find((f) => f.name.toLowerCase() === 'manifest.csv') ?? null
+  const sensorCsvs = files.filter(
+    (f) => f.name.toLowerCase().endsWith('.csv') && f.name.toLowerCase() !== 'manifest.csv',
+  )
+  const payload = zips.length ? zips : sensorCsvs
+  return { zips, sensorCsvs, manifestInFiles, payload }
 }
 
 export const datasetApi = {
@@ -36,11 +44,15 @@ export const datasetApi = {
     return request<ImportPreviewItem[]>('/datasets/preview', { method: 'POST', body: form })
   },
   import: (datasetId: number, files: File[], manifest?: File, bumpVersion = false) => {
+    if (!files.length) throw new Error('No importable files selected. Add sensor CSV files or a dataset ZIP.')
     const form = new FormData()
     files.forEach((f) => form.append('files', f))
     if (manifest) form.append('manifest', manifest)
     form.append('bump_version', String(bumpVersion))
-    return request<Record<string, unknown>>(`/datasets/${datasetId}/import`, { method: 'POST', body: form })
+    return request<{ imported: number; skipped_duplicates: number; errors: string[]; version: string }>(
+      `/datasets/${datasetId}/import`,
+      { method: 'POST', body: form },
+    )
   },
   assignSplits: (datasetId: number, body: { train_ratio: number; val_ratio: number; preserve_existing: boolean }) =>
     request<Record<string, number>>(`/datasets/${datasetId}/splits`, {

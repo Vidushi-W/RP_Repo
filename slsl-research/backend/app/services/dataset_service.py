@@ -10,6 +10,7 @@ from typing import Any
 
 import pandas as pd
 from fastapi import UploadFile
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.core.config import settings
@@ -18,7 +19,7 @@ from app.models.dataset import Dataset, DatasetVersion, ImportJob, Recording
 from app.repositories.dataset import DatasetRepository
 from app.services.manifest import map_manifest_columns, normalize_emotion, normalize_split
 from app.services.split_service import assign_splits, save_split_manifest, validate_split_isolation
-from app.services.synthetic_generator import SyntheticConfig, content_hash_for_file, generate_synthetic_package
+from app.services.synthetic_generator import SENTENCE_PATTERNS, SyntheticConfig, content_hash_for_file, generate_synthetic_package
 from app.services.zip_utils import safe_extract_zip
 from app.sensors.csv_source import CsvRecordingSource, load_csv_to_recording
 
@@ -53,6 +54,21 @@ class DatasetService:
     def preview_csv_files(self, files: list[UploadFile]) -> list[dict[str, Any]]:
         previews = []
         for f in files:
+            if not f.filename:
+                continue
+            lower = f.filename.lower()
+            if lower.endswith(".zip"):
+                previews.append({
+                    "filename": f.filename,
+                    "valid": True,
+                    "errors": [],
+                    "warnings": ["ZIP archive will be unpacked during import."],
+                    "frame_count": 0,
+                    "duration_ms": 0.0,
+                })
+                continue
+            if lower == "manifest.csv" or not lower.endswith(".csv"):
+                continue
             content = f.file.read()
             f.file.seek(0)
             try:
@@ -143,8 +159,10 @@ class DatasetService:
             self.db.add(row)
             imported += 1
 
-        ds.recording_count = len(self.repo.list_recordings(dataset_id))
-        ds.status = "ready" if imported else ds.status
+        self.db.flush()
+        ds.recording_count = self.sync_recording_count(dataset_id, commit=False)
+        if imported:
+            ds.status = "ready"
         job = ImportJob(dataset_id=dataset_id, status="completed", step="saved", source_name=f"{imported} files")
         job.report_json = json.dumps({"imported": imported, "skipped_duplicates": skipped, "errors": errors})
         self.db.add(job)
@@ -308,3 +326,44 @@ class DatasetService:
 
     def list_import_jobs(self) -> list[ImportJob]:
         return self.repo.list_import_jobs()
+
+    def sync_recording_count(self, dataset_id: int, commit: bool = True) -> int:
+        ds = self.repo.get_dataset(dataset_id)
+        if not ds:
+            raise ValueError("Dataset not found")
+        count = self.db.scalar(
+            select(func.count()).select_from(Recording).where(Recording.dataset_id == dataset_id)
+        ) or 0
+        ds.recording_count = count
+        if count > 0 and ds.status == "draft":
+            ds.status = "ready"
+        if commit:
+            self.db.commit()
+        return count
+
+    def repair_syn_simulation_labels(self, dataset_id: int) -> dict[str, Any]:
+        """Apply standard SLSL gloss sequences to SYN_XX_YYY simulation recording IDs."""
+        recordings = self.repo.list_recordings(dataset_id)
+        updated = 0
+        for rec in recordings:
+            parts = rec.recording_id.split("_")
+            if len(parts) != 3 or parts[0] != "SYN" or not parts[1].isdigit() or not parts[2].isdigit():
+                continue
+            signer_num = int(parts[1])
+            seq_num = int(parts[2])
+            pattern_idx = (seq_num - 1) // 4
+            signs, sentence, base_emotion = SENTENCE_PATTERNS[pattern_idx % len(SENTENCE_PATTERNS)]
+            rec.ordered_sign_labels = "|".join(signs)
+            rec.reference_english_sentence = sentence
+            rec.emotion_label = normalize_emotion("angry" if seq_num % 4 == 1 else base_emotion)
+            rec.signer_id = f"SYNTHETIC_SIGNER_{signer_num:02d}"
+            rec.provenance = "synthetic"
+            rec.group_id = rec.recording_id
+            updated += 1
+        count = self.sync_recording_count(dataset_id, commit=False)
+        self.repo.add_activity(
+            "dataset_repair",
+            f"Repaired labels for dataset id={dataset_id} ({updated} recordings, count={count})",
+        )
+        self.db.commit()
+        return {"updated": updated, "recording_count": count}

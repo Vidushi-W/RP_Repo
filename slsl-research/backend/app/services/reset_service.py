@@ -43,12 +43,15 @@ class ResetService:
         if options.get("remove_synthetic_datasets"):
             for d in self.db.scalars(select(Dataset).where(Dataset.provenance == "synthetic")):
                 affected["datasets_to_remove"].append({"id": d.id, "name": d.name})
+        if options.get("delete_checkpoints"):
+            affected["warnings"].append("Checkpoint deletion is irreversible and requires typing DELETE in addition to RESET.")
+        affected["warnings"].append("Real recordings and annotations are preserved unless you explicitly delete a dataset.")
         return affected
 
     def execute_reset(self, options: dict, confirmation: str) -> dict:
         if confirmation != "RESET":
             raise ValueError("Typed confirmation must be RESET for irreversible actions.")
-        result = {"deactivated_models": 0, "archived_models": 0, "cleared_jobs": 0}
+        result = {"deactivated_models": 0, "archived_models": 0, "cleared_jobs": 0, "removed_datasets": 0}
         for m in self.db.scalars(select(MLModel).where(MLModel.status == "active")):
             m.status = "inactive"
             result["deactivated_models"] += 1
@@ -61,18 +64,27 @@ class ResetService:
             for j in self.db.scalars(select(TrainingJob)):
                 self.db.delete(j)
                 result["cleared_jobs"] += 1
+        if options.get("remove_synthetic_datasets"):
+            from app.services.maintenance_service import MaintenanceService
+
+            maint = MaintenanceService(self.db)
+            synth_ids = [d.id for d in self.db.scalars(select(Dataset).where(Dataset.provenance == "synthetic"))]
+            for ds_id in synth_ids:
+                maint.delete_dataset(ds_id, confirmation=f"DELETE {ds_id}", force=True)
+                result["removed_datasets"] += 1
         if options.get("delete_checkpoints") and options.get("confirmation_delete") == "DELETE":
             models_dir = settings.artifacts_dir / "models"
             if models_dir.exists():
+                import shutil
+
                 for p in models_dir.iterdir():
                     if p.is_dir() and p.name.startswith("job_"):
-                        import shutil
                         shutil.rmtree(p, ignore_errors=True)
         from app.repositories.dataset import DatasetRepository
 
         DatasetRepository(self.db).add_activity(
             "workspace_reset",
-            f"Reset workspace — deactivated {result['deactivated_models']}, archived {result['archived_models']}",
+            f"Reset workspace — deactivated {result['deactivated_models']}, archived {result['archived_models']}, removed {result['removed_datasets']} synthetic datasets",
         )
         self.db.commit()
         return result

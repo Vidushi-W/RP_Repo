@@ -1,6 +1,9 @@
 import json
+import tempfile
+from pathlib import Path
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -119,6 +122,16 @@ def get_model(model_id: int, db: Session = Depends(get_db)) -> ModelResponse:
 def activate_model(model_id: int, db: Session = Depends(get_db)) -> ModelResponse:
     try:
         return _model_response(ModelRegistryService(db).activate_model(model_id))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.get("/models/{model_id}/export")
+def export_model(model_id: int, db: Session = Depends(get_db)) -> FileResponse:
+    try:
+        dest = Path(tempfile.gettempdir()) / f"slsl_model_{model_id}.zip"
+        path = ModelRegistryService(db).export_bundle(model_id, dest)
+        return FileResponse(path, filename=path.name, media_type="application/zip")
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

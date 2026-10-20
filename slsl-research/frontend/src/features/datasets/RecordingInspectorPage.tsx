@@ -1,15 +1,23 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PageHeader } from '@/components/layout/PageHeader'
+import { LoadingSpinner } from '@/components/shared/LoadingState'
 import { SensorChart } from '@/components/shared/SensorChart'
+import { Alert } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Select } from '@/components/ui/select'
 import { datasetApi } from '@/services/datasetApi'
+import { maintenanceApi } from '@/services/maintenanceApi'
 
 export function RecordingInspectorPage() {
   const { datasetId, recordingId } = useParams()
   const id = Number(datasetId)
   const qc = useQueryClient()
+  const navigate = useNavigate()
 
   const { data } = useQuery({
     queryKey: ['recording', id, recordingId],
@@ -50,13 +58,29 @@ export function RecordingInspectorPage() {
     onSuccess: () => qc.invalidateQueries({ queryKey: ['recording', id, recordingId] }),
   })
 
-  if (!data) return <p className="text-sm text-[var(--color-muted)]">Loading recording…</p>
+  const deleteMutation = useMutation({
+    mutationFn: () => maintenanceApi.deleteRecording(id, recordingId!),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['recordings', id] })
+      qc.invalidateQueries({ queryKey: ['dataset', id] })
+      navigate(`/datasets/${id}`)
+    },
+  })
+
+  const canDelete = data && (data.provenance === 'synthetic' || !data.validation.warnings.some((w) => w.includes('protected')))
+
+  if (!data) return <LoadingSpinner label="Loading recording…" className="py-12" />
 
   return (
     <div>
       <PageHeader
         title={data.recording_id}
         description={`${(data.duration_ms / 1000).toFixed(2)} s · ${data.frame_count} frames · ~${data.sample_rate_hz.toFixed(1)} Hz`}
+        breadcrumbs={[
+          { label: 'Datasets', href: '/datasets' },
+          { label: `Dataset ${id}`, href: `/datasets/${id}` },
+          { label: data.recording_id },
+        ]}
         action={<Button onClick={() => saveMutation.mutate()} disabled={saveMutation.isPending}>Save Annotation</Button>}
       />
 
@@ -67,54 +91,68 @@ export function RecordingInspectorPage() {
         <SensorChart title="Right flex 1" series={data.visualization.right_flex_1} color="#db2777" />
       </div>
 
-      <div className="rounded-xl border border-[var(--color-border)] bg-white p-5 space-y-4">
+      <Card>
+        <CardContent className="space-y-4 pt-5">
         <div>
-          <label className="text-xs font-medium text-[var(--color-muted)]">Sign sequence (pipe-separated)</label>
-          <input className="mt-1 w-full rounded-md border px-3 py-2 text-sm" value={labels} onChange={(e) => setLabels(e.target.value)} placeholder="I|NEED|WATER" />
+          <Label>Sign sequence (pipe-separated)</Label>
+          <Input className="mt-1.5" value={labels} onChange={(e) => setLabels(e.target.value)} placeholder="I|NEED|WATER" />
           <div className="mt-2 flex flex-wrap gap-2">
             {tokens.map((t, i) => (
-              <span key={`${t}-${i}`} className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700">{t}</span>
+              <span key={`${t}-${i}`} className="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">{t}</span>
             ))}
           </div>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <label className="text-xs font-medium text-[var(--color-muted)]">Emotion</label>
-            <select className="mt-1 w-full rounded-md border px-3 py-2 text-sm" value={emotion} onChange={(e) => setEmotion(e.target.value)}>
+            <Label>Emotion</Label>
+            <Select className="mt-1.5" value={emotion} onChange={(e) => setEmotion(e.target.value)}>
               <option value="neutral">Neutral</option>
               <option value="angry">Angry</option>
               <option value="unknown">Unknown</option>
-            </select>
+            </Select>
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--color-muted)]">Split</label>
-            <select className="mt-1 w-full rounded-md border px-3 py-2 text-sm" value={split} onChange={(e) => setSplit(e.target.value)}>
+            <Label>Split</Label>
+            <Select className="mt-1.5" value={split} onChange={(e) => setSplit(e.target.value)}>
               <option value="train">Train</option>
               <option value="val">Validation</option>
               <option value="test">Test</option>
               <option value="unassigned">Unassigned</option>
-            </select>
+            </Select>
           </div>
         </div>
         <div>
-          <label className="text-xs font-medium text-[var(--color-muted)]">Reference English sentence</label>
-          <input className="mt-1 w-full rounded-md border px-3 py-2 text-sm" value={sentence} onChange={(e) => setSentence(e.target.value)} />
+          <Label>Reference English sentence</Label>
+          <Input className="mt-1.5" value={sentence} onChange={(e) => setSentence(e.target.value)} />
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <label className="text-xs font-medium text-[var(--color-muted)]">Signer ID</label>
-            <input className="mt-1 w-full rounded-md border px-3 py-2 text-sm" value={signer} onChange={(e) => setSigner(e.target.value)} />
+            <Label>Signer ID</Label>
+            <Input className="mt-1.5" value={signer} onChange={(e) => setSigner(e.target.value)} />
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--color-muted)]">Provenance</label>
-            <select className="mt-1 w-full rounded-md border px-3 py-2 text-sm" value={provenance} onChange={(e) => setProvenance(e.target.value)}>
+            <Label>Provenance</Label>
+            <Select className="mt-1.5" value={provenance} onChange={(e) => setProvenance(e.target.value)}>
               <option value="synthetic">Synthetic</option>
               <option value="real">Real</option>
-            </select>
+            </Select>
           </div>
         </div>
-        {data.validation.warnings.map((w) => <p key={w} className="text-xs text-amber-800">{w}</p>)}
-      </div>
+        {data.validation.warnings.map((w) => <Alert key={w} variant="warning">{w}</Alert>)}
+        {canDelete ? (
+          <div className="border-t pt-4">
+            <Button variant="secondary" size="sm" disabled={deleteMutation.isPending} onClick={() => {
+              if (window.confirm(`Delete recording ${recordingId}? This cannot be undone.`)) deleteMutation.mutate()
+            }}>
+              Delete recording
+            </Button>
+            {deleteMutation.error && <p className="mt-2 text-xs text-rose-700">{(deleteMutation.error as Error).message}</p>}
+          </div>
+        ) : (
+          <p className="text-xs text-muted">Protected real recordings cannot be deleted individually. Delete the whole dataset from Settings or the dataset page.</p>
+        )}
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -19,6 +19,7 @@ from app.ml.trainer import TrainingConfig, validate_time_resolution
 from app.ml.vocabulary import build_vocabulary
 from app.models.job import TrainingJob
 from app.models.ml_model import MLModel
+from app.models.dataset import Recording
 from app.repositories.dataset import DatasetRepository
 
 
@@ -69,7 +70,12 @@ class TrainingService:
         if self._active_job():
             raise ValueError("Another training job is already active. Wait for it to finish or cancel it.")
         dataset_id = payload["dataset_id"]
-        preview = self.preview_training(dataset_id)
+        if payload.get("studio"):
+            replay = list(self.db.scalars(select(Recording).where(Recording.id.in_(payload["studio_recording_ids"]))))
+            preview = {"train_count": sum(r.split == "train" for r in replay),
+                       "val_count": sum(r.split == "val" for r in replay), "warnings": []}
+        else:
+            preview = self.preview_training(dataset_id)
         if preview["train_count"] == 0 or preview["val_count"] == 0:
             raise ValueError("Dataset must have train and validation splits before training.")
         if preview["warnings"] and any("No training" in w or "No validation" in w for w in preview["warnings"]):
@@ -98,6 +104,7 @@ class TrainingService:
 
         worker = BACKEND_ROOT / "scripts" / "train_worker.py"
         python = sys.executable
+        self.db.commit()
         proc = subprocess.Popen([python, str(worker), str(job.id)], cwd=str(BACKEND_ROOT))
         job.pid = proc.pid
         job.status = "running"

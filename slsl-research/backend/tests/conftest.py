@@ -53,3 +53,12 @@ def client():
     with TestClient(app) as c:
         yield c
     app.dependency_overrides.clear()
+
+@pytest.fixture(autouse=True)
+def isolate_test_storage(tmp_path, monkeypatch):
+    """Existing tests must never write into the user's datasets or startup state."""
+    import importlib
+    from app.core.config import settings
+    monkeypatch.setattr(settings, "data_dir", tmp_path / "data")
+    monkeypatch.setattr(settings, "artifacts_dir", tmp_path / "artifacts")
+    monkeypatch.setattr(importlib.import_module("app.main"), "SessionLocal", TestingSession)

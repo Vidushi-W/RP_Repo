@@ -17,10 +17,10 @@ from app.core.config import FEATURE_COLUMNS, RANDOM_SEED, SENSOR_COLUMNS
 from app.ml.data_loader import RecordingSequenceDataset, collate_sequences
 from app.ml.decoder import torch_greedy_decode
 from app.ml.metrics import word_error_rate as token_wer
-from app.ml.emotion import train_emotion_model
 from app.ml.models import CtcSignModel
 from app.ml.preprocessing import NormalizationConfig, fit_normalization, resample_recording, smooth_features
 from app.ml.vocabulary import BLANK_TOKEN, build_vocabulary, save_vocabulary
+from app.ml.continual import continuing_vocabulary, restore_training, optimizer_snapshot
 from app.models.dataset import Recording
 from app.sensors.csv_source import load_csv_to_recording
 
@@ -67,15 +67,18 @@ def run_training(
     bundle_dir.mkdir(parents=True, exist_ok=True)
 
     signs = set()
-    for rec in train_recs + val_recs:
+    for rec in train_recs:
         signs.update(t.strip() for t in rec.ordered_sign_labels.split("|") if t.strip())
-    vocab = build_vocabulary(sorted(signs))
+    if config.training_mode == "finetune" and not config.source_bundle_path:
+        raise ValueError("Continued training requires a source checkpoint.")
+    source = Path(config.source_bundle_path) if config.source_bundle_path else None
+    vocab = continuing_vocabulary(signs, source)
     save_vocabulary(vocab, bundle_dir / "vocabulary.json")
 
     from app.core.config import settings
 
     train_sensors = [load_csv_to_recording(settings.data_dir / r.file_path) for r in train_recs]
-    norm = fit_normalization(train_sensors)
+    norm = NormalizationConfig.load(source / "preprocessing.json") if source else fit_normalization(train_sensors)
     norm.save(bundle_dir / "preprocessing.json")
 
     train_ds = RecordingSequenceDataset(train_recs, vocab["label_to_id"], norm)
@@ -91,16 +94,14 @@ def run_training(
         cnn_channels=config.cnn_channels,
         hidden_size=config.hidden_size,
     )
-    if config.training_mode == "finetune" and config.source_bundle_path:
-        state = torch.load(Path(config.source_bundle_path) / "model.pt", map_location="cpu", weights_only=True)
-        model.load_state_dict(state, strict=False)
-
     optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
+    optimizer_resumed = restore_training(model, optimizer, source) if source else False
     criterion = torch.nn.CTCLoss(blank=0, zero_infinity=True)
     id_to_label = {int(k): v for k, v in vocab["id_to_label"].items() if v != BLANK_TOKEN}
 
     best_val = float("inf")
     best_state = None
+    best_entry = None
     stale = 0
     history: list[dict] = []
     start = time.time()
@@ -148,9 +149,11 @@ def run_training(
 
         if avg_val < best_val:
             best_val = avg_val
+            best_entry = dict(entry)
             best_state = {k: v.cpu().clone() for k, v in model.state_dict().items()}
             stale = 0
             torch.save(best_state, bundle_dir / "model.pt")
+            torch.save(optimizer_snapshot(optimizer), bundle_dir / "optimizer.pt")
         else:
             stale += 1
             if stale >= config.patience:
@@ -172,18 +175,11 @@ def run_training(
     (bundle_dir / "training_settings.json").write_text(json.dumps(config.__dict__, indent=2, default=str), encoding="utf-8")
 
     emotion_result = {"trained": False, "message": "Emotion model unavailable"}
-    emo_labels = [r.emotion_label for r in train_recs if r.emotion_label in {"neutral", "angry"}]
-    if emo_labels:
-        emo_recs = [load_csv_to_recording(settings.data_dir / r.file_path) for r in train_recs if r.emotion_label in {"neutral", "angry"}]
-        emo_model, emo_meta = train_emotion_model(emo_recs, emo_labels, random_state=config.random_seed)
-        if emo_model:
-            from app.ml.emotion import save_emotion_bundle
-            save_emotion_bundle(emo_model, bundle_dir / "emotion_model.pkl", {"source": "prototype_motion_model", **emo_meta.__dict__})
-            emotion_result = emo_meta.__dict__
-
     metrics = {
         "best_val_loss": best_val,
-        "final_val_wer": history[-1]["val_wer"] if history else None,
+        "optimizer_resumed": optimizer_resumed,
+        "source_bundle": str(source) if source else None,
+        "final_val_wer": best_entry["val_wer"] if best_entry else None,
         "epochs_trained": len(history),
         "duration_seconds": time.time() - start,
     }

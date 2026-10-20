@@ -4,13 +4,14 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
-        default: 'bg-indigo-600 text-white hover:bg-indigo-700',
-        secondary: 'border border-[var(--color-border)] bg-white text-[var(--color-foreground)] hover:bg-slate-50',
-        ghost: 'hover:bg-slate-100 text-[var(--color-foreground)]',
+        default: 'bg-accent text-accent-foreground shadow-sm hover:bg-accent-hover',
+        secondary: 'border border-border bg-surface text-foreground shadow-sm hover:bg-surface-muted',
+        ghost: 'text-foreground hover:bg-surface-muted',
+        destructive: 'bg-danger text-white shadow-sm hover:bg-danger/90',
       },
       size: {
         default: 'h-9 px-4 py-2',

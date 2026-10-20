@@ -1,74 +1,17 @@
-import {
-  BarChart3,
-  Brain,
-  Database,
-  LayoutDashboard,
-  MessageSquare,
-} from 'lucide-react'
 import { NavLink } from 'react-router-dom'
-import { Badge } from '@/components/ui/badge'
+import { Activity, ArrowUpRight, AudioLines, CircleHelp } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { useHealth, useSystemStatus } from '@/hooks/useSystemStatus'
-import { SettingsDialog } from './SettingsDialog'
-
-const nav = [
-  { to: '/', label: 'Overview', icon: LayoutDashboard },
-  { to: '/datasets', label: 'Datasets', icon: Database },
-  { to: '/training', label: 'Training', icon: Brain },
-  { to: '/evaluation', label: 'Evaluation', icon: BarChart3 },
-  { to: '/playground', label: 'Playground', icon: MessageSquare },
-]
+import { mainNav } from '@/lib/nav'
+import { useHealth } from '@/hooks/useSystemStatus'
 
 export function Sidebar() {
   const { data: health } = useHealth()
-  const { data: status } = useSystemStatus()
-
-  return (
-    <aside className="hidden h-screen w-64 shrink-0 flex-col border-r border-[var(--color-border)] bg-white md:flex">
-      <div className="border-b border-[var(--color-border)] px-5 py-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-indigo-600">SLSL AI Studio</p>
-        <h1 className="mt-1 text-base font-semibold text-[var(--color-foreground)]">Continuous Sign Research</h1>
-      </div>
-
-      <nav className="flex-1 space-y-1 px-3 py-4">
-        {nav.map(({ to, label, icon: Icon }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={to === '/'}
-            className={({ isActive }) =>
-              cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition',
-                isActive ? 'bg-indigo-50 text-indigo-700' : 'text-[var(--color-muted)] hover:bg-slate-50 hover:text-[var(--color-foreground)]',
-              )
-            }
-          >
-            <Icon className="h-4 w-4" />
-            {label}
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className="px-3 pb-2">
-        <SettingsDialog />
-      </div>
-
-      <div className="border-t border-[var(--color-border)] px-4 py-4 text-xs text-[var(--color-muted)]">
-        <div className="flex items-center justify-between">
-          <span>Backend</span>
-          <Badge variant={health?.status === 'ok' ? 'success' : 'warning'}>
-            {health?.status === 'ok' ? 'Online' : 'Offline'}
-          </Badge>
-        </div>
-        <div className="mt-2 flex items-center justify-between">
-          <span>Models</span>
-          <span className="font-medium text-[var(--color-foreground)]">{status?.model_count ?? 0}</span>
-        </div>
-        <div className="mt-1 flex items-center justify-between">
-          <span>Datasets</span>
-          <span className="font-medium text-[var(--color-foreground)]">{status?.dataset_count ?? 0}</span>
-        </div>
-      </div>
-    </aside>
-  )
+  return <aside className="studio-sidebar hidden md:flex">
+    <NavLink to="/" className="studio-brand"><span className="brand-mark"><AudioLines size={23} /></span><div><span className="block text-base font-semibold tracking-tight">SLSL<span className="font-normal opacity-70"> studio</span></span><span className="mt-1 block text-[10px] tracking-[.2em] opacity-50">MOTION INTO MEANING</span></div></NavLink>
+    <div className="mx-5 mt-4 rounded-xl border border-white/10 bg-white/5 px-3.5 py-3"><div className="flex items-center gap-2 text-xs"><span className="h-1.5 w-1.5 rounded-full bg-[#a9d9bb]" />Research workspace</div><p className="mt-1.5 pl-3.5 text-[11px] text-white/45">Local · Single model</p></div>
+    <p className="mb-3 mt-9 px-7 text-[10px] font-medium tracking-[.18em] text-white/35">WORKSPACE</p>
+    <nav aria-label="Main navigation" className="space-y-1 px-4">{mainNav.map(({ to, label, icon: Icon }) => <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) => cn('sidebar-link', isActive && 'is-active')}><Icon size={18} strokeWidth={1.7} /><span className="flex-1">{label}</span><ArrowUpRight size={14} className="nav-arrow" /></NavLink>)}</nav>
+    <div className="mx-5 mb-5 mt-auto rounded-xl border border-white/10 p-4"><CircleHelp size={18} className="text-[#b5d7c6]" /><p className="mt-3 text-xs font-medium">One step at a time.</p><p className="mt-2 text-[11px] leading-5 text-white/50">Add your recordings, train your model, then test what it knows.</p><NavLink to="/datasets" className="mt-3 inline-flex items-center gap-2 text-xs text-[#b5d7c6]">Manage recordings <ArrowUpRight size={13} /></NavLink></div>
+    <div className="flex items-center gap-2 border-t border-white/10 px-6 py-5 text-[11px] text-white/55"><Activity size={14} /><span className={`h-1.5 w-1.5 rounded-full ${health?.status === 'ok' ? 'bg-[#a9d9bb]' : 'bg-amber-300'}`} />{health?.status === 'ok' ? 'System connected' : 'Backend unavailable'}</div>
+  </aside>
 }

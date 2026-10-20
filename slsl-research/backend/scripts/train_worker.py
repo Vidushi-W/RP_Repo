@@ -14,6 +14,8 @@ from app.core.database import SessionLocal
 from app.ml.trainer import TrainingConfig, run_training
 from app.models.job import TrainingJob
 from app.models.ml_model import MLModel
+from app.models.dataset import Recording
+from sqlalchemy import select
 from app.repositories.dataset import DatasetRepository
 
 
@@ -32,7 +34,8 @@ def main(job_id: int) -> None:
         db.commit()
         sys.exit(1)
 
-    recordings = repo.list_recordings(job.dataset_id)
+    recordings = (list(db.scalars(select(Recording).where(Recording.id.in_(config_data["studio_recording_ids"]))))
+                  if config_data.get("studio") else repo.list_recordings(job.dataset_id))
     train_recs = [r for r in recordings if r.split == "train"]
     val_recs = [r for r in recordings if r.split == "val"]
     if not train_recs or not val_recs:
@@ -76,19 +79,22 @@ def main(job_id: int) -> None:
             db.commit()
 
     try:
+        (bundle_dir).mkdir(parents=True, exist_ok=True)
+        (bundle_dir / "training_sources.json").write_text(json.dumps([dict(id=r.id, dataset_id=r.dataset_id, source_hash=r.content_hash, labels=r.ordered_sign_labels, split=r.split) for r in recordings], indent=2))
         result = run_training(
             train_recs, val_recs, config, bundle_dir,
             progress_callback=on_progress,
             cancel_check=lambda: cancel_flag["cancelled"],
         )
         job = db.get(TrainingJob, job_id)
-        if result.get("status") == "cancelled":
+        db.refresh(job)
+        if result.get("status") == "cancelled" or job.status == "cancelled":
             job.status = "cancelled"
             job.message = "Training cancelled by user."
         else:
             model = MLModel(
                 name=config_data.get("model_name", f"Model {job_id}"),
-                version="1.0.0",
+                version=str(job_id),
                 status="inactive",
                 architecture="ctc_cnn_bilstm",
                 dataset_id=job.dataset_id,
@@ -103,6 +109,10 @@ def main(job_id: int) -> None:
                 emotion_available=result.get("emotion", {}).get("trained", False),
                 emotion_model_path="emotion_model.pkl" if result.get("emotion", {}).get("trained") else None,
             )
+            if config_data.get("studio"):
+                for previous in db.scalars(select(MLModel).where(MLModel.status == "active")):
+                    previous.status = "inactive"
+                model.status = "active"
             db.add(model)
             db.flush()
             job.status = "completed"

@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { datasetApi } from '@/services/datasetApi'
 import { evaluationApi } from '@/services/evaluationApi'
+import { maintenanceApi } from '@/services/maintenanceApi'
 import { trainingApi } from '@/services/trainingApi'
 import type { AlignmentStep, PredictionRow } from '@/types/evaluation'
 
@@ -112,6 +113,14 @@ export function EvaluationPage() {
     queryKey: ['eval-results', activeRunId],
     queryFn: () => evaluationApi.getResults(activeRunId!),
     enabled: !!activeRunId,
+  })
+
+  const deleteRunMutation = useMutation({
+    mutationFn: (runId: number) => maintenanceApi.deleteEvaluation(runId),
+    onSuccess: () => {
+      refetchRuns()
+      if (activeRunId) setActiveRunId(null)
+    },
   })
 
   const runMutation = useMutation({
@@ -378,6 +387,9 @@ export function EvaluationPage() {
                   <div className="flex items-center gap-2">
                     <span className="text-xs">WER {run.word_error_rate?.toFixed(3) ?? '—'}</span>
                     <Button size="sm" variant="secondary" onClick={() => { setActiveRunId(run.id); setStep(4) }}>View</Button>
+                    <Button size="sm" variant="secondary" onClick={() => {
+                      if (window.confirm(`Delete evaluation run "${run.name}"?`)) deleteRunMutation.mutate(run.id)
+                    }}>Delete</Button>
                     <input type="checkbox" checked={compareIds.includes(run.id)} onChange={(e) => {
                       setCompareIds((prev) => e.target.checked ? [...prev, run.id] : prev.filter((id) => id !== run.id))
                     }} />

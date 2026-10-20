@@ -1,5 +1,6 @@
 """Application settings loaded from environment variables."""
 
+import json
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -43,8 +44,22 @@ class Settings(BaseSettings):
     database_url: str = f"sqlite:///{(BACKEND_ROOT / 'slsl_studio.db').as_posix()}"
     data_dir: Path = PROJECT_ROOT / "data"
     artifacts_dir: Path = PROJECT_ROOT / "artifacts"
-    cors_origins: list[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
+    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
     max_upload_bytes: int = 50 * 1024 * 1024
+    sentence_model_dir: Path = PROJECT_ROOT / "local_models" / "qwen2.5-0.5b-instruct"
+    sentence_timeout_seconds: int = 120
+
+    @property
+    def cors_origins_list(self) -> list[str]:
+        value = self.cors_origins.strip()
+        if value.startswith("["):
+            try:
+                parsed = json.loads(value)
+                if isinstance(parsed, list):
+                    return [str(origin).strip() for origin in parsed if str(origin).strip()]
+            except json.JSONDecodeError:
+                pass
+        return [origin.strip() for origin in value.split(",") if origin.strip()]
 
     @property
     def datasets_dir(self) -> Path:

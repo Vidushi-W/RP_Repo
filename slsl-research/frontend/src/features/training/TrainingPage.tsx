@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { datasetApi } from '@/services/datasetApi'
+import { maintenanceApi } from '@/services/maintenanceApi'
 import { trainingApi } from '@/services/trainingApi'
 import type { TrainingPreview } from '@/types/training'
 
@@ -21,6 +22,14 @@ export function TrainingPage() {
   const [lr, setLr] = useState(0.001)
   const [trainingMode, setTrainingMode] = useState('fresh')
   const [resetConfirm, setResetConfirm] = useState('')
+  const [resetOptions, setResetOptions] = useState({
+    archive_models: true,
+    clear_jobs: false,
+    delete_checkpoints: false,
+    remove_synthetic_datasets: false,
+  })
+  const [deleteModelId, setDeleteModelId] = useState<number | null>(null)
+  const [deleteModelConfirm, setDeleteModelConfirm] = useState('')
 
   const { data: datasets = [] } = useQuery({ queryKey: ['datasets'], queryFn: datasetApi.list })
   const { data: jobs = [], refetch: refetchJobs } = useQuery({
@@ -66,15 +75,44 @@ export function TrainingPage() {
     onSuccess: () => refetchModels(),
   })
 
+  const { data: resetPreview } = useQuery({
+    queryKey: ['reset-preview', resetOptions],
+    queryFn: () => trainingApi.resetPreview(resetOptions),
+    enabled: tab === 'models',
+  })
+
   const resetMutation = useMutation({
     mutationFn: () =>
       trainingApi.resetExecute({
-        archive_models: true,
-        clear_jobs: false,
-        delete_checkpoints: false,
+        ...resetOptions,
         confirmation: resetConfirm,
+        confirmation_delete: resetOptions.delete_checkpoints ? 'DELETE' : undefined,
       }),
-    onSuccess: () => { refetchModels(); refetchJobs(); qc.invalidateQueries({ queryKey: ['system-status'] }) },
+    onSuccess: () => {
+      refetchModels()
+      refetchJobs()
+      qc.invalidateQueries({ queryKey: ['datasets'] })
+      qc.invalidateQueries({ queryKey: ['system-status'] })
+      setResetConfirm('')
+    },
+  })
+
+  const deleteJobMutation = useMutation({
+    mutationFn: (jobId: number) => maintenanceApi.deleteJob(jobId),
+    onSuccess: () => refetchJobs(),
+  })
+
+  const deleteModelMutation = useMutation({
+    mutationFn: () => maintenanceApi.deleteModel(deleteModelId!, deleteModelConfirm),
+    onSuccess: () => {
+      refetchModels()
+      setDeleteModelId(null)
+      setDeleteModelConfirm('')
+    },
+  })
+
+  const exportMutation = useMutation({
+    mutationFn: (modelId: number) => trainingApi.exportModel(modelId),
   })
 
   const statusTone = (s: string) => {
@@ -171,11 +209,18 @@ export function TrainingPage() {
                     <span>Val loss: {job.val_loss?.toFixed(4) ?? '—'}</span>
                     <span>Val WER: {job.val_wer?.toFixed(3) ?? '—'}</span>
                   </div>
-                  {(job.status === 'running' || job.status === 'queued') && (
-                    <Button size="sm" variant="secondary" className="mt-3" onClick={() => cancelMutation.mutate(job.id)}>
-                      <Square className="h-3 w-3" /> Cancel
-                    </Button>
-                  )}
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {(job.status === 'running' || job.status === 'queued') && (
+                      <Button size="sm" variant="secondary" onClick={() => cancelMutation.mutate(job.id)}>
+                        <Square className="h-3 w-3" /> Cancel
+                      </Button>
+                    )}
+                    {job.status !== 'running' && job.status !== 'queued' && (
+                      <Button size="sm" variant="secondary" onClick={() => {
+                        if (window.confirm(`Delete training job ${job.id}?`)) deleteJobMutation.mutate(job.id)
+                      }}>Delete</Button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -204,7 +249,21 @@ export function TrainingPage() {
                     {!m.is_archived && (
                       <Button size="sm" variant="secondary" onClick={() => archiveMutation.mutate(m.id)}>Archive</Button>
                     )}
+                    <Button size="sm" variant="secondary" disabled={exportMutation.isPending} onClick={() => exportMutation.mutate(m.id)}>Export bundle</Button>
+                    {m.is_archived && m.status !== 'active' && (
+                      <Button size="sm" variant="secondary" onClick={() => setDeleteModelId(m.id)}>Delete permanently</Button>
+                    )}
                   </div>
+                  {deleteModelId === m.id && (
+                    <div className="mt-3 rounded-lg border bg-slate-50 p-3 space-y-2">
+                      <p className="text-xs text-[var(--color-muted)]">Type DELETE MODEL {m.id} to remove bundle files and registry entry.</p>
+                      <input className="w-full rounded-md border px-2 py-1 text-xs" value={deleteModelConfirm} onChange={(e) => setDeleteModelConfirm(e.target.value)} />
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="secondary" disabled={deleteModelConfirm !== `DELETE MODEL ${m.id}`} onClick={() => deleteModelMutation.mutate()}>Confirm delete</Button>
+                        <Button size="sm" variant="secondary" onClick={() => { setDeleteModelId(null); setDeleteModelConfirm('') }}>Cancel</Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -213,9 +272,25 @@ export function TrainingPage() {
           <Card className="mt-6">
             <CardHeader><CardTitle className="flex items-center gap-2"><RotateCcw className="h-4 w-4" /> Reset Training Workspace</CardTitle></CardHeader>
             <CardContent className="space-y-3 text-sm">
-              <p className="text-[var(--color-muted)]">Deactivate models and archive checkpoints. Defaults to archiving, not deleting. Real recordings and annotations are preserved.</p>
+              <p className="text-[var(--color-muted)]">Deactivate models and archive checkpoints. Real recordings are preserved unless you remove synthetic datasets.</p>
+              <div className="space-y-2 text-xs">
+                {(['archive_models', 'clear_jobs', 'delete_checkpoints', 'remove_synthetic_datasets'] as const).map((key) => (
+                  <label key={key} className="flex items-center gap-2">
+                    <input type="checkbox" checked={resetOptions[key]} onChange={(e) => setResetOptions((o) => ({ ...o, [key]: e.target.checked }))} />
+                    {key.replace(/_/g, ' ')}
+                  </label>
+                ))}
+              </div>
+              {resetPreview && (
+                <div className="rounded-lg bg-slate-50 p-3 text-xs space-y-1">
+                  <p>Active models: {resetPreview.active_models.length} · To archive: {resetPreview.models_to_archive.length}</p>
+                  <p>Jobs to clear: {resetPreview.jobs_to_clear.length} · Synthetic datasets: {resetPreview.datasets_to_remove.length}</p>
+                  {resetPreview.warnings.map((w) => <p key={w} className="text-amber-800">{w}</p>)}
+                </div>
+              )}
               <input className="w-full rounded-md border px-3 py-2" placeholder="Type RESET to confirm" value={resetConfirm} onChange={(e) => setResetConfirm(e.target.value)} />
               <Button variant="secondary" disabled={resetConfirm !== 'RESET'} onClick={() => resetMutation.mutate()}>Reset Workspace</Button>
+              <p className="text-xs text-[var(--color-muted)]">For full database reset (all datasets, evaluations, history), use Settings → Data Management.</p>
             </CardContent>
           </Card>
         </TabsContent>

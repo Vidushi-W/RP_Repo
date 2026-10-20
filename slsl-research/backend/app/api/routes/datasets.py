@@ -66,6 +66,8 @@ def list_imports(db: Session = Depends(get_db)) -> list[ImportJobSchema]:
 @router.post("/preview", response_model=list[ImportPreviewItem])
 async def preview_files(files: list[UploadFile] = File(...), db: Session = Depends(get_db)) -> list[ImportPreviewItem]:
     previews = DatasetService(db).preview_csv_files(files)
+    if not previews:
+        raise HTTPException(status_code=400, detail="No previewable sensor CSV or ZIP files received.")
     return [ImportPreviewItem(**p) for p in previews]
 
 
@@ -173,6 +175,8 @@ async def import_dataset(
     svc = DatasetService(db)
     zip_files = [f for f in files if f.filename and f.filename.lower().endswith(".zip")]
     csv_files = [f for f in files if f.filename and f.filename.lower().endswith(".csv") and f.filename.lower() != "manifest.csv"]
+    if not zip_files and not csv_files:
+        raise HTTPException(status_code=400, detail="No importable files received. Upload sensor CSV files or a dataset ZIP.")
     try:
         if zip_files:
             return svc.import_zip(dataset_id, zip_files[0], bump_version=bump_version)
@@ -186,6 +190,23 @@ def assign_splits(dataset_id: int, payload: SplitAssignRequest, db: Session = De
     return DatasetService(db).assign_dataset_splits(
         dataset_id, payload.train_ratio, payload.val_ratio, payload.preserve_existing
     )
+
+
+@router.post("/{dataset_id}/sync-count")
+def sync_dataset_count(dataset_id: int, db: Session = Depends(get_db)) -> dict[str, int]:
+    try:
+        count = DatasetService(db).sync_recording_count(dataset_id)
+        return {"recording_count": count}
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@router.post("/{dataset_id}/repair-labels")
+def repair_dataset_labels(dataset_id: int, db: Session = Depends(get_db)) -> dict:
+    try:
+        return DatasetService(db).repair_syn_simulation_labels(dataset_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
 @router.get("/{dataset_id}/validation", response_model=DatasetValidationReport)

@@ -67,14 +67,6 @@ def load_bundle(bundle_dir: Path) -> LoadedBundle:
 
     emotion_model = None
     emotion_metadata: dict = {}
-    emo_path = bundle_dir / "emotion_model.pkl"
-    if emo_path.exists():
-        with emo_path.open("rb") as f:
-            emotion_model = pickle.load(f)
-        meta_path = bundle_dir / "emotion_metadata.json"
-        if meta_path.exists():
-            emotion_metadata = json.loads(meta_path.read_text(encoding="utf-8"))
-
     return LoadedBundle(
         bundle_dir=bundle_dir,
         model=model,
@@ -117,29 +109,8 @@ def recognize_from_csv(csv_path: Path, bundle: LoadedBundle) -> RecognitionResul
 
 
 def predict_emotion(sensor: SensorRecording, bundle: LoadedBundle) -> EmotionResult:
-    if bundle.emotion_model is None:
-        return EmotionResult(
-            available=False,
-            predicted_emotion=None,
-            confidence=None,
-            source="none",
-            message="Emotion model unavailable",
-        )
-    feats = extract_motion_features(sensor).reshape(1, -1)
-    model = bundle.emotion_model
-    pred = model.predict(feats)[0]
-    conf = None
-    if hasattr(model, "predict_proba"):
-        proba = model.predict_proba(feats)[0]
-        classes = list(model.classes_)
-        conf = float(proba[classes.index(pred)]) if pred in classes else None
-    return EmotionResult(
-        available=True,
-        predicted_emotion=str(pred),
-        confidence=conf,
-        source=bundle.emotion_metadata.get("source", "prototype_motion_model"),
-        message="Motion-based emotion prediction; not calibrated for correctness.",
-    )
+    return EmotionResult(available=False, predicted_emotion=None, confidence=None,
+                         source="disabled", message="Emotion recognition is disabled.")
 
 
 def gloss_to_english(gloss_tokens: list[str]) -> str:
