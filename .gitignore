@@ -3,3 +3,11 @@ node_modules/
 dist/
 web-build/
 *.log
+
+# Component 3 standalone Python webcam demo
+component-3-slsl/.venv/
+component-3-slsl/__pycache__/
+component-3-slsl/.mpl-cache/
+component-3-slsl/hand_landmarker.task
+component-3-slsl/mediapipe-*.whl
+component-3-slsl/expert_reference.npy
