@@ -1,0 +1,4 @@
+# Python 3.11 recommended. API dependencies only; pin the resolved environment for a study.
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.34,<1.0
+pydantic>=2.10,<3.0

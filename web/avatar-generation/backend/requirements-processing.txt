@@ -1,0 +1,5 @@
+# Optional offline research environment. Keep separate from API deployment.
+-r requirements.txt
+mediapipe>=0.10.21,<0.11
+opencv-contrib-python>=4.11,<5
+numpy>=1.26,<3
