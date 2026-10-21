@@ -24,6 +24,8 @@ def normalized_hand(landmarks):
     return [{"x": max(0.0, min(1.0, p.x)), "y": max(0.0, min(1.0, p.y))} for p in landmarks]
 
 def extract(args):
+    import os
+    os.environ.setdefault('MPLCONFIGDIR', str(COMPONENT_ROOT / '.cache' / 'matplotlib'))
     import cv2
     import mediapipe as mp
     from mediapipe.tasks import python

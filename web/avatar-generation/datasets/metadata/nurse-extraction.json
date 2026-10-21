@@ -1,0 +1,49 @@
+{
+  "signId": "NURSE",
+  "source": {
+    "path": "datasets/raw/nurse.mp4",
+    "bytes": 2189246,
+    "sha256": "d712330ed43ef8f44361a238537c7b8f9dd47e61f8254f454b96eda0b21bb9d6",
+    "datasetUrl": "https://www.kaggle.com/datasets/dckahawearachchi/sinhala-sign-language-dataset",
+    "attribution": "Dataset URL supplied by repository owner; specific dataset version and licensing details not independently verified"
+  },
+  "output": {
+    "path": "frontend/public/hand-animations/recorded/nurse.json",
+    "sha256": "90ba82ed85643668767c688a4a538c8a7356d92c8d32dc64ba8ab892394089a0",
+    "schemaVersion": 1
+  },
+  "extraction": {
+    "durationMs": 3360,
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "sourceFps": 25.0,
+    "sampleCount": 84,
+    "leftHandFrames": 39,
+    "rightHandFrames": 39,
+    "bothHandsFrames": 35,
+    "noHandFrames": 41,
+    "leadingNoHandFrames": 15,
+    "trailingNoHandFrames": 25,
+    "interiorNoHandTimestampsMs": [
+      2040
+    ],
+    "modelSha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+    "pythonVersion": "3.11.9",
+    "mediapipeVersion": "0.10.35",
+    "opencvVersion": "4.14.0.94",
+    "extractionVersion": "lankasigns-hands-1.0"
+  },
+  "review": {
+    "status": "pending",
+    "linguisticallyValidated": false,
+    "handednessVerified": false,
+    "notes": "Extraction replay only; not a claim of SLSL accuracy. No entry added to the reviewed vocabulary manifest."
+  },
+  "verification": {
+    "frontendSchema": "passed using parseAnimation(..., NURSE)",
+    "pythonHelperTests": 3,
+    "frontendTests": 32,
+    "frontendBuild": "passed",
+    "dependencyCheck": "passed"
+  }
+}

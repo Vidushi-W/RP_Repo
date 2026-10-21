@@ -27,7 +27,7 @@ npm.cmd run build
 Both coordinate fixtures are explicitly synthetic diagnostics, not human recordings, ASL, SLSL signs or linguistic demonstrations. One fixture includes a missing-hand frame. Real SLSL playback is available only after reviewed recordings are registered; the real manifest is currently empty.
 
 ## Extract a dataset recording
-Python 3.11 is recommended. It is not installed on the current development machine, so actual MediaPipe extraction has not been executed here.
+Python 3.11 is recommended. This checkout now has a component-local Python 3.11.9 runtime in .tools and a working .venv with MediaPipe/OpenCV. NURSE has been extracted from the supplied Kaggle recording; see [NURSE preview](docs/nurse-preview.md). The system-wide py launcher remains unconfigured.
 
 From the component directory:
 ```powershell

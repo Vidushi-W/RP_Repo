@@ -33,3 +33,6 @@ preprocessing/models/*
 *.task
 frontend/public/hand-animations/recorded/*
 !frontend/public/hand-animations/recorded/.gitkeep
+
+.tools/
+.cache/
