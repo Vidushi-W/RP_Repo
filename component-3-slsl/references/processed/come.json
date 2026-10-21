@@ -1,0 +1,47 @@
+{
+  "sign_label": "come",
+  "pose_count": 12,
+  "source_files": [
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4",
+    "come-sign.mp4"
+  ],
+  "frame_numbers": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22
+  ],
+  "hand_indices": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "normalization": "wrist-origin, unit maximum wrist distance"
+}

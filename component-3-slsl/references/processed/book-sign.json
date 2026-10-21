@@ -1,0 +1,14 @@
+{
+  "sign_label": "book-sign",
+  "pose_count": 1,
+  "source_files": [
+    "book-sign.png"
+  ],
+  "frame_numbers": [
+    0
+  ],
+  "hand_indices": [
+    0
+  ],
+  "normalization": "wrist-origin, unit maximum wrist distance"
+}
