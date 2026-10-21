@@ -27,3 +27,9 @@ frontend/public/sample-videos/*
 *.webm
 *.mov
 *.avi
+
+preprocessing/models/*
+!preprocessing/models/.gitkeep
+*.task
+frontend/public/hand-animations/recorded/*
+!frontend/public/hand-animations/recorded/.gitkeep

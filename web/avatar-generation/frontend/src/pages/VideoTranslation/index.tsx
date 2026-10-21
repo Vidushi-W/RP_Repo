@@ -1,2 +1,4 @@
 import { VideoWorkspace } from '../../components/video/VideoWorkspace';
-export default function VideoTranslation() { return <><div className="page-title"><div><span className="eyebrow">TRANSLATION STUDIO</span><h1>Learning, side by side.</h1><p>Explore video playback and the prepared avatar timeline.</p></div><span className="badge">Demonstration mode</span></div><VideoWorkspace/></>; }
+export default function VideoTranslation() {
+  return <><div className="page-title"><div><span className="eyebrow">LANDMARK PLAYBACK STUDIO</span><h1>Recorded motion. Replayed clearly.</h1><p>Match explicit sign identifiers to saved 2D hand animations.</p></div><span className="badge">Offline-recorded playback</span></div><VideoWorkspace/></>;
+}

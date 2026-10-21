@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "fixture": true,
+  "signs": [
+    {
+      "signId": "TEST_CALIBRATION_A",
+      "label": "Coordinate fixture A (not a sign)",
+      "aliases": [
+        "test-a"
+      ],
+      "animationUrl": "hand-animations/fixtures/calibration-a.json",
+      "datasetReference": "Synthetic coordinate diagnostic; not a dataset recording or linguistic gesture",
+      "reviewed": false
+    },
+    {
+      "signId": "TEST_CALIBRATION_B",
+      "label": "Coordinate fixture B (not a sign)",
+      "aliases": [
+        "test-b"
+      ],
+      "animationUrl": "hand-animations/fixtures/calibration-b.json",
+      "datasetReference": "Synthetic coordinate diagnostic; not a dataset recording or linguistic gesture",
+      "reviewed": false
+    }
+  ]
+}
