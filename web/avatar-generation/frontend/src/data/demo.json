@@ -1,0 +1,11 @@
+{
+  "title": "Playback synchronization study",
+  "demonstration": true,
+  "videoUrl": null,
+  "avatarUrl": null,
+  "cues": [
+    { "id": "cue-a", "wordId": "timing-marker-a", "label": "Timing marker A", "start": 1, "end": 3 },
+    { "id": "cue-b", "wordId": "timing-marker-b", "label": "Timing marker B", "start": 4, "end": 6 },
+    { "id": "cue-c", "wordId": "timing-marker-c", "label": "Timing marker C", "start": 7, "end": 9 }
+  ]
+}
