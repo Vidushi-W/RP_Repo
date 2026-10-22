@@ -1,0 +1,7 @@
+# Install alongside the existing slsl-research/backend/requirements.txt ML runtime.
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+python-multipart>=0.0.20
+python-dotenv>=1,<2
+argon2-cffi==25.1.0
+pymongo==4.19.0

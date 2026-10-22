@@ -1,0 +1,5 @@
+{
+  "cnn_channels": 64,
+  "hidden_size": 64,
+  "model_type": "ctc_cnn_bilstm"
+}

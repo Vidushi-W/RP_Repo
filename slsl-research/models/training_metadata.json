@@ -1,0 +1,10 @@
+{
+  "version": "synthetic-prototype-1",
+  "epochs_trained": 40,
+  "best_val_loss": 0.5496044233441353,
+  "baseline": {
+    "baseline_trained": true,
+    "samples": 50
+  },
+  "random_seed": 42
+}

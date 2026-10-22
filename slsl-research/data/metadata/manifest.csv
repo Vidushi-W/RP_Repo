@@ -1,0 +1,221 @@
+recording_id,filepath,signer_id,source_type,ordered_sign_labels,emotion_label,sentence_reference,split
+sequence_001,data/recordings/sequence_001.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,train
+sequence_002,data/recordings/sequence_002.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_003,data/recordings/sequence_003.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_004,data/recordings/sequence_004.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_005,data/recordings/sequence_005.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_006,data/recordings/sequence_006.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,train
+sequence_007,data/recordings/sequence_007.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_008,data/recordings/sequence_008.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_009,data/recordings/sequence_009.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_010,data/recordings/sequence_010.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_011,data/recordings/sequence_011.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,train
+sequence_012,data/recordings/sequence_012.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_013,data/recordings/sequence_013.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_014,data/recordings/sequence_014.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_015,data/recordings/sequence_015.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_016,data/recordings/sequence_016.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,train
+sequence_017,data/recordings/sequence_017.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_018,data/recordings/sequence_018.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_019,data/recordings/sequence_019.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_020,data/recordings/sequence_020.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_021,data/recordings/sequence_021.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,train
+sequence_022,data/recordings/sequence_022.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_023,data/recordings/sequence_023.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_024,data/recordings/sequence_024.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_025,data/recordings/sequence_025.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_026,data/recordings/sequence_026.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,train
+sequence_027,data/recordings/sequence_027.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_028,data/recordings/sequence_028.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,train
+sequence_029,data/recordings/sequence_029.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,val
+sequence_030,data/recordings/sequence_030.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,val
+sequence_031,data/recordings/sequence_031.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,val
+sequence_032,data/recordings/sequence_032.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,val
+sequence_033,data/recordings/sequence_033.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,val
+sequence_034,data/recordings/sequence_034.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,val
+sequence_035,data/recordings/sequence_035.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,test
+sequence_036,data/recordings/sequence_036.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|WATER,angry,I need water.,test
+sequence_037,data/recordings/sequence_037.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|WATER,neutral,I need water.,test
+sequence_038,data/recordings/sequence_038.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|WATER,neutral,I need water.,test
+sequence_039,data/recordings/sequence_039.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|WATER,neutral,I need water.,test
+sequence_040,data/recordings/sequence_040.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|WATER,neutral,I need water.,test
+sequence_041,data/recordings/sequence_041.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,train
+sequence_042,data/recordings/sequence_042.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_043,data/recordings/sequence_043.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_044,data/recordings/sequence_044.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_045,data/recordings/sequence_045.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_046,data/recordings/sequence_046.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,train
+sequence_047,data/recordings/sequence_047.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_048,data/recordings/sequence_048.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_049,data/recordings/sequence_049.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_050,data/recordings/sequence_050.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_051,data/recordings/sequence_051.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,train
+sequence_052,data/recordings/sequence_052.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_053,data/recordings/sequence_053.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_054,data/recordings/sequence_054.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_055,data/recordings/sequence_055.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_056,data/recordings/sequence_056.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,train
+sequence_057,data/recordings/sequence_057.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_058,data/recordings/sequence_058.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_059,data/recordings/sequence_059.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_060,data/recordings/sequence_060.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_061,data/recordings/sequence_061.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,train
+sequence_062,data/recordings/sequence_062.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_063,data/recordings/sequence_063.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_064,data/recordings/sequence_064.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_065,data/recordings/sequence_065.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_066,data/recordings/sequence_066.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,train
+sequence_067,data/recordings/sequence_067.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_068,data/recordings/sequence_068.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,train
+sequence_069,data/recordings/sequence_069.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,val
+sequence_070,data/recordings/sequence_070.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,val
+sequence_071,data/recordings/sequence_071.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,val
+sequence_072,data/recordings/sequence_072.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,val
+sequence_073,data/recordings/sequence_073.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,val
+sequence_074,data/recordings/sequence_074.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,val
+sequence_075,data/recordings/sequence_075.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,test
+sequence_076,data/recordings/sequence_076.csv,SYNTHETIC_SIGNER_01,synthetic,I|WANT|FOOD,angry,I want food.,test
+sequence_077,data/recordings/sequence_077.csv,SYNTHETIC_SIGNER_02,synthetic,I|WANT|FOOD,neutral,I want food.,test
+sequence_078,data/recordings/sequence_078.csv,SYNTHETIC_SIGNER_03,synthetic,I|WANT|FOOD,neutral,I want food.,test
+sequence_079,data/recordings/sequence_079.csv,SYNTHETIC_SIGNER_04,synthetic,I|WANT|FOOD,neutral,I want food.,test
+sequence_080,data/recordings/sequence_080.csv,SYNTHETIC_SIGNER_05,synthetic,I|WANT|FOOD,neutral,I want food.,test
+sequence_081,data/recordings/sequence_081.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,train
+sequence_082,data/recordings/sequence_082.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_083,data/recordings/sequence_083.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_084,data/recordings/sequence_084.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_085,data/recordings/sequence_085.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_086,data/recordings/sequence_086.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,train
+sequence_087,data/recordings/sequence_087.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_088,data/recordings/sequence_088.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_089,data/recordings/sequence_089.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_090,data/recordings/sequence_090.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_091,data/recordings/sequence_091.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,train
+sequence_092,data/recordings/sequence_092.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_093,data/recordings/sequence_093.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_094,data/recordings/sequence_094.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_095,data/recordings/sequence_095.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_096,data/recordings/sequence_096.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,train
+sequence_097,data/recordings/sequence_097.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_098,data/recordings/sequence_098.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_099,data/recordings/sequence_099.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_100,data/recordings/sequence_100.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_101,data/recordings/sequence_101.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,train
+sequence_102,data/recordings/sequence_102.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_103,data/recordings/sequence_103.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_104,data/recordings/sequence_104.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_105,data/recordings/sequence_105.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_106,data/recordings/sequence_106.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,train
+sequence_107,data/recordings/sequence_107.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_108,data/recordings/sequence_108.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,train
+sequence_109,data/recordings/sequence_109.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,val
+sequence_110,data/recordings/sequence_110.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,val
+sequence_111,data/recordings/sequence_111.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,val
+sequence_112,data/recordings/sequence_112.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,val
+sequence_113,data/recordings/sequence_113.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,val
+sequence_114,data/recordings/sequence_114.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,val
+sequence_115,data/recordings/sequence_115.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,test
+sequence_116,data/recordings/sequence_116.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|GO|HOME,angry,You go home.,test
+sequence_117,data/recordings/sequence_117.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|GO|HOME,neutral,You go home.,test
+sequence_118,data/recordings/sequence_118.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|GO|HOME,neutral,You go home.,test
+sequence_119,data/recordings/sequence_119.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|GO|HOME,neutral,You go home.,test
+sequence_120,data/recordings/sequence_120.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|GO|HOME,neutral,You go home.,test
+sequence_121,data/recordings/sequence_121.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,train
+sequence_122,data/recordings/sequence_122.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_123,data/recordings/sequence_123.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_124,data/recordings/sequence_124.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_125,data/recordings/sequence_125.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_126,data/recordings/sequence_126.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,train
+sequence_127,data/recordings/sequence_127.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_128,data/recordings/sequence_128.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_129,data/recordings/sequence_129.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_130,data/recordings/sequence_130.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_131,data/recordings/sequence_131.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,train
+sequence_132,data/recordings/sequence_132.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_133,data/recordings/sequence_133.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_134,data/recordings/sequence_134.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_135,data/recordings/sequence_135.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_136,data/recordings/sequence_136.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,train
+sequence_137,data/recordings/sequence_137.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_138,data/recordings/sequence_138.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_139,data/recordings/sequence_139.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_140,data/recordings/sequence_140.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_141,data/recordings/sequence_141.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,train
+sequence_142,data/recordings/sequence_142.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_143,data/recordings/sequence_143.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_144,data/recordings/sequence_144.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_145,data/recordings/sequence_145.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_146,data/recordings/sequence_146.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,train
+sequence_147,data/recordings/sequence_147.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_148,data/recordings/sequence_148.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,train
+sequence_149,data/recordings/sequence_149.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,val
+sequence_150,data/recordings/sequence_150.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,val
+sequence_151,data/recordings/sequence_151.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,val
+sequence_152,data/recordings/sequence_152.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,val
+sequence_153,data/recordings/sequence_153.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,val
+sequence_154,data/recordings/sequence_154.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,val
+sequence_155,data/recordings/sequence_155.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,test
+sequence_156,data/recordings/sequence_156.csv,SYNTHETIC_SIGNER_01,synthetic,I|NEED|HELP,angry,I need help.,test
+sequence_157,data/recordings/sequence_157.csv,SYNTHETIC_SIGNER_02,synthetic,I|NEED|HELP,neutral,I need help.,test
+sequence_158,data/recordings/sequence_158.csv,SYNTHETIC_SIGNER_03,synthetic,I|NEED|HELP,neutral,I need help.,test
+sequence_159,data/recordings/sequence_159.csv,SYNTHETIC_SIGNER_04,synthetic,I|NEED|HELP,neutral,I need help.,test
+sequence_160,data/recordings/sequence_160.csv,SYNTHETIC_SIGNER_05,synthetic,I|NEED|HELP,neutral,I need help.,test
+sequence_161,data/recordings/sequence_161.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,train
+sequence_162,data/recordings/sequence_162.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_163,data/recordings/sequence_163.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_164,data/recordings/sequence_164.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_165,data/recordings/sequence_165.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_166,data/recordings/sequence_166.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,train
+sequence_167,data/recordings/sequence_167.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_168,data/recordings/sequence_168.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_169,data/recordings/sequence_169.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_170,data/recordings/sequence_170.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_171,data/recordings/sequence_171.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,train
+sequence_172,data/recordings/sequence_172.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_173,data/recordings/sequence_173.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_174,data/recordings/sequence_174.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_175,data/recordings/sequence_175.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_176,data/recordings/sequence_176.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,train
+sequence_177,data/recordings/sequence_177.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_178,data/recordings/sequence_178.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_179,data/recordings/sequence_179.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_180,data/recordings/sequence_180.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_181,data/recordings/sequence_181.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,train
+sequence_182,data/recordings/sequence_182.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_183,data/recordings/sequence_183.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_184,data/recordings/sequence_184.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_185,data/recordings/sequence_185.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_186,data/recordings/sequence_186.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,train
+sequence_187,data/recordings/sequence_187.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_188,data/recordings/sequence_188.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,train
+sequence_189,data/recordings/sequence_189.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,val
+sequence_190,data/recordings/sequence_190.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,val
+sequence_191,data/recordings/sequence_191.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,val
+sequence_192,data/recordings/sequence_192.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,val
+sequence_193,data/recordings/sequence_193.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,val
+sequence_194,data/recordings/sequence_194.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,val
+sequence_195,data/recordings/sequence_195.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,test
+sequence_196,data/recordings/sequence_196.csv,SYNTHETIC_SIGNER_01,synthetic,YOU|STOP,angry,You stop.,test
+sequence_197,data/recordings/sequence_197.csv,SYNTHETIC_SIGNER_02,synthetic,YOU|STOP,neutral,You stop.,test
+sequence_198,data/recordings/sequence_198.csv,SYNTHETIC_SIGNER_03,synthetic,YOU|STOP,neutral,You stop.,test
+sequence_199,data/recordings/sequence_199.csv,SYNTHETIC_SIGNER_04,synthetic,YOU|STOP,neutral,You stop.,test
+sequence_200,data/recordings/sequence_200.csv,SYNTHETIC_SIGNER_05,synthetic,YOU|STOP,neutral,You stop.,test
+robustness_001,data/recordings/robustness_001.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|WATER,neutral,I need water.,test
+robustness_002,data/recordings/robustness_002.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|WANT|FOOD,neutral,I want food.,test
+robustness_003,data/recordings/robustness_003.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|GO|HOME,neutral,You go home.,test
+robustness_004,data/recordings/robustness_004.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|HELP,neutral,I need help.,test
+robustness_005,data/recordings/robustness_005.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|STOP,neutral,You stop.,test
+robustness_006,data/recordings/robustness_006.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|WATER,neutral,I need water.,test
+robustness_007,data/recordings/robustness_007.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|WANT|FOOD,neutral,I want food.,test
+robustness_008,data/recordings/robustness_008.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|GO|HOME,neutral,You go home.,test
+robustness_009,data/recordings/robustness_009.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|HELP,neutral,I need help.,test
+robustness_010,data/recordings/robustness_010.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|STOP,neutral,You stop.,test
+robustness_011,data/recordings/robustness_011.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|WATER,neutral,I need water.,test
+robustness_012,data/recordings/robustness_012.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|WANT|FOOD,neutral,I want food.,test
+robustness_013,data/recordings/robustness_013.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|GO|HOME,neutral,You go home.,test
+robustness_014,data/recordings/robustness_014.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|HELP,neutral,I need help.,test
+robustness_015,data/recordings/robustness_015.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|STOP,neutral,You stop.,test
+robustness_016,data/recordings/robustness_016.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|WATER,neutral,I need water.,test
+robustness_017,data/recordings/robustness_017.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|WANT|FOOD,neutral,I want food.,test
+robustness_018,data/recordings/robustness_018.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|GO|HOME,neutral,You go home.,test
+robustness_019,data/recordings/robustness_019.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,I|NEED|HELP,neutral,I need help.,test
+robustness_020,data/recordings/robustness_020.csv,SYNTHETIC_SIGNER_06,synthetic_robustness,YOU|STOP,neutral,You stop.,test
