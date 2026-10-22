@@ -1,0 +1,6 @@
+{
+  "house-sign": {
+    "expected_hands": 2,
+    "note": "Two-hand sign; reference extraction uses an overlapping crop fallback when full-frame detection misses one hand."
+  }
+}

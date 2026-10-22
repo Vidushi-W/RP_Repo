@@ -1,4 +1,4 @@
-"""Similarity scores and basic hand joint-angle measurements."""
+﻿"""Similarity scores and basic hand joint-angle measurements."""
 
 from __future__ import annotations
 
@@ -167,3 +167,18 @@ def joint_angle_degrees(
         return float("nan")
     cosine = float(np.clip(np.dot(vector_a, vector_b) / lengths, -1.0, 1.0))
     return float(np.degrees(np.arccos(cosine)))
+
+
+def hand_kinematic_features(landmarks: np.ndarray | list) -> dict[str, float]:
+    """Measure the fifteen joint-angle features used by the local classifier."""
+    points = _landmark_array(landmarks, "landmarks")
+    features: dict[str, float] = {
+        "thumb_mcp": joint_angle_degrees(points, 1, 2, 3),
+        "thumb_ip": joint_angle_degrees(points, 2, 3, 4),
+        "thumb_abduction": joint_angle_degrees(points, 0, 1, 5),
+    }
+    for finger, base in (("index", 5), ("middle", 9), ("ring", 13), ("pinky", 17)):
+        features[f"{finger}_mcp"] = joint_angle_degrees(points, 0, base, base + 1)
+        features[f"{finger}_pip"] = joint_angle_degrees(points, base, base + 1, base + 2)
+        features[f"{finger}_dip"] = joint_angle_degrees(points, base + 1, base + 2, base + 3)
+    return features

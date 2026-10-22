@@ -3,11 +3,19 @@ node_modules/
 dist/
 web-build/
 *.log
+__pycache__/
+.env
+.env.*
+!.env.example
 
 # Component 3 standalone Python webcam demo
-component-3-slsl/.venv/
-component-3-slsl/__pycache__/
-component-3-slsl/.mpl-cache/
-component-3-slsl/hand_landmarker.task
-component-3-slsl/mediapipe-*.whl
-component-3-slsl/expert_reference.npy
+web/skill-remediation/.venv/
+web/skill-remediation/__pycache__/
+web/skill-remediation/.mpl-cache/
+web/skill-remediation/hand_landmarker.task
+web/skill-remediation/mediapipe-*.whl
+web/skill-remediation/expert_reference.npy
+web/skill-remediation/kinematic_error_classifier.joblib
+web/skill-remediation/kinematic_error_classifier.pkl
+web/skill-remediation/data/kinematic_dataset.csv
+web/skill-remediation/data/

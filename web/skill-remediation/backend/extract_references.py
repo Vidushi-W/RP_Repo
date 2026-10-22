@@ -1,4 +1,4 @@
-"""Extract normalized MediaPipe hand poses from labeled image/video folders.
+﻿"""Extract normalized MediaPipe hand poses from labeled image/video folders.
 
 Input layout::
 
@@ -21,10 +21,10 @@ import numpy as np
 from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python import vision
 
-from normalization import normalize_landmarks
+from backend.normalization import normalize_landmarks
 
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).resolve().parents[1]
 REFERENCES_DIR = ROOT / "references"
 OUTPUT_DIR = REFERENCES_DIR / "processed"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
