@@ -212,3 +212,177 @@ def test_local_sentence_never_overwrites_newer_motion_prediction(client, db_sess
     stored=client.get('/api/studio/tests').json()[0]['result']
     assert stored['recognition_id']=='newer-prediction'
     assert 'spoken_sentence' not in stored
+
+
+
+def test_expression_settings_api(client):
+    assert client.get('/api/studio/expression-rules').json()['words']==['HATE','DIE','STOP','ENOUGH','ANNOYING','IDIOT','LOSER','DISGUST','STUPID']
+    updated=client.put('/api/studio/expression-rules',json={'enabled':True,'words':[' hate ','HATE']})
+    assert updated.status_code==200 and updated.json()['words']==['HATE']
+    assert client.get('/api/studio/expression-rules').json()['words']==['HATE']
+    assert client.put('/api/studio/expression-rules',json={'enabled':True,'words':['*HATE*']}).status_code==400
+    assert client.get('/api/studio/expression-rules').json()['words']==['HATE']
+
+
+@pytest.mark.parametrize('prediction,answer,enabled,expected_label', [
+    (['I','HATE','BAT'],'I|LIKE|BAT',True,'angry'),
+    (['I','LIKE','BAT'],'I|HATE|BAT',True,None),
+    (['I','HATE','BAT'],'I|HATE|BAT',False,None),
+])
+def test_expression_uses_predictions_and_does_not_change_metrics(client,db_session,monkeypatch,prediction,answer,enabled,expected_label):
+    from app.ml.local_sentence import SpokenSentence
+    model(db_session)
+    client.put('/api/studio/expression-rules',json={'enabled':enabled,'words':['HATE']})
+    key=('recording_id,ordered_sign_labels\nunknown,'+answer+'\n').encode()
+    response=client.post('/api/studio/data/tests',files=[('files',('unknown.csv',sample(),'text/csv')),('answer_key',('answers.csv',key,'text/csv'))])
+    assert response.status_code==200
+    row=client.get('/api/studio/tests').json()[0]
+    monkeypatch.setattr(studio,'load_bundle',lambda _:object())
+    monkeypatch.setattr(studio,'recognize_from_csv',lambda *_:SimpleNamespace(predicted_signs=prediction,decoder_score=.9,inference_ms=1.))
+    predicted=client.post('/api/studio/tests/'+row['id']+'/run').json()['result']
+    assert predicted['expression']['label']==expected_label
+    original_metrics=predicted['metrics'].copy()
+    phrase='I hate this bat.' if 'HATE' in prediction else 'I like the bat.'
+    calls=[]
+    def suggest(words,uncertain=False):
+        calls.append(words)
+        return SpokenSentence(phrase,'suggested','AI suggestion')
+    monkeypatch.setattr(studio,'generate_spoken_sentence',suggest)
+    result=client.post('/api/studio/tests/'+row['id']+'/sentence',json={'recognition_id':predicted['recognition_id']})
+    assert result.status_code==200,result.text
+    assert result.json()['text']==phrase
+    assert result.json()['display_text']==phrase+(' [angry]' if expected_label else '')
+    assert result.json()['expression']['label']==expected_label
+    assert calls==[prediction]
+    stored=client.get('/api/studio/tests').json()[0]['result']
+    assert stored['metrics']==original_metrics
+    assert stored['predicted_signs']==prediction
+
+
+def test_training_uses_only_selected_collections(client, db_session, monkeypatch):
+    selected = client.post('/api/studio/data/training', files=[
+        ('files', ('a.csv', sample(offset=.01, label='I'), 'text/csv')),
+        ('files', ('b.csv', sample(offset=.02, label='I'), 'text/csv')),
+    ]).json()['dataset_id']
+    excluded = client.post('/api/studio/data/training', files={
+        'files': ('c.csv', sample(offset=.03, label='EXCLUDED'), 'text/csv')
+    }).json()['dataset_id']
+    rows = DatasetService(db_session).repo.list_recordings(selected)
+    rows[0].split = 'train'
+    rows[1].split = 'val'
+    db_session.commit()
+    captured = []
+    monkeypatch.setattr(studio.TrainingService, 'start_training',
+        lambda self, payload: (captured.append(payload) or SimpleNamespace(id=123)))
+    assert client.post('/api/studio/collections', json={'dataset_ids': [selected]}).status_code == 200
+    overview = client.get('/api/studio/overview').json()
+    assert overview['included_dataset_ids'] == [selected]
+    assert overview['training_recordings'] == 2
+    response = client.post('/api/studio/train', json={'epochs': 1})
+    assert response.status_code == 200, response.text
+    assert captured[0]['dataset_ids'] == [selected]
+    assert set(captured[0]['studio_recording_ids']) == {r.id for r in rows}
+    assert excluded not in captured[0]['dataset_ids']
+    assert client.post('/api/studio/collections', json={'dataset_ids': []}).status_code == 200
+    assert client.post('/api/studio/train', json={'epochs': 1}).status_code == 400
+    assert len(captured) == 1
+
+
+def test_overview_removes_deleted_collection_from_saved_selection(client, db_session):
+    uploaded = client.post('/api/studio/data/training', files={
+        'files': ('train.csv', sample(label='I'), 'text/csv')
+    }).json()
+    selected = uploaded['dataset_id']
+    (settings.data_dir / 'studio_collections.json').write_text(json.dumps([selected, 999999]))
+    overview = client.get('/api/studio/overview').json()
+    assert overview['included_dataset_ids'] == [selected]
+    assert client.post('/api/studio/collections', json={
+        'dataset_ids': [i for i in overview['included_dataset_ids'] if i != selected]
+    }).status_code == 200
+    assert client.get('/api/studio/overview').json()['training_recordings'] == 0
+
+
+def test_accuracy_recomputed_with_coverage_and_no_unlabelled_successes():
+    def row(rid, ref, pred, **extra):
+        return dict(id=rid, expected_signs=ref, result=dict(model_id=3, evaluation_version=2,
+            predicted_signs=pred, metrics={'exact_match': True}, motion_fingerprint=rid, **extra))
+    rows=[row('a',['I'],['I']), row('b',['I'],['YOU']), row('c',[],['I']),
+          dict(id='d',expected_signs=['I'],result=None),
+          dict(id='e',expected_signs=['I'],result={'model_id':2,'evaluation_version':2,'predicted_signs':['I']}),
+          row('f',['I'],['I'],accuracy_excluded_reason='Training copy')]
+    score=studio.evaluation_summary(rows,3)
+    assert score['accuracy']==.5 and score['exact_matches']==1
+    assert score['evaluated_recordings']==2 and score['labelled_test_recordings']==5
+    assert score['pending_evaluations']==2 and score['excluded_evaluations']==1
+    assert score['unlabelled_test_recordings']==1 and score['sign_error_rate']==.5
+    assert score['accuracy_interval'][0]<.5<score['accuracy_interval'][1]
+    score=studio.evaluation_summary([row('only',['I'],['I'])],3)
+    assert score['accuracy']==1 and score['accuracy_interval'][0]<.5
+
+
+def test_duplicate_test_does_not_inflate_accuracy():
+    a=dict(id='a',expected_signs=['I'],result=dict(model_id=3,evaluation_version=2,
+        predicted_signs=['I'],motion_fingerprint='same'))
+    b=dict(id='b',expected_signs=['I'],result=dict(a['result']))
+    score=studio.evaluation_summary([a,b],3)
+    assert score['evaluated_recordings']==1 and score['excluded_evaluations']==1
+    assert score['sign_error_rate']==0
+
+
+def test_validation_and_ancestor_training_copy_excluded(client,db_session,monkeypatch):
+    uploaded=client.post('/api/studio/data/training',files={'files':('train.csv',sample(label='I'),'text/csv')}).json()
+    r=DatasetService(db_session).repo.list_recordings(uploaded['dataset_id'])[0]
+    r.split='test';db_session.commit()
+    m=model(db_session)
+    current=settings.artifacts_dir/m.bundle_path;current.mkdir(parents=True)
+    ancestor=settings.artifacts_dir/'models'/'previous';ancestor.mkdir(parents=True)
+    (current/'training_sources.json').write_text('[]')
+    (current/'training_settings.json').write_text(json.dumps({'source_bundle_path':str(ancestor.resolve())}))
+    (ancestor/'training_sources.json').write_text(json.dumps([{'id':r.id,'split':'val'}]))
+    assert r.id in studio.exposed_recording_ids(db_session,m)
+    # An identical signal with a different absolute clock must also be excluded.
+    shifted=pd.read_csv(io.BytesIO(sample()));shifted.timestamp_ms+=500
+    client.post('/api/studio/data/tests',files=[('files',('copy.csv',shifted.to_csv(index=False).encode(),'text/csv')),
+        ('answer_key',('answers.csv',b'recording_id,ordered_sign_labels\ncopy,I\n','text/csv'))])
+    t=client.get('/api/studio/tests').json()[0]
+    monkeypatch.setattr(studio,'load_bundle',lambda _:object())
+    monkeypatch.setattr(studio,'recognize_from_csv',lambda *_:SimpleNamespace(predicted_signs=['I'],decoder_score=.9,inference_ms=1.))
+    result=client.post('/api/studio/tests/'+t['id']+'/run').json()['result']
+    assert result['metrics'] is None and result['accuracy_excluded_reason']
+
+
+def test_delete_test_removes_files_and_updates_accuracy(client,db_session):
+    m=model(db_session)
+    result=client.post('/api/studio/data/tests',files=[
+        ('files',('one.csv',sample(),'text/csv')),
+        ('files',('two.csv',sample(offset=.1),'text/csv')),
+        ('answer_key',('answers.csv',b'recording_id,ordered_sign_labels\none,I\ntwo,I\n','text/csv'))])
+    assert result.status_code==200
+    rows=client.get('/api/studio/tests').json()
+    for i,row in enumerate(rows):
+        row['result']=dict(model_id=m.id,evaluation_version=2,predicted_signs=['I'] if i==0 else ['YOU'],motion_fingerprint=row['id'])
+        studio.save_test_record(row)
+    assert client.get('/api/studio/overview').json()['accuracy']==.5
+    removed=rows[0]['id'];kept=rows[1]['id']
+    assert client.delete('/api/studio/tests/'+removed).status_code==200
+    assert not (studio.test_dir()/(removed+'.csv')).exists()
+    assert not (studio.test_dir()/(removed+'.json')).exists()
+    assert (studio.test_dir()/(kept+'.csv')).exists()
+    overview=client.get('/api/studio/overview').json()
+    assert overview['test_recordings']==1 and overview['evaluated_recordings']==1
+    assert overview['accuracy']==0 and overview['model']['id']==m.id
+    assert client.delete('/api/studio/tests/'+removed).status_code==404
+
+
+def test_deleted_recording_cannot_be_restored_by_inflight_prediction(client,db_session,monkeypatch):
+    model(db_session)
+    client.post('/api/studio/data/tests',files={'files':('test.csv',sample(),'text/csv')})
+    row=client.get('/api/studio/tests').json()[0]
+    monkeypatch.setattr(studio,'load_bundle',lambda _:object())
+    def predict(*args):
+        studio.delete_test(row['id'])
+        return SimpleNamespace(predicted_signs=['I'],decoder_score=.9,inference_ms=1.)
+    monkeypatch.setattr(studio,'recognize_from_csv',predict)
+    response=client.post('/api/studio/tests/'+row['id']+'/run')
+    assert response.status_code==404
+    assert client.get('/api/studio/tests').json()==[]

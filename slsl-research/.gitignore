@@ -86,3 +86,9 @@ htmlcov/
 .coverage.*
 test-results/
 playwright-report/
+
+# User-configured expression annotation rules
+data/expression_rules.json
+
+# Generated Sinhala audio (recreated from stored predictions)
+data/studio_speech/

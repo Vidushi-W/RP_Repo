@@ -48,6 +48,9 @@ class Settings(BaseSettings):
     max_upload_bytes: int = 50 * 1024 * 1024
     sentence_model_dir: Path = PROJECT_ROOT / "local_models" / "qwen2.5-0.5b-instruct"
     sentence_timeout_seconds: int = 120
+    translation_model_dir: Path = PROJECT_ROOT / 'local_models' / 'm2m100-418m'
+    sinhala_voice_dir: Path = PROJECT_ROOT / 'local_models' / 'dilu-sinhala'
+    speech_timeout_seconds: int = 120
 
     @property
     def cors_origins_list(self) -> list[str]:

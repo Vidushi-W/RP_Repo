@@ -1,0 +1,51 @@
+**/.env
+**/.env.*
+!**/.env.example
+**/__pycache__/
+**/.pytest_cache/
+server/runtime/
+server/.venv/
+*.log
+
+# Nested Android/Flutter build reports and compiler intermediates
+**/build/
+**/.cxx/
+
+# Local Python environments, caches and packaging output
+**/.venv/
+**/venv/
+**/.mypy_cache/
+**/.ruff_cache/
+**/*.egg-info/
+**/htmlcov/
+**/.coverage
+**/.coverage.*
+
+# Local databases and journal files (including outside runtime/)
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite3-journal
+
+# Installable packages, profiling and local editor/OS files
+*.apk
+*.aab
+*.apks
+*.hprof
+**/.vscode/
+Thumbs.db
+Desktop.ini
+
+# Downloaded model files are supplied by the local inference service
+*.pt
+*.pth
+*.onnx
+*.safetensors

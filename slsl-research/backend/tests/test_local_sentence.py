@@ -32,13 +32,13 @@ def test_no_model_needed_for_empty_uncertain_or_untranslated_labels(monkeypatch)
         pytest.fail('Language model must not run')
     monkeypatch.setattr(local_sentence, '_run_local_model', forbidden)
     assert local_sentence.generate_spoken_sentence([]).status == 'empty'
-    assert local_sentence.generate_spoken_sentence(['I','WANT','FOOD'], uncertain=True).status == 'uncertain'
+    assert local_sentence.generate_spoken_sentence(['I','WANT','FOOD'], uncertain=True).status == 'fallback'
     assert local_sentence.generate_spoken_sentence(['SOURCE1 KUNU']).status == 'unsupported'
 
 
 def test_missing_model_is_explicit(tmp_path, monkeypatch):
     monkeypatch.setattr(settings, 'sentence_model_dir', tmp_path/'missing')
-    assert local_sentence.generate_spoken_sentence(['I','WANT','FOOD']).status == 'unavailable'
+    assert local_sentence.generate_spoken_sentence(['I','WANT','FOOD']).status == 'fallback'
 
 
 def test_model_result_is_checked(tmp_path, monkeypatch):
@@ -49,4 +49,23 @@ def test_model_result_is_checked(tmp_path, monkeypatch):
     result = local_sentence.generate_spoken_sentence(['MY','BAG','RED'])
     assert result.status == 'suggested' and result.text == 'My bag is red.'
     monkeypatch.setattr(local_sentence, '_run_local_model', lambda *args: 'My bag is blue.')
-    assert local_sentence.generate_spoken_sentence(['MY','BAG','RED']).status == 'unsupported'
+    assert local_sentence.generate_spoken_sentence(['MY','BAG','RED']).status == 'fallback'
+
+
+@pytest.mark.parametrize('word',['HATE','DIE','STOP','ENOUGH','ANNOYING','IDIOT','LOSER','DISGUST','STUPID'])
+def test_every_known_angry_word_has_fallback_without_model(word,tmp_path,monkeypatch):
+    monkeypatch.setattr(settings,'sentence_model_dir',tmp_path/'missing')
+    result=local_sentence.generate_spoken_sentence([word])
+    assert result.text and word.lower() in result.text
+    assert result.status=='fallback' and result.model_name=='Word-based fallback'
+
+
+@pytest.mark.parametrize('tokens,expected',[
+    (['MY','SON','STUPID'],'My son is stupid.'),
+    (['WE','IDIOT'],'We are idiots.'),
+    (['OUR','CHILDREN','ANNOYING'],'Our children are annoying.'),
+])
+def test_known_fallback_grammar(tokens,expected,tmp_path,monkeypatch):
+    monkeypatch.setattr(settings,'sentence_model_dir',tmp_path/'missing')
+    result=local_sentence.generate_spoken_sentence(tokens)
+    assert result.text==expected and result.status=='fallback'
