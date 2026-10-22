@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
-import time
+import os
 import textwrap
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import cv2
@@ -15,6 +17,9 @@ from mediapipe.tasks.python import vision
 from backend.metrics import compare_pose_sequences, joint_angle_degrees
 from backend.normalization import normalize_landmarks
 from backend.reference_loader import load_reference_sequences
+from backend.ml_classifier import load_error_classifier, predict_sequence
+from backend.remediation_engine import recommend_from_history
+from frontend.api_client import load_recent_attempts, save_practice_result
 
 
 PROMPT_SECONDS = 4.5
@@ -110,6 +115,31 @@ def draw_sign_picture(canvas: np.ndarray, sign: str, center: tuple[int, int], si
         cv2.circle(canvas, (cx, cy), int(size * 0.38), (180, 190, 210), -1)
 
 
+def load_reference_cues(signs: list[str]) -> dict[str, np.ndarray]:
+    """Load the real source image, or a first video frame, for each cue."""
+    root = Path(__file__).resolve().parents[1] / "references"
+    cues: dict[str, np.ndarray] = {}
+    for sign in signs:
+        folder = root / sign
+        sources = sorted(
+            path for path in folder.iterdir()
+            if path.is_file() and path.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp", ".webp", ".mp4", ".mov", ".avi", ".mkv"}
+        ) if folder.exists() else []
+        for source in sources:
+            if source.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp", ".webp"}:
+                cue = cv2.imread(str(source))
+            else:
+                video = cv2.VideoCapture(str(source))
+                ok, cue = video.read()
+                video.release()
+                if not ok:
+                    cue = None
+            if cue is not None:
+                cues[sign] = cue
+                break
+    return cues
+
+
 def _dominant_hand_count(frames: list[np.ndarray]) -> int:
     counts = [len(frame) for frame in frames]
     return max(set(counts), key=lambda count: (counts.count(count), count))
@@ -120,12 +150,22 @@ def summarize_sequence(
 ) -> dict[str, float | str]:
     """DTW-align the captured clip with its closest reference video or image."""
     if len(live_frames) < MIN_VALID_FRAMES:
-        return {"message": "Not enough hand samples. Wait for the next cue and keep your hand visible."}
+        return {
+            "message": (
+                f"Captured {len(live_frames)} hand sample(s); at least {MIN_VALID_FRAMES} are needed. "
+                "Keep the signing hand(s) visible during the full capture."
+            )
+        }
 
     live_hand_count = _dominant_hand_count(live_frames)
     live_sequence = [frame for frame in live_frames if len(frame) == live_hand_count]
     if len(live_sequence) < MIN_VALID_FRAMES:
-        return {"message": "Keep the same signing hand(s) visible throughout the capture."}
+        return {
+            "message": (
+                f"Captured {len(live_sequence)} consistent sample(s) with {live_hand_count} hand(s); "
+                f"at least {MIN_VALID_FRAMES} are needed. Keep the same hand(s) visible throughout."
+            )
+        }
 
     best: dict[str, object] | None = None
     best_reference: list[np.ndarray] | None = None
@@ -139,7 +179,12 @@ def summarize_sequence(
     if best is None or best_reference is None:
         reference_counts = sorted({len(sequence[0]) for sequence in reference_sequences if sequence})
         expected = ", ".join(map(str, reference_counts)) or "no"
-        return {"message": f"Camera sees {live_hand_count} hand(s); this reference has {expected}. Check the reference view."}
+        return {
+            "message": (
+                f"Camera sees {live_hand_count} hand(s); this reference needs {expected}. "
+                "Keep the required hand(s) visible for the whole capture."
+            )
+        }
 
     thumb_errors: list[float] = []
     index_errors: list[float] = []
@@ -160,6 +205,7 @@ def summarize_sequence(
     index_error = float(np.median(index_errors)) if index_errors else float("nan")
     return {
         "similarity": float(best["similarity"]),
+        "dtw_distance": float(best["distance"]),
         "thumb_status": angle_error_status(thumb_error),
         "index_status": angle_error_status(index_error),
     }
@@ -174,12 +220,22 @@ def draw_frontend(
     result: dict[str, float | str] | None,
     sign_index: int,
     sign_count: int,
+    cue_image: np.ndarray | None = None,
 ) -> np.ndarray:
     """Compose camera view, picture cue, phase instructions and locked score."""
     view_height, view_width, panel_width = 540, 720, 350
     camera = cv2.resize(camera_frame, (view_width, view_height))
     panel = np.full((view_height, panel_width, 3), (34, 37, 48), dtype=np.uint8)
-    draw_sign_picture(panel, sign, (panel_width // 2, 135), 155)
+    if cue_image is None:
+        draw_sign_picture(panel, sign, (panel_width // 2, 135), 155)
+    else:
+        max_width, max_height = panel_width - 36, 185
+        cue_height, cue_width = cue_image.shape[:2]
+        scale = min(max_width / cue_width, max_height / cue_height)
+        resized = cv2.resize(cue_image, (int(cue_width * scale), int(cue_height * scale)))
+        y0 = 35 + (max_height - resized.shape[0]) // 2
+        x0 = (panel_width - resized.shape[1]) // 2
+        panel[y0:y0 + resized.shape[0], x0:x0 + resized.shape[1]] = resized
     cv2.putText(panel, f"Sign {sign_index + 1} of {sign_count}", (24, 258), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (190, 195, 210), 1, cv2.LINE_AA)
 
     if state == "prompt":
@@ -195,7 +251,23 @@ def draw_frontend(
     else:
         lines = ["Result locked"]
         if result and "similarity" in result:
-            lines += [f"Pose similarity: {result['similarity']:.1f}%", f"Thumb: {result['thumb_status']}", f"Index: {result['index_status']}"]
+            lines += [f"DTW pose similarity: {result['similarity']:.1f}%", f"Thumb: {result['thumb_status']}", f"Index: {result['index_status']}"]
+            diagnosis = result.get("ml_label", "unavailable")
+            if diagnosis == "NORMAL":
+                diagnosis = "No trained error detected"
+            elif diagnosis.startswith("ERR_"):
+                diagnosis = f"Provisional: {diagnosis}"
+            elif diagnosis == "UNSUPPORTED_SIGN":
+                diagnosis = "Not trained for this sign"
+            elif diagnosis == "NO_SINGLE_HAND_DATA":
+                diagnosis = "Needs one visible hand"
+            lines.append(f"RF diagnosis: {diagnosis}")
+            if result.get("ml_confidence") is not None:
+                lines.append(f"RF vote confidence (not accuracy): {result['ml_confidence']:.0%}")
+            if result.get("recommendation"):
+                lines.append(f"Practice: {result['recommendation']}")
+            if result.get("save_status"):
+                lines.append(str(result["save_status"]))
         elif result:
             lines += [str(result.get("message", "No result available."))]
         lines += ["Next picture appears automatically"]
@@ -221,22 +293,39 @@ def main() -> None:
     if not references:
         raise FileNotFoundError("No processed reference templates. Run python -m backend.process_references first.")
     labels = list(references)
+    reference_cues = load_reference_cues(labels)
+    model_path = Path(__file__).resolve().parents[1] / "kinematic_error_classifier.pkl"
+    classifier = load_error_classifier(model_path)
+    if classifier:
+        evaluation = classifier.get("evaluation", {})
+        print(
+            "Loaded provisional kinematic classifier; labels:", classifier.get("labels"),
+            "supported signs:", classifier.get("sign_ids"),
+            "stored held-out frame score:", evaluation.get("test_frame_accuracy", "not recorded"),
+        )
+    else:
+        if model_path.exists():
+            print("Kinematic classifier is not approved by grouped validation; ML diagnosis is disabled.")
+        else:
+            print("Kinematic classifier artifact missing; ML diagnosis is unavailable.")
+    user_id = os.getenv("SLSL_USER_ID", "student_01").strip() or "student_01"
     selected_index = 0
     state = "prompt"
     state_started = time.monotonic()
     paused_state = "prompt"
     paused_at = 0.0
     live_frames: list[np.ndarray] = []
+    scoring_frames: list[np.ndarray] = []
     session_result: dict[str, float | str] | None = None
     frame_counter = 0
 
-    model_path = Path(__file__).resolve().parents[1] / "hand_landmarker.task"
-    if not model_path.exists():
+    hand_model_path = Path(__file__).resolve().parents[1] / "hand_landmarker.task"
+    if not hand_model_path.exists():
         raise FileNotFoundError("Missing hand_landmarker.task; see README.md for setup.")
     capture = open_webcam()
 
     options = vision.HandLandmarkerOptions(
-        base_options=mp_python.BaseOptions(model_asset_path=str(model_path)),
+        base_options=mp_python.BaseOptions(model_asset_path=str(hand_model_path)),
         running_mode=vision.RunningMode.VIDEO,
         num_hands=2,
         min_hand_detection_confidence=0.6,
@@ -256,10 +345,16 @@ def main() -> None:
                 result = hands.detect_for_video(mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb), timestamp_ms)
 
                 live_poses: list[np.ndarray] = []
+                scoring_poses: list[np.ndarray] = []
                 for hand in result.hand_landmarks or []:
                     draw_hand_landmarks(frame, hand)
                     raw = np.asarray([[point.x, point.y, point.z] for point in hand], dtype=np.float32)
-                    live_poses.append(normalize_landmarks(raw))
+                    normalized = normalize_landmarks(raw)
+                    live_poses.append(normalized)
+                    reference_orientation = normalized.copy()
+                    # The preview is mirrored for the signer; reference media is not.
+                    reference_orientation[:, 0] *= -1.0
+                    scoring_poses.append(reference_orientation)
 
                 now = time.monotonic()
                 elapsed = now - state_started
@@ -268,15 +363,60 @@ def main() -> None:
                 elif state == "countdown" and elapsed >= COUNTDOWN_SECONDS:
                     state, state_started = "capture", now
                     live_frames = []
+                    scoring_frames = []
                     frame_counter = 0
                 elif state == "capture":
                     frame_counter += 1
                     if live_poses and frame_counter % SAMPLE_EVERY_N_FRAMES == 0:
                         live_frames.append(np.stack(live_poses))
+                        scoring_frames.append(np.stack(scoring_poses))
                     if elapsed >= CAPTURE_SECONDS:
                         state, state_started = "analyze", now
                 elif state == "analyze":
-                    session_result = summarize_sequence(live_frames, references[labels[selected_index]])
+                    analysis_started = time.monotonic()
+                    session_result = summarize_sequence(scoring_frames, references[labels[selected_index]])
+                    prediction = predict_sequence(classifier, live_frames, labels[selected_index])
+                    if prediction:
+                        session_result["ml_label"] = prediction["label"]
+                        session_result["ml_confidence"] = prediction.get("confidence")
+                    if "similarity" in session_result:
+                        error_codes = []
+                        if prediction and str(prediction.get("label", "")).startswith("ERR_"):
+                            error_codes = [prediction["label"]]
+                        expected_hands = len(references[labels[selected_index]][0][0])
+                        payload = {
+                            "user_id": user_id,
+                            "sign_id": labels[selected_index],
+                            "timestamp": datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+                            "hands_detected": int(_dominant_hand_count(live_frames)),
+                            "expected_hands": expected_hands,
+                            "status": "COMPLETED",
+                            "metrics": {
+                                "dtw_distance": float(session_result["dtw_distance"]),
+                                "similarity_score": float(session_result["similarity"]),
+                                "analysis_latency_ms": max(0.0, (time.monotonic() - analysis_started) * 1000.0),
+                                "ml_prediction": prediction.get("label") if prediction else None,
+                                "ml_confidence": prediction.get("confidence") if prediction else None,
+                            },
+                            "detected_error_codes": error_codes,
+                        }
+                        if error_codes:
+                            payload["kinematic_observation"] = {
+                                "feature_schema": "wrist_origin_unit_scale_xyz_v1",
+                                "frames": [
+                                    {"frame_index": i, "hands": frame.astype(float).tolist()}
+                                    for i, frame in enumerate(live_frames[:120])
+                                ],
+                            }
+                        attempts, _ = load_recent_attempts(user_id, limit=4)
+                        if attempts is not None:
+                            recommendations = recommend_from_history([*attempts[:4], payload])
+                            if recommendations:
+                                session_result["recommendation"] = recommendations[0]["exercise"]
+                        else:
+                            session_result["recommendation"] = "History unavailable; no recurrence recommendation"
+                        _, save_status = save_practice_result(payload)
+                        session_result["save_status"] = save_status
                     state, state_started = "result", now
                 elif state == "result" and elapsed >= RESULT_SECONDS:
                     selected_index = (selected_index + 1) % len(labels)
@@ -295,6 +435,7 @@ def main() -> None:
                 view = draw_frontend(
                     frame, labels[selected_index], state, seconds_left,
                     len(live_poses), session_result, selected_index, len(labels),
+                    reference_cues.get(labels[selected_index]),
                 )
                 cv2.imshow("SLSL Sign Practice", view)
                 key = cv2.waitKey(1) & 0xFF

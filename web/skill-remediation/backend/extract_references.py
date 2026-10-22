@@ -30,6 +30,51 @@ OUTPUT_DIR = REFERENCES_DIR / "processed"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 VIDEO_EXTENSIONS = {".mp4", ".mov", ".avi", ".mkv"}
 SAMPLE_EVERY_N_FRAMES = 2  # About 15 samples/second for 30 FPS source clips.
+EXPECTED_HANDS_PATH = REFERENCES_DIR / "sign_requirements.json"
+
+
+def _square_crop(image: np.ndarray, x_start: int, x_end: int) -> tuple[np.ndarray, int, int]:
+    """Crop a vertical image slice and pad it square without distorting its hands."""
+    height, width = image.shape[:2]
+    crop = image[:, x_start:x_end]
+    side = max(height, crop.shape[1])
+    pad_left = (side - crop.shape[1]) // 2
+    pad_right = side - crop.shape[1] - pad_left
+    padded = cv2.copyMakeBorder(
+        crop, 0, 0, pad_left, pad_right, cv2.BORDER_CONSTANT, value=(0, 0, 0)
+    )
+    return padded, pad_left, side
+
+
+def _recover_two_crop_hands(image: np.ndarray, landmarker, timestamp_ms: int) -> list[list]:
+    """Detect one hand in each overlapping half when full-frame detection misses one."""
+    height, width = image.shape[:2]
+    split = width // 2
+    overlap = max(1, round(width * 0.20))
+    regions = (
+        (0, min(width, split + overlap // 2)),
+        (max(0, split - overlap // 2), width),
+    )
+    recovered: list[tuple[float, list]] = []
+    for side, (x_start, x_end) in enumerate(regions):
+        crop, pad_left, square_side = _square_crop(image, x_start, x_end)
+        rgb = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)
+        result = landmarker.detect_for_video(
+            mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb), timestamp_ms + side
+        )
+        candidates = []
+        for hand in result.hand_landmarks or []:
+            center_x = x_start + (
+                float(np.mean([point.x for point in hand])) * square_side - pad_left
+            )
+            candidates.append((center_x, hand))
+        if candidates:
+            target_x = width * (0.28 if side == 0 else 0.72)
+            recovered.append(min(candidates, key=lambda item: abs(item[0] - target_x)))
+
+    if len(recovered) == 2 and recovered[0][0] < recovered[1][0]:
+        return [recovered[0][1], recovered[1][1]]
+    return []
 
 
 def landmarks_to_array(points: list) -> np.ndarray:
@@ -57,10 +102,12 @@ def main() -> None:
         base_options=mp_python.BaseOptions(model_asset_path=str(model_path)),
         running_mode=vision.RunningMode.VIDEO,
         num_hands=2,
-        min_hand_detection_confidence=0.3,
-        min_hand_presence_confidence=0.3,
-        min_tracking_confidence=0.3,
+        min_hand_detection_confidence=0.15,
+        min_hand_presence_confidence=0.15,
+        min_tracking_confidence=0.15,
     )
+
+    requirements = json.loads(EXPECTED_HANDS_PATH.read_text(encoding="utf-8")) if EXPECTED_HANDS_PATH.exists() else {}
 
     with vision.HandLandmarker.create_from_options(options) as landmarker:
         timestamp_ms = 0
@@ -85,7 +132,14 @@ def main() -> None:
                     result = landmarker.detect_for_video(
                         mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb), timestamp_ms
                     )
-                    detections = [(0, result.hand_landmarks)]
+                    image_hands = list(result.hand_landmarks or [])
+                    expected_hands = requirements.get(label_dir.name, {}).get("expected_hands")
+                    if expected_hands == 2 and len(image_hands) < 2:
+                        image_hands = _recover_two_crop_hands(image, landmarker, timestamp_ms + 1)
+                        timestamp_ms += 2
+                        if len(image_hands) < 2:
+                            print(f"Could not recover both hands in {media_path.name}; check the reference crop.")
+                    detections = [(0, image_hands)]
                 else:
                     detections = []
                     capture = cv2.VideoCapture(str(media_path))
@@ -105,7 +159,12 @@ def main() -> None:
                                 mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb),
                                 timestamp_ms,
                             )
-                            detections.append((frame_number, result.hand_landmarks))
+                            video_hands = list(result.hand_landmarks or [])
+                            expected_hands = requirements.get(label_dir.name, {}).get("expected_hands")
+                            if expected_hands == 2 and len(video_hands) < 2:
+                                video_hands = _recover_two_crop_hands(frame, landmarker, timestamp_ms + 1)
+                                timestamp_ms += 2
+                            detections.append((frame_number, video_hands))
                         frame_number += 1
                     capture.release()
 

@@ -37,7 +37,12 @@ def _read_template(path: Path) -> tuple[np.ndarray, dict[str, list]]:
     return poses, metadata
 
 
-def _sequence_groups(poses: np.ndarray, metadata: dict[str, list], fallback_name: str) -> list[list[np.ndarray]]:
+def _sequence_groups(
+    poses: np.ndarray,
+    metadata: dict[str, list],
+    fallback_name: str,
+    required_hands: int | None = None,
+) -> list[list[np.ndarray]]:
     """Group hand rows into ordered frames and source-specific sequences."""
     source_files = metadata.get("source_files") or [fallback_name] * len(poses)
     frame_numbers = metadata.get("frame_numbers") or list(range(len(poses)))
@@ -56,7 +61,12 @@ def _sequence_groups(poses: np.ndarray, metadata: dict[str, list], fallback_name
             continue
         # Keep the dominant hand count per source. Prefer 2 hands on ties,
         # which avoids silently reducing an intended two-hand sign to one.
-        expected_hands = max(hand_counts, key=lambda count: (hand_counts[count], count))
+        if required_hands is not None:
+            if required_hands not in hand_counts:
+                continue
+            expected_hands = required_hands
+        else:
+            expected_hands = max(hand_counts, key=lambda count: (hand_counts[count], count))
         sequence = [
             np.stack([hands[index] for index in sorted(hands)])
             for _, hands in sorted(frames.items())
@@ -83,6 +93,12 @@ def load_reference_sequences(
     if not directory.exists():
         return {}
 
+    requirements_path = directory.parent / "sign_requirements.json"
+    requirements = (
+        json.loads(requirements_path.read_text(encoding="utf-8"))
+        if requirements_path.exists() else {}
+    )
+
     library: dict[str, list[list[np.ndarray]]] = {}
     for path in sorted(directory.iterdir()):
         if path.suffix.lower() not in {".npy", ".npz"}:
@@ -92,7 +108,8 @@ def load_reference_sequences(
             if path.with_suffix(".npy").exists():
                 continue
         poses, metadata = _read_template(path)
-        sequences = _sequence_groups(poses, metadata, path.name)
+        required_hands = requirements.get(path.stem, {}).get("expected_hands")
+        sequences = _sequence_groups(poses, metadata, path.name, required_hands)
         if sequences:
             library[path.stem] = sequences
     return library

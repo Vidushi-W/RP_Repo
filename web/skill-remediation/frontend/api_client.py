@@ -10,6 +10,7 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
+from backend.attempt_store import AttemptStore
 
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
@@ -32,19 +33,34 @@ def load_recent_attempts(user_id: str, limit: int = 4) -> tuple[list[dict] | Non
         attempts = _request_json(f"/api/users/{quote(user_id, safe='')}/attempts?limit={limit}")
         return attempts, "MongoDB"
     except (HTTPError, URLError, TimeoutError, OSError, ValueError):
-        return None, "SQLite fallback"
+        try:
+            return AttemptStore().recent(user_id, limit), "SQLite fallback"
+        except (OSError, ValueError):
+            return None, "history unavailable"
 
 
 def save_practice_result(payload: dict) -> tuple[bool, str]:
     """Post a result without interrupting camera practice if the API is offline."""
     try:
         _request_json("/api/attempts", method="POST", payload=payload)
+        try:
+            AttemptStore().record(payload)
+        except (OSError, ValueError, KeyError):
+            return True, "saved to MongoDB; local history cache unavailable"
         return True, "saved to MongoDB"
     except HTTPError as error:
         try:
             detail = json.loads(error.read().decode("utf-8")).get("detail", "API rejected the result")
         except (ValueError, AttributeError):
             detail = "API rejected the result"
-        return False, str(detail)
+        try:
+            AttemptStore().record(payload)
+        except (OSError, ValueError, KeyError):
+            return False, str(detail)
+        return False, f"MongoDB save failed; cached locally ({detail})"
     except (URLError, TimeoutError, OSError, ValueError):
-        return False, "API unavailable; result was not saved"
+        try:
+            AttemptStore().record(payload)
+            return False, "API unavailable; result cached locally"
+        except (OSError, ValueError, KeyError):
+            return False, "API unavailable; result was not saved"
