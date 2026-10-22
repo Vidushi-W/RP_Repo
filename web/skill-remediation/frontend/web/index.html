@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4fbf5">
+  <title>Little Signs — SLSL practice</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script src="/assets/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Little Signs home">
+      <span class="brand-mark" aria-hidden="true">✋</span>
+      <span><strong>Little Signs</strong><small>Learn a little. Sign a lot.</small></span>
+    </a>
+    <div class="lesson-progress" aria-label="Lesson progress">
+      <div class="progress-label"><span id="progress-text">Sign 1 of 1</span><span>🌱</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-button" id="home-button" type="button" aria-label="Go to first sign" title="First sign">⌂</button>
+      <button class="icon-button" id="settings-button" type="button" aria-label="Camera settings" title="Camera settings">⚙</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="welcome-row" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">YOUR SIGNING GARDEN</p>
+        <h1 id="page-title">Ready to learn a sign?</h1>
+        <p class="subheading">Watch the example, then show us your sign. You choose when to move on.</p>
+      </div>
+      <div class="mascot" aria-hidden="true"><span>🦉</span><i>Hi!</i></div>
+    </section>
+
+    <section class="lesson-layout" aria-label="Sign lesson">
+      <article class="card reference-card">
+        <div class="card-heading">
+          <div><span class="step-pill">1</span><span class="eyebrow">TODAY'S WORD</span></div>
+          <span class="hand-count" id="hand-count">✋ One hand</span>
+        </div>
+        <h2 id="word-title">Loading…</h2>
+        <div class="media-frame" id="reference-frame">
+          <div class="media-placeholder" id="media-placeholder"><span aria-hidden="true">📖</span><p>Loading the sign example…</p></div>
+          <img id="reference-image" alt="SLSL reference image" hidden>
+          <video id="reference-video" playsinline controls loop hidden></video>
+        </div>
+        <div class="reference-footer">
+          <p id="reference-caption">Watch the reference sign carefully.</p>
+          <button class="soft-button" id="replay-button" type="button" hidden>↻ Replay</button>
+        </div>
+      </article>
+
+      <article class="card camera-card">
+        <div class="card-heading">
+          <div><span class="step-pill step-blue">2</span><span class="eyebrow">YOUR TURN</span></div>
+          <span class="live-indicator" id="camera-state"><i></i> Camera off</span>
+        </div>
+        <div class="camera-frame" id="camera-frame">
+          <video id="camera-video" autoplay muted playsinline hidden></video>
+          <div class="camera-placeholder" id="camera-placeholder">
+            <div class="camera-icon" aria-hidden="true">📷</div>
+            <strong>Ready when you are!</strong>
+            <span>Keep your hands in the picture</span>
+          </div>
+          <div class="camera-guide" aria-hidden="true"><span></span></div>
+          <div class="capture-overlay" id="capture-overlay" hidden><span class="pulse-dot"></span><span id="capture-label">Getting ready…</span><strong id="capture-countdown">4</strong></div>
+        </div>
+        <div class="camera-controls">
+          <button class="primary-button" id="camera-button" type="button"><span aria-hidden="true">▶</span> Start camera</button>
+          <button class="primary-button analyze-button" id="analyze-button" type="button" disabled><span aria-hidden="true">✋</span> Sign now</button>
+        </div>
+        <p class="camera-note" id="camera-note">Short camera snapshots go to the learning server for hand tracking. Webcam video is not stored.</p>
+      </article>
+    </section>
+
+    <section class="feedback-card" id="feedback-card" aria-live="polite" aria-atomic="true">
+      <div class="feedback-icon" id="feedback-icon" aria-hidden="true">🌼</div>
+      <div class="feedback-copy"><p class="eyebrow" id="feedback-eyebrow">YOU'RE DOING GREAT</p><h2 id="feedback-title">Let's practice together!</h2><p id="feedback-message">When you're ready, show your sign in the camera.</p></div>
+      <div class="score-chip" id="similarity-chip" hidden><strong id="similarity-value">—</strong><span>reference similarity*</span></div>
+    </section>
+    <p class="score-note" id="score-note" hidden>*</p>
+
+    <nav class="lesson-nav" aria-label="Lesson signs">
+      <button class="nav-button previous-button" id="previous-button" type="button" disabled><span aria-hidden="true">←</span> Previous</button>
+      <span class="nav-hint" id="nav-hint">One sign at a time 🌿</span>
+      <button class="nav-button next-button" id="next-button" type="button" disabled>Next <span aria-hidden="true">→</span></button>
+    </nav>
+    <div class="page-message" id="page-message" role="status" hidden></div>
+  </main>
+  <footer>Made for curious hands and growing minds <span aria-hidden="true">✦</span></footer>
+</body>
+</html>
