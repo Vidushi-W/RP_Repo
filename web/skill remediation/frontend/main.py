@@ -1,4 +1,4 @@
-"""Hands-free visual sign-practice demo with locked sequence feedback."""
+﻿"""Hands-free visual sign-practice demo with locked sequence feedback."""
 
 from __future__ import annotations
 
@@ -12,9 +12,9 @@ import numpy as np
 from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python import vision
 
-from metrics import compare_pose_sequences, joint_angle_degrees
-from normalization import normalize_landmarks
-from reference_loader import load_reference_sequences
+from backend.metrics import compare_pose_sequences, joint_angle_degrees
+from backend.normalization import normalize_landmarks
+from backend.reference_loader import load_reference_sequences
 
 
 PROMPT_SECONDS = 4.5
@@ -24,6 +24,15 @@ RESULT_SECONDS = 4.0
 SAMPLE_EVERY_N_FRAMES = 2
 MIN_VALID_FRAMES = 5
 ANGLE_TOLERANCE_DEGREES = 20.0
+
+
+def open_webcam() -> cv2.VideoCapture:
+    """Open the default camera for the practice and data-collection screens."""
+    capture = cv2.VideoCapture(0)
+    if not capture.isOpened():
+        capture.release()
+        raise RuntimeError("Could not open webcam. Check camera access or index.")
+    return capture
 
 
 def angle_error_status(error_degrees: float) -> str:
@@ -210,7 +219,7 @@ def draw_frontend(
 def main() -> None:
     references = load_reference_sequences()
     if not references:
-        raise FileNotFoundError("No processed reference templates. Run python process_references.py first.")
+        raise FileNotFoundError("No processed reference templates. Run python -m backend.process_references first.")
     labels = list(references)
     selected_index = 0
     state = "prompt"
@@ -221,12 +230,10 @@ def main() -> None:
     session_result: dict[str, float | str] | None = None
     frame_counter = 0
 
-    model_path = Path(__file__).with_name("hand_landmarker.task")
+    model_path = Path(__file__).resolve().parents[1] / "hand_landmarker.task"
     if not model_path.exists():
         raise FileNotFoundError("Missing hand_landmarker.task; see README.md for setup.")
-    capture = cv2.VideoCapture(0)
-    if not capture.isOpened():
-        raise RuntimeError("Could not open webcam. Check camera access or index.")
+    capture = open_webcam()
 
     options = vision.HandLandmarkerOptions(
         base_options=mp_python.BaseOptions(model_asset_path=str(model_path)),

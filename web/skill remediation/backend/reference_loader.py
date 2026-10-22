@@ -1,4 +1,4 @@
-"""Load normalized hand-pose templates from the processed reference folder."""
+﻿"""Load normalized hand-pose templates from the processed reference folder."""
 
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def load_reference_sequences(
     directory = (
         Path(reference_dir)
         if reference_dir is not None
-        else Path(__file__).parent / "references" / "processed"
+        else Path(__file__).resolve().parents[1] / "references" / "processed"
     )
     if not directory.exists():
         return {}

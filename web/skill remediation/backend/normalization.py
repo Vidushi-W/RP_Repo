@@ -1,4 +1,4 @@
-"""Coordinate normalization for MediaPipe Hands landmarks."""
+﻿"""Coordinate normalization for MediaPipe Hands landmarks."""
 
 from __future__ import annotations
 
