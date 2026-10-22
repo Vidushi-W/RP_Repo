@@ -1,8 +1,7 @@
 {
   "sign_label": "come",
-  "pose_count": 12,
+  "pose_count": 11,
   "source_files": [
-    "come-sign.mp4",
     "come-sign.mp4",
     "come-sign.mp4",
     "come-sign.mp4",
@@ -26,11 +25,9 @@
     14,
     16,
     18,
-    20,
     22
   ],
   "hand_indices": [
-    0,
     0,
     0,
     0,

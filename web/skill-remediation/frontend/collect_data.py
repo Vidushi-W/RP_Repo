@@ -53,7 +53,9 @@ def collect(output: Path, target_frames: int, signer_id: str, sign_id: str) -> N
         min_tracking_confidence=0.6,
     )
     print("Use one signing hand. Keys: 1 NORMAL | 2 pinky flex | 3 index extension | 4 wrist rotation error | Q quit")
-    print(f"Each capture saves up to {target_frames} detected frames; repeat each label in multiple captures.")
+    print(f"Each key capture saves up to {target_frames} frames as a separate session.")
+    print("Repeat every label in at least six sessions; vary distance and slight hand tilt between sessions.")
+    print("Keep each label true to the visible pose, and collect every label from multiple signer IDs.")
     try:
         with output.open("a", newline="", encoding="utf-8") as data_file, vision.HandLandmarker.create_from_options(options) as detector:
             writer = csv.DictWriter(data_file, fieldnames=["label", "sign_id", "signer_id", "session_id", "frame_index", *FEATURE_NAMES])

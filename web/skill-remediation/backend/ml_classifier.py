@@ -21,6 +21,10 @@ def load_error_classifier(path: Path):
     bundle = joblib.load(path)
     if not isinstance(bundle, dict) or "pipeline" not in bundle or "sign_ids" not in bundle:
         raise ValueError("Classifier bundle is invalid; retrain it with python -m backend.train_model")
+    if tuple(bundle.get("feature_names", ())) != FEATURE_NAMES:
+        raise ValueError("Classifier feature schema is stale; retrain it with python -m backend.train_model")
+    if not bundle.get("evaluation", {}).get("deployment_approved", False):
+        return None
     return bundle
 
 

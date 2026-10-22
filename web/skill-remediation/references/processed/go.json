@@ -1,9 +1,7 @@
 {
   "sign_label": "go",
-  "pose_count": 28,
+  "pose_count": 26,
   "source_files": [
-    "go-sign.mp4",
-    "go-sign.mp4",
     "go-sign.mp4",
     "go-sign.mp4",
     "go-sign.mp4",
@@ -49,8 +47,6 @@
     38,
     40,
     42,
-    42,
-    44,
     46,
     48,
     50,
@@ -78,8 +74,6 @@
     0,
     0,
     0,
-    0,
-    1,
     0,
     0,
     0,

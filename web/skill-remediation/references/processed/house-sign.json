@@ -1,14 +1,17 @@
 {
   "sign_label": "house-sign",
-  "pose_count": 1,
+  "pose_count": 2,
   "source_files": [
+    "house-sign.png",
     "house-sign.png"
   ],
   "frame_numbers": [
+    0,
     0
   ],
   "hand_indices": [
-    0
+    0,
+    1
   ],
   "normalization": "wrist-origin, unit maximum wrist distance"
 }

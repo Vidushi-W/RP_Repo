@@ -52,21 +52,30 @@ cd "web/skill-remediation"
 python -m frontend.main
 ```
 
-The API service persists submitted attempts in MongoDB. The OpenCV client is currently a standalone practice interface; it can be connected to the API as the component evolves. Check Atlas Network Access and ensure the database user has read/write permission on the configured database if the health check fails.
+The OpenCV practice client submits completed attempts to the API, which persists them in MongoDB. The client also maintains a local SQLite history cache for offline recurrence recommendations. Check Atlas Network Access and ensure the database user has read/write permission on the configured database if the health check fails.
 
 ## Reference data
 
 Put source photos or videos in `references/<sign-label>/`. The offline extractor samples video frames, detects up to two hands, extracts the 21 XYZ landmarks, translates the wrist to the origin, and scales by maximum wrist-relative distance. It writes `references/processed/<label>.npy` arrays plus JSON metadata with source filenames, frame numbers, and hand indices. Still JPG, PNG, BMP, and WebP images are also supported.
 
-The current user-provided templates contain `book-sign` (1 hand pose), `house-sign` (2 hands in one frame), and `pen-sign` (1) from images; and `come` (12 frames), `go` (28), and `like` (25) from videos. The house image's touching hands are difficult to separate in a full-frame detection, so still-image extraction uses an overlapping crop fallback for the missing hand.
+The processed templates contain `book-sign` (2 hands in one image), `house-sign` (2 hands in one image), and `pen-sign` (1) from images; and `come`, `go`, and `like` from videos. For the two-hand still references, if full-image detection misses a hand, extraction detects each hand from overlapping, square-padded crops and combines them into the same reference frame.
 
-The video extractor requests two hands and uses 0.3 detection/presence/tracking confidence. Still-image crop recovery uses a lower detection threshold. `references/sign_requirements.json` declares that house-sign requires two hands. The live scorer refuses to output a similarity when the learner or the template is missing a required hand, instead of comparing incomplete data.
+The extractor requests two hands and uses a lower detection threshold to recover hands in still images. `references/sign_requirements.json` declares that book-sign and house-sign require two hands. The live scorer refuses to output a similarity when the learner or the template is missing a required hand, instead of comparing incomplete data.
+
+To add a better reference pose, copy a source photo or preferably a short, clear video into that sign's folder. For example, from this project directory in PowerShell:
+
+```powershell
+Copy-Item "C:\path\to\book-reference.mp4" ".\references\book-sign\book-reference-02.mp4"
+.\.venv\Scripts\python.exe -m backend.process_references
+```
+
+Use the same pattern for `references\like`, `references\come`, and the other sign folders. The extractor rebuilds `references\processed\<sign>.npy` and its JSON metadata from every source in each sign folder; the loader keeps each source video as its own ordered sequence. For a new two-hand sign, add its required count before processing, for example `"new-two-hand-sign": { "expected_hands": 2 }` in `references\sign_requirements.json`. Two-hand photos and videos use a crop fallback when the full-frame detector misses one hand. Confirm the processing output says it extracted both hands; the live loader ignores incomplete frames for signs marked as two-hand.
 
 `backend/reference_loader.py` keeps frames grouped by source file and in temporal order. For a video reference, `backend/metrics.py` uses dynamic time warping (DTW) to align the learner's captured movement with the reference movement, allowing different signing speeds. A still image is a one-frame pose reference. Frames with different detected hand counts are not paired; the capture keeps its dominant hand count.
 
 ## Hands-free practice UI
 
-Run `python -m frontend.main`. The UI shows a picture cue without relying on a written sign name. For each sign it:
+Run `python -m frontend.main`. The UI shows the actual source image, or the first frame of the source video, as its cue. For each sign it:
 
 1. Shows the cue for 4.5 seconds.
 2. Counts down for 3 seconds.
@@ -75,15 +84,15 @@ Run `python -m frontend.main`. The UI shows a picture cue without relying on a w
 
 No keypress is needed while signing. `N` skips to the next cue, `1`–`6` selects a sign, `R` restarts its prompt, `P` pauses/resumes, and `Q` quits.
 
-The similarity uses the supplied formula. Each aligned frame distance is the mean of the per-landmark Euclidean distances, `d = (1/21) * sum(norm(live[i] - reference[i]))`; the sequence distance averages those frame distances along the DTW path, then maps to `max(0, (1 - 2*d) * 100)`. Video comparison trims idle frames at the beginning and end and allows tempo differences while retaining landmark order. It is a prototype pose/sequence similarity, not calibrated accuracy, probability, or validated sign recognition. Closest-template comparisons can overstate a match, especially with only one source video per sign.
+The similarity uses extracted MediaPipe landmarks from the source reference and live camera, not fixed example scores. Each aligned frame distance is the mean of per-landmark Euclidean distances; the sequence distance averages those frame distances along the DTW path, then maps to `max(0, (1 - 2*d) * 100)`. Because the camera preview is mirrored, the scorer reverses the normalized horizontal coordinate before comparing with unmirrored source media. Video comparison trims idle frames at the beginning and end and allows tempo differences while retaining landmark order. This formula can bottom out at 0 for substantial pose differences; it is a prototype pose/sequence similarity, not calibrated accuracy, probability, or validated sign recognition. Closest-template comparisons can overstate a match, especially with only one source video per sign.
 
-The engine compares thumb MCP/IP, thumb-spread proxy, and MCP/PIP/DIP flexion angles for index, middle, ring, and pinky along the DTW alignment. Median differences over 20 degrees produce provisional error codes. `ERR_WRIST_ROTATION` is based on palm-plane orientation because MediaPipe Hands does not supply wrist articulation landmarks. These are initial diagnostic heuristics, not validated clinical or instructional thresholds.
+The currently displayed thumb and index statuses compare those finger angles against the closest reference along the DTW alignment; differences over 20 degrees show `Needs adjustment`. These are reference deviations, not classifier diagnoses.
 
 ## Persistent attempts and remediation
 
 The backend supports attempt persistence in MongoDB and a local SQLite cache at `data/attempts.sqlite3`. Set `SLSL_USER_ID` in `.env` to separate learners; the default is `student_01`.
 
-`backend/remediation_engine.py` defines a NetworkX directed graph from error codes to skills and exercises, with the six signs represented as graph nodes. The graph and thresholds are prototype scaffolding and require review with SLSL instructors and learner evidence before being described as validated remediation.
+`backend/remediation_engine.py` defines a NetworkX directed graph from error codes to skills and exercises, with the six signs represented as graph nodes. After a completed attempt, the client checks up to the previous four attempts plus the current attempt; an error seen at least three times can trigger a suggested exercise. MongoDB history is preferred and SQLite history is used when the API is unreachable. The graph, labels, and threshold are prototype scaffolding and require review with SLSL instructors and learner evidence before being described as validated remediation.
 
 ## Empirical evaluation
 
@@ -101,13 +110,19 @@ python -m frontend.collect_training_data --sign-id like --signer-id signer_01
 
 In the camera window, press `1` for `NORMAL`, `2` for `ERR_PINKY_FLEX`, `3` for `ERR_INDEX_EXT`, or `4` for `ERR_WRIST_ROTATION`. Each press records 50 detected frames by default as one capture session. Repeat each label across multiple separate captures. Make sure the pose actually reflects the selected sign and error; labels are ground truth supplied by the collector, not inferred by the software. Use pseudonymous signer IDs and obtain participant consent. For other signs or participants, use their own IDs, for example `--sign-id book-sign --signer-id signer_02`. Press `Q` to close.
 
+The extractor centers landmarks at the wrist and scales the pose, so its XYZ inputs are already invariant to where the hand appears and its overall size. The feature vector also includes the 15 joint angles. Angle-only features were tried against the current sessions and performed worse, so training retains both normalized geometry and angles.
+
 Train and save the model:
 
 ```powershell
-python -m backend.train_error_model
+python -m backend.train_model
 ```
 
-The script reports a held-out score only when it can keep groups separate and all labels represented on each side. With multiple signer IDs it holds out entire signers; with one signer it holds out capture sessions and explicitly reports that this does not measure generalization to new signers. Collect every label in multiple distinct sessions (and, for signer-independent evaluation, across multiple signers). A frame-level score still weights long recordings more heavily and should be described as a pilot result, not validated system accuracy. If a CSV header is from the earlier feature format, `dataset_schema.py` repairs it while keeping a `.bak` copy. It saves `kinematic_error_classifier.pkl`, which is ignored by git; run `python -m frontend.main` again to load it. For each completed attempt, the app predicts on individual captured frames and uses the majority label as the stable classifier result. Inputs include 63 normalized landmark coordinates, finger angles, and a palm-plane normal feature for orientation. The result and MongoDB `metrics` include its predicted label and mean per-frame class confidence. If that attempt has a detected error, its normalized sequence is stored as `kinematic_observation`; no training CSV or raw webcam video is sent to MongoDB.
+Training evaluates with three-fold `GroupKFold`, grouping by whole capture sessions (or whole signers once multiple signer IDs exist). It reports both out-of-fold frame accuracy and session-level accuracy after the same majority vote used during live inference. Then it fits a research artifact on all labeled samples. The app will load the model for live inference only after held-out session accuracy and recall for every class reach 45%, each class has at least three capture sessions, and the dataset includes at least one signer. A saved research model below those requirements is deliberately disabled in the webcam UI and is not logged as a diagnosis.
+
+The current dataset has 8,000 frames from 160 capture sessions and one signer. Grouped cross-validation measured 62.90% frame accuracy and 63.12% session majority accuracy. Session recall is 59% for `ERR_INDEX_EXT`, 47% for `ERR_PINKY_FLEX`, 59% for `ERR_WRIST_ROTATION`, and 78% for `NORMAL`. At the 45% threshold and one-signer requirement, this dataset meets the current approval gates. It covers only `like` and the labels `NORMAL`, `ERR_INDEX_EXT`, `ERR_PINKY_FLEX`, and `ERR_WRIST_ROTATION`. Vary distance and mild hand angle between sessions, but keep the label tied to the actual visible hand pose; do not label frames based only on the key pressed. Re-train after collecting data and use the grouped session report before enabling inference.
+
+For a supported one-hand sign, the app predicts on captured frames and would use the majority label as the attempt diagnosis when the model meets the validation gate. Inputs include normalized landmark coordinates and 15 joint angles. The UI shows Random Forest diagnosis separately from DTW pose similarity. Class confidence is an uncalibrated model score, not accuracy or probability. MongoDB stores a predicted label only when an approved model is active; for a predicted error, up to 120 normalized landmark frames are stored as `kinematic_observation`. No training CSV or raw webcam video is sent to MongoDB. Unsupported signs and multi-hand captures do not receive an RF diagnosis.
 
 ## Modules
 
