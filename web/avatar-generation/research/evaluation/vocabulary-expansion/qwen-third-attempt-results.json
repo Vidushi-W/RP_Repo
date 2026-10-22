@@ -1,0 +1,237 @@
+{
+  "atUtc": "2026-10-22T20:59:24.805719+00:00",
+  "sourceType": "English text; separate audio results are required for speech claims",
+  "evaluationScope": "Prompt-development checks, not held-out linguistic accuracy",
+  "results": [
+    {
+      "input": "She is drinking water.",
+      "expected": [
+        "DRINK"
+      ],
+      "predicted": [],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 117,
+        "totalDurationNs": 31922337400,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "drinking",
+            "equivalent": false,
+            "evalCount": 9,
+            "totalDurationNs": 3024786200
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "SEE",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "drinking"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "TAKE",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "DRINK",
+            "evidence": "drinking",
+            "signId": "DRINK",
+            "senseId": "person-drinking-liquid",
+            "support": "clear",
+            "explanation": "Context matched the registered drink meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 31922.3374,
+      "lookupMs": 562.65,
+      "wallMs": 38833.71
+    },
+    {
+      "input": "The boy is running.",
+      "expected": [
+        "RUN"
+      ],
+      "predicted": [],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 58,
+        "totalDurationNs": 21950869500,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "The boy is running.",
+            "equivalent": false,
+            "evalCount": 9,
+            "totalDurationNs": 2042983100
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "RUN",
+          "evidence": "The boy is running."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take the bag",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give the book",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "RUN",
+            "evidence": "The boy is running.",
+            "signId": "RUN",
+            "senseId": "person-running-on-foot",
+            "support": "clear",
+            "explanation": "Context matched the registered run meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 21950.8695,
+      "lookupMs": 618.09,
+      "wallMs": 29029.69
+    },
+    {
+      "input": "Give me the book.",
+      "expected": [
+        "GIVE"
+      ],
+      "predicted": [
+        "GIVE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 47,
+        "totalDurationNs": 21905724000,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "Give me the book.",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 1939055400
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "GIVE",
+          "evidence": "Give me the book."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "GIVE",
+            "label": "give",
+            "aliases": [
+              "give",
+              "giving",
+              "gave",
+              "hand over",
+              "handing over"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/give.json",
+            "sha256": "cd3fc7839dd38065a940e7eccfa28e33cdde97a01c7342c874e7d2e556570113",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 21905.724,
+      "lookupMs": 615.98,
+      "wallMs": 29210.18
+    }
+  ],
+  "passed": 1,
+  "total": 19,
+  "completed": 3
+}

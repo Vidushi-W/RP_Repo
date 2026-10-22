@@ -1,0 +1,133 @@
+{
+  "atUtc": "2026-10-22T19:58:19.720Z",
+  "captureSeam": "real-paced generated English PCM; browser capture mocked",
+  "browserCaptureVerified": false,
+  "visiblePlaybackVerified": false,
+  "status": "passed",
+  "playbackOrder": [
+    "CRY",
+    "WALK",
+    "LOOK"
+  ],
+  "serverResponses": [
+    {
+      "type": "selection",
+      "seq": 0,
+      "signs": [
+        "CRY"
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "CRY",
+            "label": "cry",
+            "aliases": [
+              "cry",
+              "weep",
+              "weeping",
+              "crying",
+              "shedding tears"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/cry.json",
+            "sha256": "9c7ce86c26d513c1eed27754b50bf89493e5a9b363aa5776e7a6e6d142bee6d1",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "timing": {
+        "sttMs": 1620.59,
+        "semanticMs": 7760.58,
+        "serverMs": 9573.67
+      },
+      "session": "13aed9ff3b2b422793e4336bee588085"
+    },
+    {
+      "type": "selection",
+      "seq": 1,
+      "signs": [
+        "WALK",
+        "LOOK"
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "WALK",
+            "label": "walk",
+            "aliases": [
+              "walk",
+              "walking",
+              "stroll",
+              "strolling"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/walk.json",
+            "sha256": "b2a73e0a6252786b77b51926352b2dc73c211d7317da045f686a33c852d2a66e",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "LOOK",
+            "label": "look",
+            "aliases": [
+              "look",
+              "looking",
+              "look at",
+              "watch",
+              "watching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/look.json",
+            "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "timing": {
+        "sttMs": 1251.49,
+        "semanticMs": 8094.47,
+        "serverMs": 9437.74
+      },
+      "session": "13aed9ff3b2b422793e4336bee588085"
+    }
+  ],
+  "metrics": [
+    {
+      "session": "13aed9ff3b2b422793e4336bee588085",
+      "seq": 0,
+      "signId": "CRY",
+      "captureWindowMs": 1900,
+      "preparationMs": 43.92200000000048,
+      "firstRecordedHandMs": 12075.9517,
+      "animationDurationMs": 2360
+    },
+    {
+      "session": "13aed9ff3b2b422793e4336bee588085",
+      "seq": 1,
+      "signId": "WALK",
+      "captureWindowMs": 2560,
+      "preparationMs": 22.376900000002934,
+      "firstRecordedHandMs": 17760.9605,
+      "animationDurationMs": 4160
+    },
+    {
+      "session": "13aed9ff3b2b422793e4336bee588085",
+      "seq": 1,
+      "signId": "LOOK",
+      "captureWindowMs": 2560,
+      "preparationMs": 23.50050000000192,
+      "firstRecordedHandMs": 22656.483500000002,
+      "animationDurationMs": 3440
+    }
+  ],
+  "assets": [
+    "/hand-animations/recorded/batch/cry.json",
+    "/hand-animations/recorded/batch/walk.json",
+    "/hand-animations/recorded/batch/look.json"
+  ],
+  "bodyAndHandsRendered": true,
+  "captureCleanupCalled": true
+}

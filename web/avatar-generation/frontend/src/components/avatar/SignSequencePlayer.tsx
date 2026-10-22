@@ -18,8 +18,9 @@ export interface SequencePlayerProps {
   videoClock?: VideoClock;
   segments?: SignSegment[];
   onCurrentSignChange?: (id: string | null, index: number) => void;
+  autoPlay?: boolean;
 }
-export function SignSequencePlayer({signs,manifest:providedManifest,visible=true,size='medium',speed=1,onSpeedChange,videoClock,segments=[],onCurrentSignChange}: SequencePlayerProps) {
+export function SignSequencePlayer({signs,manifest:providedManifest,visible=true,size='medium',speed=1,onSpeedChange,videoClock,segments=[],onCurrentSignChange,autoPlay=false}: SequencePlayerProps) {
   const defaultLibrary=useAnimationLibrary(false,providedManifest===undefined);
   const manifest=providedManifest===undefined ? defaultLibrary.manifest : providedManifest;
   const [items,setItems]=useState<SequenceItem[]>([]);
@@ -36,6 +37,7 @@ export function SignSequencePlayer({signs,manifest:providedManifest,visible=true
     return ()=>{active=false;controller.abort();};
   },[key,manifest]);
   const clock=useAnimationClock(sequenceDuration(items),speed,!loading && !external,key);
+  useEffect(()=>{if(autoPlay && !loading && !external && items.length && clock.durationMs===sequenceDuration(items) && clock.status==='idle')clock.play();},[autoPlay,loading,external,items,clock.durationMs,clock.status,clock.play]);
   const video=external ? videoSignPosition(segments,items,videoClock!.currentTimeMs,videoClock!.playing,speed) : null;
   const current=external ? video?.current || null : sequenceAt(items,clock.elapsedMs);
   const animation=current?.item.animation;

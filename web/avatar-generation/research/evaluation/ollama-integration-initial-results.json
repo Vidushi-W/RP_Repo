@@ -1,0 +1,154 @@
+{
+  "testedAtUtc": "2026-10-22T17:42:37.149823+00:00",
+  "status": "failed",
+  "realInferencePerformed": true,
+  "provider": "ollama",
+  "model": "qwen3:1.7b",
+  "researchPreview": true,
+  "labelStatus": "development expectations, not human-reviewed study labels",
+  "results": [
+    {
+      "input": "nurse",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 110,
+        "totalDurationNs": 16986110700,
+        "cpuOnly": true
+      },
+      "passed": true
+    },
+    {
+      "input": "nursing professional",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 125,
+        "totalDurationNs": 9771958100,
+        "cpuOnly": true
+      },
+      "passed": true
+    },
+    {
+      "input": "hospital nurse",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 113,
+        "totalDurationNs": 8881799100,
+        "cpuOnly": true
+      },
+      "passed": true
+    },
+    {
+      "input": "cellphone",
+      "concepts": [
+        "PHONE"
+      ],
+      "signs": [],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 94,
+        "totalDurationNs": 7737397800,
+        "cpuOnly": true
+      },
+      "passed": true
+    },
+    {
+      "input": "smartphone",
+      "concepts": [
+        "PHONE"
+      ],
+      "signs": [],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 86,
+        "totalDurationNs": 6904876600,
+        "cpuOnly": true
+      },
+      "passed": true
+    },
+    {
+      "input": "The nurse has a smartphone",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 92,
+        "totalDurationNs": 7303885700,
+        "cpuOnly": true
+      },
+      "passed": false
+    },
+    {
+      "input": "A nurse greeted another nurse",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 88,
+        "totalDurationNs": 6938050900,
+        "cpuOnly": true
+      },
+      "passed": false
+    },
+    {
+      "input": "Jupiter",
+      "passed": false,
+      "error": "Concept evidence is missing or not in transcript order",
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 111,
+        "totalDurationNs": 8323240700,
+        "cpuOnly": true
+      }
+    }
+  ]
+}

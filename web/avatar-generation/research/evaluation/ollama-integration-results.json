@@ -1,0 +1,194 @@
+{
+  "testedAtUtc": "2026-10-22T18:18:26.604993+00:00",
+  "status": "passed",
+  "realInferencePerformed": true,
+  "provider": "ollama",
+  "model": "qwen3:1.7b",
+  "researchPreview": true,
+  "labelStatus": "development expectations, not human-reviewed study labels",
+  "results": [
+    {
+      "input": "nurse",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 66,
+        "totalDurationNs": 19210456300,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "NURSE"
+      ],
+      "wallLatencySeconds": 21.346,
+      "passed": true
+    },
+    {
+      "input": "nursing professional",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 69,
+        "totalDurationNs": 6715586700,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "NURSE"
+      ],
+      "wallLatencySeconds": 8.799,
+      "passed": true
+    },
+    {
+      "input": "hospital nurse",
+      "concepts": [
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 54,
+        "totalDurationNs": 5064260800,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "NURSE"
+      ],
+      "wallLatencySeconds": 7.126,
+      "passed": true
+    },
+    {
+      "input": "cellphone",
+      "concepts": [
+        "PHONE"
+      ],
+      "signs": [],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 56,
+        "totalDurationNs": 5200521900,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "CELLPHONE"
+      ],
+      "wallLatencySeconds": 7.275,
+      "passed": true
+    },
+    {
+      "input": "smartphone",
+      "concepts": [
+        "PHONE"
+      ],
+      "signs": [],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 56,
+        "totalDurationNs": 5479673100,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "PHONE"
+      ],
+      "wallLatencySeconds": 7.515,
+      "passed": true
+    },
+    {
+      "input": "The nurse has a smartphone",
+      "concepts": [
+        "NURSE",
+        "PHONE"
+      ],
+      "signs": [
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 88,
+        "totalDurationNs": 9181685100,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "NURSE",
+        "PHONE"
+      ],
+      "wallLatencySeconds": 11.26,
+      "passed": true
+    },
+    {
+      "input": "A nurse greeted another nurse",
+      "concepts": [
+        "NURSE",
+        "NURSE"
+      ],
+      "signs": [
+        "NURSE",
+        "NURSE"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 88,
+        "totalDurationNs": 9516290800,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "NURSE",
+        "NURSE"
+      ],
+      "wallLatencySeconds": 11.59,
+      "passed": true
+    },
+    {
+      "input": "Jupiter",
+      "concepts": [
+        "JUPITER"
+      ],
+      "signs": [],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 43,
+        "totalDurationNs": 4940952000,
+        "cpuOnly": true
+      },
+      "modelConcepts": [
+        "JUPITER"
+      ],
+      "wallLatencySeconds": 7.002,
+      "passed": true
+    }
+  ]
+}

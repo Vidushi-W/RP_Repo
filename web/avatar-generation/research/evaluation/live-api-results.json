@@ -1,0 +1,188 @@
+{
+  "testedAtUtc": "2026-10-22T18:26:58.729599+00:00",
+  "baseUrl": "http://127.0.0.1:5173",
+  "verificationType": "real HTTP API and asset checks; visible browser playback not verified",
+  "results": [
+    {
+      "input": "nurse",
+      "researchPreview": false,
+      "httpStatus": 422,
+      "wallLatencySeconds": 6.577,
+      "response": {
+        "detail": "Registry, recording or transcript validation failed. No playback was requested."
+      },
+      "passed": true
+    },
+    {
+      "input": "cellphone",
+      "researchPreview": true,
+      "httpStatus": 200,
+      "wallLatencySeconds": 8.456,
+      "response": {
+        "englishText": "cellphone",
+        "signs": [],
+        "matches": [],
+        "unsupported": [
+          "cellphone: PHONE — no eligible animation or meaning is ambiguous"
+        ],
+        "status": "unsupported",
+        "researchPreview": true,
+        "manifest": {
+          "schemaVersion": 1,
+          "fixture": false,
+          "signs": []
+        },
+        "trace": [
+          {
+            "tool": "listAvailableSigns",
+            "arguments": {},
+            "orchestrator": "backend"
+          },
+          {
+            "tool": "findMatchingSign",
+            "arguments": {
+              "text": "cellphone"
+            },
+            "orchestrator": "backend"
+          },
+          {
+            "tool": "getSignDetails",
+            "arguments": {
+              "signId": "NURSE"
+            },
+            "orchestrator": "backend"
+          }
+        ],
+        "concepts": [
+          {
+            "concept": "PHONE",
+            "evidence": "cellphone",
+            "signId": null,
+            "senseId": null,
+            "support": "clear",
+            "explanation": "A cellphone is an object; no recording is available.",
+            "modelConcept": "CELLPHONE",
+            "start": 0,
+            "end": 9,
+            "animationAvailable": false
+          }
+        ],
+        "inference": {
+          "provider": "ollama",
+          "model": "qwen3:1.7b",
+          "performed": true,
+          "mode": "structured-output orchestration",
+          "evalCount": 56,
+          "totalDurationNs": 6385491000,
+          "cpuOnly": true
+        },
+        "confidencePolicy": "Closed vocabulary, grounded spans and sense validation; no calibrated probability is claimed."
+      },
+      "passed": true
+    },
+    {
+      "input": "nurse",
+      "researchPreview": true,
+      "httpStatus": 200,
+      "wallLatencySeconds": 0.05,
+      "response": {
+        "englishText": "nurse",
+        "signs": [
+          "NURSE"
+        ],
+        "matches": [
+          {
+            "signId": "NURSE",
+            "senseId": "nursing-professional-person",
+            "start": 0,
+            "end": 5,
+            "evidence": "nurse",
+            "explanation": "Standalone registry vocabulary match.",
+            "animationId": "NURSE",
+            "animationFile": "hand-animations/recorded/nurse.json",
+            "sha256": "90ba82ed85643668767c688a4a538c8a7356d92c8d32dc64ba8ab892394089a0",
+            "canonicalLabel": "nurse",
+            "method": "registered canonical label",
+            "reviewStatus": "pending"
+          }
+        ],
+        "unsupported": [],
+        "status": "matched",
+        "researchPreview": true,
+        "manifest": {
+          "schemaVersion": 1,
+          "fixture": false,
+          "signs": [
+            {
+              "signId": "NURSE",
+              "label": "nurse",
+              "aliases": [
+                "nurse"
+              ],
+              "animationUrl": "hand-animations/recorded/nurse.json",
+              "sha256": "90ba82ed85643668767c688a4a538c8a7356d92c8d32dc64ba8ab892394089a0",
+              "datasetReference": "Repository-owner NURSE recording; datasets/metadata/nurse-extraction.json. Linguistic correctness and handedness remain pending expert review.",
+              "reviewed": false
+            }
+          ]
+        },
+        "trace": [],
+        "concepts": [
+          {
+            "concept": "NURSE",
+            "evidence": "nurse",
+            "animationAvailable": true,
+            "support": "clear",
+            "explanation": "Standalone registry vocabulary match."
+          }
+        ],
+        "inference": {
+          "performed": false,
+          "mode": "deterministic registry match"
+        },
+        "confidencePolicy": "Closed vocabulary, grounded spans and sense validation; no calibrated probability is claimed."
+      },
+      "passed": true,
+      "asset": {
+        "httpStatus": 200,
+        "sha256": "90ba82ed85643668767c688a4a538c8a7356d92c8d32dc64ba8ab892394089a0",
+        "frameCount": 84,
+        "signId": "NURSE"
+      }
+    }
+  ],
+  "ollamaVersion": {
+    "httpStatus": 200,
+    "response": {
+      "version": "0.40.8"
+    }
+  },
+  "ollamaPs": {
+    "httpStatus": 200,
+    "response": {
+      "models": [
+        {
+          "name": "qwen3:1.7b",
+          "model": "qwen3:1.7b",
+          "size": 1886629395,
+          "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen3",
+            "families": [
+              "qwen3"
+            ],
+            "parameter_size": "2.0B",
+            "quantization_level": "Q4_K_M"
+          },
+          "expires_at": "2026-10-22T23:59:13.7592502+05:30",
+          "size_vram": 0,
+          "context_length": 4096,
+          "runner": "llamacpp"
+        }
+      ]
+    }
+  },
+  "status": "passed"
+}

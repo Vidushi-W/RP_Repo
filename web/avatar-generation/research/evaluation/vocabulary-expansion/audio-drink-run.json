@@ -1,0 +1,255 @@
+{
+  "atUtc": "2026-10-22T21:31:14.087Z",
+  "referenceTranscript": "She is drinking water. The boy is running.",
+  "expectedConceptIds": [
+    "DRINK",
+    "RUN"
+  ],
+  "pcmSha256": "33e713df917a3357ec4861086e313061fed3732361dfe11c15a70b7e06d92d3e",
+  "captureSeam": "real-paced generated English PCM; browser capture mocked",
+  "browserCaptureVerified": false,
+  "visiblePlaybackVerified": false,
+  "status": "passed",
+  "playbackOrder": [
+    "DRINK",
+    "RUN"
+  ],
+  "serverResponses": [
+    {
+      "type": "selection",
+      "seq": 0,
+      "signs": [
+        "DRINK"
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping",
+              "drinks",
+              "sips"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "timing": {
+        "sttMs": 9551.77,
+        "semanticMs": 12975.32,
+        "serverMs": 24109.49
+      },
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495"
+    },
+    {
+      "type": "selection",
+      "seq": 1,
+      "signs": [
+        "RUN"
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting",
+              "runs",
+              "sprints"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "timing": {
+        "sttMs": 6474.97,
+        "semanticMs": 13701.47,
+        "serverMs": 21339.93
+      },
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495"
+    }
+  ],
+  "metrics": [
+    {
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495",
+      "seq": 0,
+      "signId": "DRINK",
+      "captureWindowMs": 2180,
+      "preparationMs": 214.92629999999917,
+      "firstRecordedHandMs": 27680.220400000002,
+      "animationDurationMs": 3360
+    },
+    {
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495",
+      "seq": 1,
+      "signId": "RUN",
+      "captureWindowMs": 1800,
+      "preparationMs": 56.48379999999452,
+      "firstRecordedHandMs": 44780.2172,
+      "animationDurationMs": 3720
+    }
+  ],
+  "assets": [
+    "/hand-animations/recorded/batch/drink.json",
+    "/hand-animations/recorded/batch/run.json"
+  ],
+  "bodyAndHandsRendered": true,
+  "captureCleanupCalled": true,
+  "speechAndSelection": [
+    {
+      "atUtc": "2026-10-22T21:31:27.560000+00:00",
+      "type": "speech-recognition",
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495",
+      "seq": 0,
+      "speech": {
+        "segments": [
+          {
+            "text": "She is drinking water.",
+            "startMs": 0,
+            "endMs": 2000,
+            "avgLogProbability": -0.42959998920559883,
+            "noSpeechProbability": 0.0021995948627591133
+          }
+        ],
+        "latencyMs": 9551.77,
+        "language": "en",
+        "languageProbability": 0.9824525117874146,
+        "task": "offline speech-to-English"
+      }
+    },
+    {
+      "atUtc": "2026-10-22T21:31:41.726334+00:00",
+      "type": "speech-selection",
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495",
+      "seq": 0,
+      "speech": {
+        "text": "She is drinking water.",
+        "startMs": 0,
+        "endMs": 2000,
+        "avgLogProbability": -0.42959998920559883,
+        "noSpeechProbability": 0.0021995948627591133
+      },
+      "language": "en",
+      "predictedConcepts": [
+        "DRINK"
+      ],
+      "playbackOrder": [
+        "DRINK"
+      ],
+      "missingVocabulary": [
+        {
+          "text": "take the bag",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "drinking"
+        }
+      ],
+      "sttMs": 9551.77,
+      "semanticMs": 12975.32,
+      "lookupMs": 1177.68,
+      "qwenMs": 5861.7322,
+      "cacheHit": false
+    },
+    {
+      "atUtc": "2026-10-22T21:31:48.255046+00:00",
+      "type": "speech-recognition",
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495",
+      "seq": 1,
+      "speech": {
+        "segments": [
+          {
+            "text": "The boy is running.",
+            "startMs": 2420,
+            "endMs": 4420,
+            "avgLogProbability": -0.40814709290862083,
+            "noSpeechProbability": 0.02484595589339733
+          }
+        ],
+        "latencyMs": 6474.97,
+        "language": "en",
+        "languageProbability": 0.9703218340873718,
+        "task": "offline speech-to-English"
+      }
+    },
+    {
+      "atUtc": "2026-10-22T21:32:03.119057+00:00",
+      "type": "speech-selection",
+      "session": "8ae8c29533fd459e9ef0c9acd0fdf495",
+      "seq": 1,
+      "speech": {
+        "text": "The boy is running.",
+        "startMs": 2420,
+        "endMs": 4420,
+        "avgLogProbability": -0.40814709290862083,
+        "noSpeechProbability": 0.02484595589339733
+      },
+      "language": "en",
+      "predictedConcepts": [
+        "RUN"
+      ],
+      "playbackOrder": [
+        "RUN"
+      ],
+      "missingVocabulary": [
+        {
+          "text": "The boy is running.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "The boy is running.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "The boy is running.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "The boy is running.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "The boy is running.",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "rawModelMatches": [
+        {
+          "signId": "RUN",
+          "evidence": "running"
+        }
+      ],
+      "sttMs": 6474.97,
+      "semanticMs": 13701.47,
+      "lookupMs": 1155.44,
+      "qwenMs": 7430.8601,
+      "cacheHit": false
+    }
+  ]
+}

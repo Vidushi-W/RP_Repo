@@ -1,0 +1,33 @@
+{
+  "verificationType": "jsdom React/SVG with real HTTP and real timers; visible browser not verified",
+  "testedAtUtc": "2026-10-22T18:26:15.316Z",
+  "inferenceLatencySeconds": 21.661916100000003,
+  "inference": {
+    "performed": true,
+    "mode": "structured-output orchestration",
+    "model": "qwen3:1.7b"
+  },
+  "signs": [
+    "NURSE"
+  ],
+  "status": "passed",
+  "animationSha256": "90ba82ed85643668767c688a4a538c8a7356d92c8d32dc64ba8ab892394089a0",
+  "savedFrameCount": 84,
+  "durationMs": 3360,
+  "observedStoredFrameIndices": [
+    15,
+    18
+  ],
+  "observedLandmarkCount": 42,
+  "automaticPlaybackCompleted": true,
+  "requests": [
+    {
+      "url": "http://127.0.0.1:5173/api/agent/process",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:5173/hand-animations/recorded/nurse.json",
+      "status": 200
+    }
+  ]
+}

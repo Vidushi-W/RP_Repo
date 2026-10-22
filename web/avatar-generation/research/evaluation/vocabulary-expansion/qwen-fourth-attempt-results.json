@@ -1,0 +1,421 @@
+{
+  "atUtc": "2026-10-22T21:04:08.063315+00:00",
+  "sourceType": "English text; separate audio results are required for speech claims",
+  "evaluationScope": "Prompt-development checks, not held-out linguistic accuracy",
+  "results": [
+    {
+      "input": "She is drinking water.",
+      "expected": [
+        "DRINK"
+      ],
+      "predicted": [
+        "DRINK"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 117,
+        "totalDurationNs": 24352888100,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "drinking",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 691269100
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "SEE",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "drinking"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "TAKE",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 24352.8881,
+      "lookupMs": 573.35,
+      "wallMs": 31482.64
+    },
+    {
+      "input": "The boy is running.",
+      "expected": [
+        "RUN"
+      ],
+      "predicted": [
+        "RUN"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 58,
+        "totalDurationNs": 19241908200,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "The boy is running.",
+            "equivalent": true,
+            "evalCount": 7,
+            "totalDurationNs": 587499300
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "RUN",
+          "evidence": "The boy is running."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take the bag",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give the book",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 19241.9082,
+      "lookupMs": 530.66,
+      "wallMs": 26585.74
+    },
+    {
+      "input": "Give me the book.",
+      "expected": [
+        "GIVE"
+      ],
+      "predicted": [],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 47,
+        "totalDurationNs": 20786831600,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "Give me the book.",
+            "equivalent": false,
+            "evalCount": 7,
+            "totalDurationNs": 1659868100
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "GIVE",
+          "evidence": "Give me the book."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "GIVE",
+            "evidence": "Give me the book.",
+            "signId": "GIVE",
+            "senseId": "person-giving-physical-object",
+            "support": "clear",
+            "explanation": "Context matched the registered give meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 20786.8316,
+      "lookupMs": 615.1,
+      "wallMs": 28392.49
+    },
+    {
+      "input": "Take the bag.",
+      "expected": [
+        "TAKE"
+      ],
+      "predicted": [],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 46,
+        "totalDurationNs": 21092345500,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "Take the bag.",
+            "equivalent": false,
+            "evalCount": 7,
+            "totalDurationNs": 1477007500
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "TAKE",
+          "evidence": "Take the bag."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "TAKE",
+            "evidence": "Take the bag.",
+            "signId": "TAKE",
+            "senseId": "person-taking-physical-object",
+            "support": "clear",
+            "explanation": "Context matched the registered take meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 21092.3455,
+      "lookupMs": 627.27,
+      "wallMs": 28457.32
+    },
+    {
+      "input": "Ask a question.",
+      "expected": [],
+      "predicted": [],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 18928678400,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "Ask a question.",
+            "equivalent": false,
+            "evalCount": 7,
+            "totalDurationNs": 1274793000
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "LOOK",
+          "evidence": "Ask a question."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "LOOK",
+            "evidence": "Ask a question.",
+            "signId": "LOOK",
+            "senseId": "person-looking-with-eyes",
+            "support": "clear",
+            "explanation": "Context matched the registered look meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 18928.6784,
+      "lookupMs": 655.13,
+      "wallMs": 26619.65
+    },
+    {
+      "input": "I can see the house.",
+      "expected": [
+        "SEE"
+      ],
+      "predicted": [
+        "SEE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 18381715700,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "see the house",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 1417541600
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "SEE",
+          "evidence": "see the house"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "SEE",
+            "label": "see",
+            "aliases": [
+              "see",
+              "seeing",
+              "saw",
+              "seen",
+              "spot",
+              "spotted"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/see.json",
+            "sha256": "6d7fe92cd409e09f84d5a809157697a7c47cd13e7d957908d03544fb9b8c4219",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 18381.7157,
+      "lookupMs": 1039.27,
+      "wallMs": 28280.45
+    }
+  ],
+  "passed": 4,
+  "total": 19,
+  "completed": 6
+}

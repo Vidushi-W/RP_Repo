@@ -5,6 +5,7 @@ import hashlib
 import json
 import math
 import re
+from contextlib import ExitStack
 from pathlib import Path
 
 VERSION = "lankasigns-hands-1.0"
@@ -66,7 +67,16 @@ def extract(args):
         frames, index, previous_ms, next_sample_ms = [], 0, -1, 0.0
         fallback_count = 0
         width = height = 0
-        with vision.HandLandmarker.create_from_options(options) as detector:
+        with ExitStack() as stack:
+            detector = stack.enter_context(vision.HandLandmarker.create_from_options(options))
+            pose_model = getattr(args, 'pose_model', None)
+            face_model = getattr(args, 'face_model', None)
+            pose_detector = stack.enter_context(vision.PoseLandmarker.create_from_options(vision.PoseLandmarkerOptions(
+                base_options=python.BaseOptions(model_asset_path=str(within_component(pose_model))),
+                running_mode=vision.RunningMode.VIDEO, num_poses=1))) if pose_model else None
+            face_detector = stack.enter_context(vision.FaceLandmarker.create_from_options(vision.FaceLandmarkerOptions(
+                base_options=python.BaseOptions(model_asset_path=str(within_component(face_model))),
+                running_mode=vision.RunningMode.VIDEO, num_faces=1))) if face_model else None
             while True:
                 ok, image = capture.read()
                 if not ok:
@@ -105,7 +115,15 @@ def extract(args):
                     if category.score > scores[key]:
                         hands[key] = normalized_hand(landmarks)
                         scores[key] = float(category.score)
-                frames.append({"timestampMs": timestamp_ms, **hands})
+                frame = {"timestampMs": timestamp_ms, **hands}
+                mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
+                if pose_detector:
+                    poses = pose_detector.detect_for_video(mp_image, timestamp_ms).pose_landmarks
+                    frame['pose'] = normalized_points(poses[0], 33, visibility=True) if poses else None
+                if face_detector:
+                    faces = face_detector.detect_for_video(mp_image, timestamp_ms).face_landmarks
+                    frame['face'] = normalized_points(faces[0], 478) if faces else None
+                frames.append(frame)
         if not frames:
             raise ValueError("No decodable frames found.")
         output.parent.mkdir(parents=True, exist_ok=True)
@@ -127,6 +145,8 @@ def extract(args):
                 "handednessSwapped": args.swap_handedness,
                 "coordinates": "full-frame normalized x,y; clipped to [0,1]; no mirroring",
                 "reviewed": False,
+                "poseModelSha256": hashlib.sha256(within_component(pose_model).read_bytes()).hexdigest() if pose_model else None,
+                "faceModelSha256": hashlib.sha256(within_component(face_model).read_bytes()).hexdigest() if face_model else None,
             },
         }
         with output.open("x", encoding="utf-8") as handle:
@@ -134,6 +154,18 @@ def extract(args):
         print(f"Saved {len(frames)} frames to {output}. Review before registering a real sign.")
     finally:
         capture.release()
+
+
+def normalized_points(points, count, visibility=False):
+    if len(points) != count:
+        return None
+    result = []
+    for point in points:
+        if not math.isfinite(point.x) or not math.isfinite(point.y) or (visibility and getattr(point, 'visibility', 0) < 0.5):
+            result.append(None)
+        else:
+            result.append({'x': max(0.0, min(1.0, point.x)), 'y': max(0.0, min(1.0, point.y))})
+    return result
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -145,6 +177,8 @@ def main():
     parser.add_argument("--sample-fps", type=float, default=30)
     parser.add_argument("--handedness-threshold", type=float, default=0.65)
     parser.add_argument("--swap-handedness", action="store_true")
+    parser.add_argument('--pose-model', type=Path)
+    parser.add_argument('--face-model', type=Path)
     args = parser.parse_args()
     if not math.isfinite(args.handedness_threshold) or not 0 <= args.handedness_threshold <= 1:
         parser.error("Handedness threshold must be in [0,1].")

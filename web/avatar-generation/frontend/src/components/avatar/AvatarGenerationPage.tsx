@@ -9,6 +9,7 @@ import type { AgentResult } from '../../types/hands';
 import { TranslationPanel } from './TranslationPanel';
 import { SignSequencePlayer } from './SignSequencePlayer';
 import { RecordedAnimationPreview } from './RecordedAnimationPreview';
+import { SemanticAgentPanel } from './SemanticAgentPanel';
 
 export function AvatarGenerationPage() {
   const [fixtureMode,setFixtureMode]=useState(false);
@@ -72,6 +73,7 @@ export function AvatarGenerationPage() {
       {resultSource==='fixture' && <p className="fixture-banner">Synthetic timing fixture only. These markers do not correspond to your video's speech. The second segment intentionally demonstrates clipping.</p>}
       <p className="small muted mt-4">Files stay in this browser. When synchronized, video time is authoritative; the player never loops a completed segment or automatically accelerates a sign.</p>
     </section>
+    <SemanticAgentPanel/>
     <RecordedAnimationPreview/>
     {error && <p role="alert" className="error">{error}</p>}
   </>;

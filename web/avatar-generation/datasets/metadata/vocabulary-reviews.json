@@ -1,0 +1,289 @@
+{
+  "andanawa.mp4": {
+    "conceptId": "CRY",
+    "sinhalaLabel": "අඬනවා",
+    "englishMeaning": "cry",
+    "synonyms": [
+      "weep",
+      "weeping",
+      "crying",
+      "shedding tears"
+    ],
+    "description": "A person shedding tears or weeping. Excludes shouting a public announcement, crying out in surprise, and laughing.",
+    "senseId": "person-weeping",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review and source-video inspection. Signer touches the cheek below the eye. Extraction quality checked. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=68",
+      "Owner-supplied andanawa.mp4; source frames inspected at 30%, 50%, 70%"
+    ]
+  },
+  "awidinawa.mp4": {
+    "conceptId": "WALK",
+    "sinhalaLabel": "ඇවිදිනවා",
+    "englishMeaning": "walk",
+    "synonyms": [
+      "walking",
+      "stroll",
+      "strolling"
+    ],
+    "description": "A person moving on foot at a walking pace. Excludes running, swimming, and walking a program through instructions.",
+    "senseId": "person-walking-on-foot",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review and source-video inspection. Signer makes a downward finger-stepping motion. Extraction quality checked. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=260",
+      "Owner-supplied awidinawa.mp4; source frames inspected at 30%, 50%, 70%"
+    ]
+  },
+  "balanawa.mp4": {
+    "conceptId": "LOOK",
+    "sinhalaLabel": "බලනවා",
+    "englishMeaning": "look",
+    "synonyms": [
+      "looking",
+      "look at",
+      "watch",
+      "watching"
+    ],
+    "description": "A person deliberately directing their eyes to look at or watch a target. Excludes mere visual perception (SEE), asking a question, listening, looking after a person, searching, and seeming or appearing.",
+    "senseId": "person-looking-with-eyes",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review and source-video inspection. Signer moves two fingers from the eye area. Extraction quality checked. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=151",
+      "Owner-supplied balanawa.mp4; source frames inspected at 30%, 50%, 70%"
+    ],
+    "excludedPhrases": [
+      "see",
+      "seeing",
+      "saw",
+      "seen",
+      "spot",
+      "spotted",
+      "ask a question",
+      "asking a question",
+      "listen",
+      "listening"
+    ]
+  },
+  "bonawa.mp4": {
+    "conceptId": "DRINK",
+    "sinhalaLabel": "?????",
+    "englishMeaning": "drink",
+    "synonyms": [
+      "drinking",
+      "drank",
+      "sip",
+      "sipping",
+      "drinks",
+      "sips"
+    ],
+    "description": "A person drinking or sipping liquid. Excludes eating food, absorbing information, and the noun beverage.",
+    "senseId": "person-drinking-liquid",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. Hand forms a cup-like shape and moves to the mouth, then returns. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=85",
+      "Owner-supplied bonawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ]
+  },
+  "duwanawa.mp4": {
+    "conceptId": "RUN",
+    "sinhalaLabel": "??????",
+    "englishMeaning": "run",
+    "synonyms": [
+      "running",
+      "ran",
+      "sprint",
+      "sprinting",
+      "runs",
+      "sprints"
+    ],
+    "description": "A person running on foot. Excludes running software, operating a business or machine, flowing liquids, and walking.",
+    "senseId": "person-running-on-foot",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. Alternating bent arms and fists pump forward and back in front of the torso. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=209",
+      "Owner-supplied duwanawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ],
+    "excludedPhrases": [
+      "run a program",
+      "running a program",
+      "run software",
+      "running software",
+      "run a business",
+      "running a business"
+    ]
+  },
+  "denawa.mp4": {
+    "conceptId": "GIVE",
+    "sinhalaLabel": "?????",
+    "englishMeaning": "give",
+    "synonyms": [
+      "giving",
+      "gave",
+      "hand over",
+      "handing over",
+      "gives",
+      "hands over"
+    ],
+    "description": "A person handing a physical object to another person. Excludes giving up, giving advice, causing illness, and figurative giving.",
+    "senseId": "person-giving-physical-object",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. An open palm moves from the torso outward toward the recipient direction. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=112",
+      "Owner-supplied denawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ],
+    "excludedPhrases": [
+      "give up",
+      "giving up",
+      "gave up"
+    ]
+  },
+  "gannawa.mp4": {
+    "conceptId": "TAKE",
+    "sinhalaLabel": "??????",
+    "englishMeaning": "take",
+    "synonyms": [
+      "taking",
+      "took",
+      "pick up",
+      "picking up"
+    ],
+    "description": "A person reaching for and taking a physical object into their possession. Excludes taking time, taking care, taking a photo, understanding, purchasing and transporting a person.",
+    "senseId": "person-taking-physical-object",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. Open hand extends forward, closes and retracts toward the torso; direction differs from GIVE. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=236",
+      "Owner-supplied gannawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ],
+    "excludedPhrases": [
+      "take care",
+      "taking care",
+      "took care",
+      "take a photo",
+      "taking a photo"
+    ]
+  },
+  "dakinawa.mp4": {
+    "conceptId": "SEE",
+    "sinhalaLabel": "??????",
+    "englishMeaning": "see",
+    "synonyms": [
+      "seeing",
+      "saw",
+      "seen",
+      "spot",
+      "spotted"
+    ],
+    "description": "A person visually perceiving something with their eyes. Excludes understanding, meeting a person, seeing to a task, and deliberately looking or watching (LOOK).",
+    "senseId": "person-visually-perceiving",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. A single raised index finger is positioned near the eye, then moves outward/down; differs from LOOK two-finger eye gesture. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=214",
+      "Owner-supplied dakinawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ],
+    "excludedPhrases": [
+      "see what you mean",
+      "see your point",
+      "seeing your point",
+      "look",
+      "looking",
+      "watch",
+      "watching"
+    ]
+  },
+  "andinawa(draw).mp4": {
+    "conceptId": "DRAW",
+    "sinhalaLabel": "??????",
+    "englishMeaning": "draw",
+    "synonyms": [
+      "drawing",
+      "drew",
+      "sketch",
+      "sketching",
+      "draws",
+      "sketches"
+    ],
+    "description": "A person drawing or sketching a picture or diagram. Excludes pulling, dressing, writing words, drawing curtains, drawing breath, and a tied game.",
+    "senseId": "person-drawing-picture",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. Dominant hand traces strokes across the open opposite palm; the supplied filename explicitly disambiguates draw. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=84",
+      "Owner-supplied andinawa(draw).mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ],
+    "excludedPhrases": [
+      "draw the curtains",
+      "drawing the curtains",
+      "draw curtains",
+      "drawing curtains",
+      "draw breath",
+      "draw a sword"
+    ]
+  },
+  "kanawa.mp4": {
+    "conceptId": "EAT",
+    "sinhalaLabel": "????",
+    "englishMeaning": "eat",
+    "synonyms": [
+      "eating",
+      "ate",
+      "eat food",
+      "eating food"
+    ],
+    "description": "A person eating food. Excludes drinking liquid, figurative consuming, corrosion, and eating ones words.",
+    "senseId": "person-eating-food",
+    "status": "approved",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "Research eligibility: Sinhala/English lexical review, six source-frame observations and existing extracted-motion audit. Grouped fingertips repeatedly approach the mouth; hand shape differs from the cup-like DRINK gesture. Missing hand detections and tracking discontinuities remain unaltered and are documented in the expansion report. Not independent SLSL linguistic certification.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=88",
+      "Owner-supplied kanawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json",
+      "research/evaluation/vocabulary-expansion/review-report.md"
+    ]
+  },
+  "ahanawa.mp4": {
+    "conceptId": null,
+    "proposedConceptId": "ASK",
+    "sinhalaLabel": null,
+    "englishMeaning": null,
+    "synonyms": [],
+    "status": "pending",
+    "reviewedBy": "Codex, explicitly authorized by repository owner to review",
+    "reviewScope": "ASK candidate reviewed but not approved: ahanavaa can mean ask or listen. Actual clip cups a hand behind the ear, consistent with listening/hearing. This conflicts with the proposed question-asking sense. Requires signer or qualified SLSL reviewer clarification. Do not expose ASK or LISTEN as playable from this source.",
+    "sources": [
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=27",
+      "https://atufto.no/HELP/sinhala/2025_Tufto_English-Sinhala_dictionary.pdf#page=149",
+      "Owner-supplied ahanawa.mp4; source frames inspected at 10%, 25%, 40%, 55%, 70%, 85%",
+      "research/evaluation/vocabulary-expansion/motion-audit.json"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "atUtc": "2026-10-22T19:44:45.556885+00:00",
+  "source": ".cache\\english-sample.wav",
+  "referenceTranscript": "Someone is crying. The child is walking and looking.",
+  "expectedConceptIds": [
+    "CRY",
+    "WALK",
+    "LOOK"
+  ],
+  "realAudio": true,
+  "browserCaptureVerified": false,
+  "visiblePlaybackVerified": false,
+  "audioSha256": "d689defe97769cb0a17a9e79fedf3db345eae958b6f16012422b711c2c664c50",
+  "windows": [
+    {
+      "type": "error",
+      "message": "This speech could not be matched safely. Please try a shorter phrase.",
+      "fatal": false,
+      "seq": 0,
+      "requestWallMs": 29622.32,
+      "captureWindowMs": 4963.25
+    }
+  ],
+  "speechAndSelection": [],
+  "playbackOrder": [],
+  "status": "failed"
+}

@@ -1,0 +1,520 @@
+{
+  "atUtc": "2026-10-22T20:49:51.584Z",
+  "method": "actual HTTP/SHA/saved-frame DOM rendering with real timers",
+  "visibleBrowserPlaybackVerified": false,
+  "sequences": [
+    {
+      "requested": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "played": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "completed": true,
+      "elapsedMs": 10590.0491,
+      "observedDistinctStoredFrames": {
+        "CRY": [
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          18,
+          19,
+          20,
+          21,
+          22,
+          24,
+          25,
+          26,
+          27
+        ],
+        "WALK": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          27,
+          28,
+          29,
+          30,
+          31,
+          33,
+          34,
+          36,
+          37,
+          39,
+          40,
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "LOOK": [
+          13,
+          18,
+          19,
+          20,
+          21,
+          22,
+          24,
+          25,
+          26,
+          27,
+          28,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          38,
+          39,
+          40
+        ]
+      },
+      "signingStates": [
+        false,
+        true,
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "requested": [
+        "DRINK",
+        "RUN"
+      ],
+      "played": [
+        "DRINK",
+        "RUN"
+      ],
+      "completed": true,
+      "elapsedMs": 7453.549399999998,
+      "observedDistinctStoredFrames": {
+        "DRINK": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          18,
+          19,
+          21,
+          22,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "RUN": [
+          7,
+          9,
+          12,
+          13,
+          15,
+          17,
+          18,
+          20,
+          21,
+          23,
+          24,
+          25,
+          27,
+          28,
+          30,
+          33,
+          34,
+          35,
+          36,
+          37,
+          39,
+          40,
+          42,
+          43,
+          45,
+          46
+        ]
+      },
+      "signingStates": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "requested": [
+        "GIVE",
+        "TAKE"
+      ],
+      "played": [
+        "GIVE",
+        "TAKE"
+      ],
+      "completed": true,
+      "elapsedMs": 6525.8233,
+      "observedDistinctStoredFrames": {
+        "GIVE": [
+          5,
+          7,
+          8,
+          9,
+          10,
+          12,
+          15,
+          18,
+          19,
+          20,
+          21,
+          22,
+          24,
+          25,
+          27,
+          28,
+          30,
+          31
+        ],
+        "TAKE": [
+          16,
+          18,
+          20,
+          21,
+          22,
+          24,
+          25,
+          27,
+          28,
+          29,
+          30,
+          31,
+          33,
+          34,
+          36,
+          37,
+          39,
+          40,
+          41,
+          42
+        ]
+      },
+      "signingStates": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "requested": [
+        "LOOK"
+      ],
+      "played": [
+        "LOOK"
+      ],
+      "completed": true,
+      "elapsedMs": 3576.5005999999994,
+      "observedDistinctStoredFrames": {
+        "LOOK": [
+          13,
+          17,
+          18,
+          19,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          39,
+          40
+        ]
+      },
+      "signingStates": [
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "requested": [
+        "DRAW",
+        "SEE"
+      ],
+      "played": [
+        "DRAW",
+        "SEE"
+      ],
+      "completed": true,
+      "elapsedMs": 7840.326499999999,
+      "observedDistinctStoredFrames": {
+        "DRAW": [
+          10,
+          12,
+          13,
+          16,
+          17,
+          19,
+          20,
+          21,
+          22,
+          24,
+          25,
+          26,
+          27,
+          28,
+          30,
+          31,
+          33,
+          34,
+          35,
+          36,
+          37,
+          39,
+          40,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          51,
+          52,
+          54,
+          56,
+          58
+        ],
+        "SEE": [
+          8,
+          9,
+          10,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          21,
+          22,
+          23,
+          24,
+          25,
+          27,
+          28
+        ]
+      },
+      "signingStates": [
+        false,
+        false,
+        true,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "requested": [
+        "EAT"
+      ],
+      "played": [
+        "EAT"
+      ],
+      "completed": true,
+      "elapsedMs": 3593.051299999999,
+      "observedDistinctStoredFrames": {
+        "EAT": [
+          18,
+          19,
+          20,
+          22,
+          24,
+          25,
+          26,
+          27,
+          28,
+          30,
+          31,
+          33,
+          34,
+          37
+        ]
+      },
+      "signingStates": [
+        false,
+        false,
+        true,
+        false
+      ]
+    }
+  ],
+  "status": "passed",
+  "metrics": [
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 0,
+      "signId": "CRY",
+      "captureWindowMs": 0,
+      "preparationMs": 22.899099999999635,
+      "firstRecordedHandMs": 485.5501000000004,
+      "animationDurationMs": 2360
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 0,
+      "signId": "WALK",
+      "captureWindowMs": 0,
+      "preparationMs": 38.36949999999979,
+      "firstRecordedHandMs": 2705.2785000000003,
+      "animationDurationMs": 4160
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 0,
+      "signId": "LOOK",
+      "captureWindowMs": 0,
+      "preparationMs": 82.54129999999986,
+      "firstRecordedHandMs": 8055.0975,
+      "animationDurationMs": 3440
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 1,
+      "signId": "DRINK",
+      "captureWindowMs": 0,
+      "preparationMs": 42.77059999999983,
+      "firstRecordedHandMs": 919.7356999999993,
+      "animationDurationMs": 3360
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 1,
+      "signId": "RUN",
+      "captureWindowMs": 0,
+      "preparationMs": 88.56550000000061,
+      "firstRecordedHandMs": 4200.639000000001,
+      "animationDurationMs": 3720
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 2,
+      "signId": "GIVE",
+      "captureWindowMs": 0,
+      "preparationMs": 35.22109999999884,
+      "firstRecordedHandMs": 508.5476000000017,
+      "animationDurationMs": 2760
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 2,
+      "signId": "TAKE",
+      "captureWindowMs": 0,
+      "preparationMs": 43.00489999999991,
+      "firstRecordedHandMs": 3081.1990000000005,
+      "animationDurationMs": 3400
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 3,
+      "signId": "LOOK",
+      "captureWindowMs": 0,
+      "preparationMs": 46.78359999999884,
+      "firstRecordedHandMs": 1016.1346000000012,
+      "animationDurationMs": 3440
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 4,
+      "signId": "DRAW",
+      "captureWindowMs": 0,
+      "preparationMs": 72.0596000000005,
+      "firstRecordedHandMs": 850.702400000002,
+      "animationDurationMs": 4600
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 4,
+      "signId": "SEE",
+      "captureWindowMs": 0,
+      "preparationMs": 49.009399999999005,
+      "firstRecordedHandMs": 5462.2366,
+      "animationDurationMs": 2920
+    },
+    {
+      "session": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "seq": 5,
+      "signId": "EAT",
+      "captureWindowMs": 0,
+      "preparationMs": 69.3672000000006,
+      "firstRecordedHandMs": 1320.7036999999982,
+      "animationDurationMs": 3440
+    }
+  ],
+  "approvedIds": [
+    "CRY",
+    "DRAW",
+    "WALK",
+    "LOOK",
+    "DRINK",
+    "SEE",
+    "GIVE",
+    "RUN",
+    "TAKE",
+    "EAT"
+  ],
+  "allTenAnimationsMovedAndCompleted": true
+}

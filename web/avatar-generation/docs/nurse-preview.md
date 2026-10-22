@@ -21,7 +21,7 @@ From the repository root:
 cd web/avatar-generation/frontend
 npm.cmd run dev
 ```
-Open http://127.0.0.1:5173/translation, expand **Preview an extracted recording before review**, choose **Extracted animation JSON**, and select:
+Open http://127.0.0.1:5173/research, expand **Preview an extracted recording before review**, choose **Extracted animation JSON**, and select:
 ```text
 C:\Users\ASUS\Desktop\RP_Repo\web\avatar-generation\frontend\public\hand-animations\recorded\nurse.json
 ```

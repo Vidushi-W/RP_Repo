@@ -1,0 +1,33 @@
+{
+  "atUtc": "2026-10-22T19:52:28.224413+00:00",
+  "source": "datasets\\raw\\andanawa.mp4",
+  "referenceTranscript": "",
+  "expectedConceptIds": [],
+  "realAudio": true,
+  "browserCaptureVerified": false,
+  "visiblePlaybackVerified": false,
+  "audioSha256": "f8452f4b241f5673e70481a9ce764e07514f5583c60392005ffe4d56f2bc2c7f",
+  "windows": [
+    {
+      "type": "selection",
+      "seq": 0,
+      "signs": [],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "timing": {
+        "sttMs": 0,
+        "semanticMs": 0,
+        "serverMs": 0.4
+      },
+      "session": "11963bc15825469f87e6719743622b04",
+      "requestWallMs": 2.53,
+      "captureWindowMs": 2366.6875
+    }
+  ],
+  "speechAndSelection": [],
+  "playbackOrder": [],
+  "status": "passed"
+}

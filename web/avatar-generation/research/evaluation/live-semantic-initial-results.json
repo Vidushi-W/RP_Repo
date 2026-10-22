@@ -1,0 +1,204 @@
+{
+  "atUtc": "2026-10-22T20:04:03.109863+00:00",
+  "sourceType": "text, not speech",
+  "labels": "Owner-authorized assistant lexical review; development cases, not held-out accuracy",
+  "passed": 4,
+  "total": 5,
+  "results": [
+    {
+      "input": "She started weeping.",
+      "inputLanguage": "en",
+      "expected": [
+        "CRY"
+      ],
+      "predicted": [
+        "CRY"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 85,
+        "totalDurationNs": 9373156000,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "WALK",
+            "evidence": "She started weeping."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "She started weeping."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        }
+      ],
+      "passed": true,
+      "latencyMs": 12016.79
+    },
+    {
+      "input": "The woman is shedding tears.",
+      "inputLanguage": "en",
+      "expected": [
+        "CRY"
+      ],
+      "predicted": [
+        "CRY"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 88,
+        "totalDurationNs": 8784780600,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "WALK",
+            "evidence": "The woman is shedding tears."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "The woman is shedding tears."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        }
+      ],
+      "passed": true,
+      "latencyMs": 11564.39
+    },
+    {
+      "input": "The nurse is crying and smiling.",
+      "inputLanguage": "en",
+      "expected": [
+        "CRY"
+      ],
+      "predicted": [
+        "CRY"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 85,
+        "totalDurationNs": 9915646500,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "WALK",
+            "evidence": "The nurse is walking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "The nurse is looking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        }
+      ],
+      "passed": true,
+      "latencyMs": 12756.9
+    },
+    {
+      "input": "She is crying, then crying again.",
+      "inputLanguage": "en",
+      "expected": [
+        "CRY",
+        "CRY"
+      ],
+      "predicted": [
+        "CRY"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 89,
+        "totalDurationNs": 9793571900,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "WALK",
+            "evidence": "walking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "looking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "She is crying, then crying again.",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "passed": false,
+      "latencyMs": 12746.5
+    },
+    {
+      "input": "මම අඬනවා.",
+      "inputLanguage": "si",
+      "expected": [
+        "CRY"
+      ],
+      "predicted": [
+        "CRY"
+      ],
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 106,
+        "totalDurationNs": 10573104700,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "WALK",
+            "evidence": "මම අඬනවා."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "මම අඬනවා."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        }
+      ],
+      "passed": true,
+      "latencyMs": 14117.12
+    }
+  ]
+}

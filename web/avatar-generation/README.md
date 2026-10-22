@@ -1,6 +1,29 @@
-# LankaSigns · 2D SLSL Hand Animation Engine
+# LankaSigns · Local Audio and 2D Sign Avatar
 
-This component replays saved 21-landmark hand recordings. It does not generate signs, determine SLSL grammar, translate Sinhala, or capture a live camera. All changes are confined to the existing `web/avatar-generation/` directory. The root Aware app and global routing are unchanged.
+This component captures shared-tab audio after a user click, runs local speech recognition and Qwen selection, and replays stored hand/body/face motion. It does not generate sign movements, establish SLSL grammar or capture a live camera. All implementation changes stay in `web/avatar-generation`.
+
+## Listen and watch
+
+`/translation` now presents only Listen/Stop and the avatar as primary controls.
+See [complete audio setup, measured results and limitations](docs/live-audio.md).
+59 source videos have been processed. Ten concepts are eligible after
+owner-authorized assistant research review: CRY, WALK, LOOK, DRINK, RUN, GIVE,
+TAKE, SEE, DRAW and EAT. The other 49 sources remain pending. ASK was withheld
+because the ahanawa clip conflicts with the question-asking meaning; EAT is the
+reviewed replacement. See the [candidate review package](research/evaluation/vocabulary-expansion/review-report.md).
+NURSE remains pending. Sinhala speech quality and visible
+browser capture/playback are not yet verified.
+
+## Semantic AI selection
+
+The `/research` page preserves the local Qwen3 1.7B text agent through Ollama,
+manual transcript input and automatic playback through the existing renderer.
+See [agent setup, registry, STT interface and evaluation](docs/semantic-agent.md).
+NURSE remains pending expert review and requires explicit research-preview
+opt-in; no PHONE animation is present. No paid API or API key is used.
+Start Ollama, run `ollama pull qwen3:1.7b`, and configure the backend using
+`backend/.env.example`. The guide includes exact Windows commands, tests,
+CPU settings and real-inference verification.
 
 ## Run the player
 
@@ -18,13 +41,13 @@ npm.cmd run build
 ```
 
 ## Demonstrate without a dataset
-1. Open Video Translation.
+1. Open `/research` for the preserved developer playback studio.
 2. Enable **Use coordinate test fixtures (not SLSL)**.
 3. Process **test-a test-b**, then select Play.
 4. Pause, Resume, Restart, Replay, and change playback speed.
 5. For video testing, choose **Load timestamped coordinate test**, select a local MP4/WebM and enable synchronization. Seek across the prepared segments or replay using the video controls.
 
-Both coordinate fixtures are explicitly synthetic diagnostics, not human recordings, ASL, SLSL signs or linguistic demonstrations. One fixture includes a missing-hand frame. Real SLSL playback is available only after reviewed recordings are registered; the real manifest is currently empty.
+Both coordinate fixtures are explicitly synthetic diagnostics, not human recordings, ASL, SLSL signs or linguistic demonstrations. One fixture includes a missing-hand frame. This diagnostics studio retains its original empty manifest. Live translation uses the separate server registry, which now has ten concepts eligible for research playback.
 
 ## Extract a dataset recording
 Python 3.11 is recommended. This checkout now has a component-local Python 3.11.9 runtime in .tools and a working .venv with MediaPipe/OpenCV. NURSE has been extracted from the supplied Kaggle recording; see [NURSE preview](docs/nurse-preview.md). The system-wide py launcher remains unconfigured.
@@ -69,8 +92,8 @@ Refresh the page after updating the manifest. Generated recordings are ignored t
 - backend, datasets and research: retained research scaffolding; the 2D player does not require an API or retargeting.
 
 ## Integration and limitations
-See [engine design and schema](docs/hand-animation-engine.md). Agent payloads contain explicit sign IDs; the player never invents SLSL ordering. Paste actual agent JSON in the studio, or inject an AgentClient through requestAgent. A missing agent is explicitly reported as pending.
+See [engine design and schema](docs/hand-animation-engine.md). Agent payloads contain explicit sign IDs; the player preserves mention order without claiming SLSL grammar. Use the local semantic panel, paste external agent JSON in the studio, or inject an AgentClient through requestAgent. Unavailable Ollama/model errors are reported explicitly.
 
-Hand-only playback omits face, body, orientation depth and other linguistically important features. Extracted landmarks require validation; extraction alone does not prove sign correctness. No speech recognition, dataset, real signs, translation service, accuracy results or live camera capture is supplied. No modifications outside this component are needed. Any future connection to an external/shared agent should be configured by its owning component.
+New processed recordings include detected body and face points in addition to hands. Missing detections remain missing. Extraction alone does not prove sign correctness, and isolated vocabulary playback is not complete grammatical SLSL translation. The live service uses offline speech recognition and local Qwen; the original research/manual playback features remain available separately.
 
 The retained FastAPI health scaffold can be started after installing backend/requirements.txt with `python -m uvicorn app.main:app --reload` from backend. It is separate from this offline 2D engine.

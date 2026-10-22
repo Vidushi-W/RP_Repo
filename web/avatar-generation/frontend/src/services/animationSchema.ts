@@ -17,6 +17,16 @@ function parseHand(value: unknown): Hand {
     return { x: point.x, y: point.y };
   });
 }
+function parseOptionalPoints(value:unknown,count:number):(HandFrame['pose']) {
+  if(value===undefined)return undefined;
+  if(value===null)return null;
+  if(!Array.isArray(value)||value.length!==count)throw new Error('Invalid body or face landmark count.');
+  return value.map(point=>{
+    if(point===null)return null;
+    if(!record(point)||!finite(point.x)||!finite(point.y)||point.x<0||point.x>1||point.y<0||point.y>1)throw new Error('Invalid body or face coordinates.');
+    return {x:point.x,y:point.y};
+  });
+}
 export function parseAnimation(value: unknown, expectedId?: string): HandAnimation {
   if (!record(value) || value.schemaVersion !== 1 || !validSignId(value.signId) || (expectedId && expectedId !== value.signId)) throw new Error('Invalid animation version or sign identifier.');
   if (!finite(value.durationMs) || value.durationMs <= 0) throw new Error('Animation duration must be positive milliseconds.');
@@ -29,7 +39,10 @@ export function parseAnimation(value: unknown, expectedId?: string): HandAnimati
   const frames: HandFrame[] = value.frames.map(frame => {
     if (!record(frame) || !finite(frame.timestampMs) || frame.timestampMs < 0 || frame.timestampMs <= previous || frame.timestampMs > (value.durationMs as number)) throw new Error('Frame timestamps must increase strictly and remain within duration.');
     previous = frame.timestampMs;
-    return { timestampMs: frame.timestampMs, leftHand: parseHand(frame.leftHand), rightHand: parseHand(frame.rightHand) };
+    const parsed:HandFrame={ timestampMs: frame.timestampMs, leftHand: parseHand(frame.leftHand), rightHand: parseHand(frame.rightHand) };
+    if(frame.pose!==undefined)parsed.pose=parseOptionalPoints(frame.pose,33);
+    if(frame.face!==undefined)parsed.face=parseOptionalPoints(frame.face,478);
+    return parsed;
   });
   return { schemaVersion: 1, signId: value.signId, durationMs: value.durationMs, frames, metadata: metadata as HandAnimation['metadata'] };
 }

@@ -1,0 +1,30 @@
+[
+  {
+    "text": "Ask a question.",
+    "meaning": "Directing the eyes or visual attention toward something.",
+    "expected": false,
+    "content": "{\"equivalent\": false}",
+    "wallMs": 8781.038200017065
+  },
+  {
+    "text": "Give me the book.",
+    "meaning": "A person taking a physical object into their possession.",
+    "expected": false,
+    "content": "{\"equivalent\": false}",
+    "wallMs": 3183.9926000102423
+  },
+  {
+    "text": "She is weeping.",
+    "meaning": "A person shedding tears or weeping.",
+    "expected": true,
+    "content": "{\"equivalent\": true}",
+    "wallMs": 3070.4026999883354
+  },
+  {
+    "text": "Run a program.",
+    "meaning": "A person running on foot.",
+    "expected": false,
+    "content": "{\"equivalent\": false}",
+    "wallMs": 3091.842199966777
+  }
+]

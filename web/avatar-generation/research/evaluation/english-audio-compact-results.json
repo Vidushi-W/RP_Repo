@@ -1,0 +1,130 @@
+{
+  "atUtc": "2026-10-22T19:51:28.716443+00:00",
+  "source": ".cache\\english-sample.wav",
+  "referenceTranscript": "Someone is crying. The child is walking and looking.",
+  "expectedConceptIds": [
+    "CRY",
+    "WALK",
+    "LOOK"
+  ],
+  "realAudio": true,
+  "browserCaptureVerified": false,
+  "visiblePlaybackVerified": false,
+  "audioSha256": "d689defe97769cb0a17a9e79fedf3db345eae958b6f16012422b711c2c664c50",
+  "windows": [
+    {
+      "type": "selection",
+      "seq": 0,
+      "signs": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "CRY",
+            "label": "cry",
+            "aliases": [
+              "cry",
+              "weep",
+              "weeping",
+              "crying",
+              "shedding tears"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/cry.json",
+            "sha256": "9c7ce86c26d513c1eed27754b50bf89493e5a9b363aa5776e7a6e6d142bee6d1",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "WALK",
+            "label": "walk",
+            "aliases": [
+              "walk",
+              "walking",
+              "stroll",
+              "strolling"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/walk.json",
+            "sha256": "b2a73e0a6252786b77b51926352b2dc73c211d7317da045f686a33c852d2a66e",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "LOOK",
+            "label": "look",
+            "aliases": [
+              "look",
+              "looking",
+              "look at",
+              "watch",
+              "watching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/look.json",
+            "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "timing": {
+        "sttMs": 1666.09,
+        "semanticMs": 12566.38,
+        "serverMs": 14422.82
+      },
+      "session": "b0b88b29298e47e3845591f60c88f48a",
+      "requestWallMs": 14432.86,
+      "captureWindowMs": 4963.25
+    }
+  ],
+  "speechAndSelection": [
+    {
+      "atUtc": "2026-10-22T19:51:43.326498+00:00",
+      "type": "speech-selection",
+      "session": "b0b88b29298e47e3845591f60c88f48a",
+      "seq": 0,
+      "speech": {
+        "text": "Someone is crying. The child is walking and looking.",
+        "startMs": 0,
+        "endMs": 4290,
+        "avgLogProbability": -0.3549367253269468,
+        "noSpeechProbability": 0.0015262053348124027
+      },
+      "language": "en",
+      "predictedConcepts": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "playbackOrder": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "missingVocabulary": [
+        {
+          "text": "Someone is crying.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "The child is walking and looking.",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "sttMs": 1666.09,
+      "semanticMs": 12566.38,
+      "lookupMs": 99.36,
+      "qwenMs": 9727.1066,
+      "cacheHit": false
+    }
+  ],
+  "playbackOrder": [
+    "CRY",
+    "WALK",
+    "LOOK"
+  ],
+  "status": "passed"
+}

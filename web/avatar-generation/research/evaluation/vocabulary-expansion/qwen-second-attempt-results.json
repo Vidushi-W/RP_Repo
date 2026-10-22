@@ -1,0 +1,345 @@
+{
+  "atUtc": "2026-10-22T20:53:42.658748+00:00",
+  "sourceType": "English text; separate audio results are required for speech claims",
+  "evaluationScope": "Prompt-development checks, not held-out linguistic accuracy",
+  "results": [
+    {
+      "input": "She is drinking water.",
+      "expected": [
+        "DRINK"
+      ],
+      "predicted": [
+        "DRINK"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 46,
+        "totalDurationNs": 13755054400,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "drinking water"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 13755.0544,
+      "lookupMs": 553.21,
+      "wallMs": 19448.53
+    },
+    {
+      "input": "The boy is running.",
+      "expected": [
+        "RUN"
+      ],
+      "predicted": [
+        "RUN"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 46,
+        "totalDurationNs": 16761699400,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "RUN",
+          "evidence": "The boy is running."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 16761.6994,
+      "lookupMs": 1067.72,
+      "wallMs": 24913.96
+    },
+    {
+      "input": "Give me the book.",
+      "expected": [
+        "GIVE"
+      ],
+      "predicted": [
+        "TAKE"
+      ],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 47,
+        "totalDurationNs": 17453693800,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "TAKE",
+          "evidence": "Give me the book."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "TAKE",
+            "label": "take",
+            "aliases": [
+              "take",
+              "taking",
+              "took",
+              "pick up",
+              "picking up"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/take.json",
+            "sha256": "dc04131a1a4de509cc557b97b01145ebecc8896d58ef95aa287f89eaa6d8ddf8",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 17453.6938,
+      "lookupMs": 1186.51,
+      "wallMs": 26080.72
+    },
+    {
+      "input": "Take the bag.",
+      "expected": [
+        "TAKE"
+      ],
+      "predicted": [
+        "TAKE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 46,
+        "totalDurationNs": 15543479200,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "TAKE",
+          "evidence": "Take the bag."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "TAKE",
+            "label": "take",
+            "aliases": [
+              "take",
+              "taking",
+              "took",
+              "pick up",
+              "picking up"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/take.json",
+            "sha256": "dc04131a1a4de509cc557b97b01145ebecc8896d58ef95aa287f89eaa6d8ddf8",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 15543.4792,
+      "lookupMs": 1095.32,
+      "wallMs": 23962.77
+    },
+    {
+      "input": "Ask a question.",
+      "expected": [],
+      "predicted": [
+        "LOOK"
+      ],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 13666820100,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "LOOK",
+          "evidence": "Ask a question."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "LOOK",
+            "label": "look",
+            "aliases": [
+              "look",
+              "looking",
+              "look at",
+              "watch",
+              "watching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/look.json",
+            "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 13666.8201,
+      "lookupMs": 1084.38,
+      "wallMs": 21743.75
+    },
+    {
+      "input": "I can see the house.",
+      "expected": [
+        "SEE"
+      ],
+      "predicted": [
+        "SEE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 14538009600,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "SEE",
+          "evidence": "see the house"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "SEE",
+            "label": "see",
+            "aliases": [
+              "see",
+              "seeing",
+              "saw",
+              "seen",
+              "spot",
+              "spotted"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/see.json",
+            "sha256": "6d7fe92cd409e09f84d5a809157697a7c47cd13e7d957908d03544fb9b8c4219",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 14538.0096,
+      "lookupMs": 1155.23,
+      "wallMs": 23001.79
+    }
+  ],
+  "passed": 4,
+  "total": 19,
+  "completed": 6
+}

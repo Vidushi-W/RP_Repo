@@ -1,0 +1,26 @@
+[
+  {
+    "text": "She is drinking water.",
+    "sid": "DRINK",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "text": "The boy is running.",
+    "sid": "RUN",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "text": "Ask a question.",
+    "sid": "LOOK",
+    "expected": false,
+    "actual": false
+  },
+  {
+    "text": "Do not drink water.",
+    "sid": "DRINK",
+    "expected": false,
+    "actual": false
+  }
+]

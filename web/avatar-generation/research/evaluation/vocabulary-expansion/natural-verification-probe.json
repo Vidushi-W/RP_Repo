@@ -1,0 +1,44 @@
+[
+  {
+    "text": "She is drinking water.",
+    "sid": "DRINK",
+    "expected": "yes",
+    "question": "Sentence: \"She is drinking water.\"\nDoes this sentence describe someone drinking or sipping liquid? Answer yes or no.",
+    "content": "{ \"answer\": \"yes\" }"
+  },
+  {
+    "text": "The boy is running.",
+    "sid": "RUN",
+    "expected": "yes",
+    "question": "Sentence: \"The boy is running.\"\nDoes this sentence describe someone running on foot? Answer yes or no.",
+    "content": "{\"answer\": \"yes\"}"
+  },
+  {
+    "text": "Ask a question.",
+    "sid": "LOOK",
+    "expected": "no",
+    "question": "Sentence: \"Ask a question.\"\nDoes this sentence describe Directing the eyes or visual attention toward something? Answer yes or no.",
+    "content": "{ \"answer\": \"no\" }"
+  },
+  {
+    "text": "Run a program.",
+    "sid": "RUN",
+    "expected": "no",
+    "question": "Sentence: \"Run a program.\"\nDoes this sentence describe someone running on foot? Answer yes or no.",
+    "content": "{ \"answer\": \"no\" }"
+  },
+  {
+    "text": "Give me the book.",
+    "sid": "TAKE",
+    "expected": "no",
+    "question": "Sentence: \"Give me the book.\"\nDoes this sentence describe someone reaching for and taking a physical object into their possession? Answer yes or no.",
+    "content": "{\"answer\": \"no\"}"
+  },
+  {
+    "text": "Do not drink water.",
+    "sid": "DRINK",
+    "expected": "no",
+    "question": "Sentence: \"Do not drink water.\"\nDoes this sentence describe someone drinking or sipping liquid? Answer yes or no.",
+    "content": "{\"answer\": \"no\"}"
+  }
+]

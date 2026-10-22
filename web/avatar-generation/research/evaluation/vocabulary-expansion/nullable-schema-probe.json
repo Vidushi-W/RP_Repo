@@ -1,0 +1,51 @@
+[
+  {
+    "text": "Ask a question.",
+    "expected": [],
+    "predicted": [
+      "LOOK"
+    ],
+    "raw": [
+      {
+        "signId": "LOOK",
+        "evidence": "Ask a question."
+      }
+    ],
+    "qwenMs": 16741.6197,
+    "passed": false
+  },
+  {
+    "text": "Give me the book.",
+    "expected": [
+      "GIVE"
+    ],
+    "predicted": [
+      "GIVE"
+    ],
+    "raw": [
+      {
+        "signId": "GIVE",
+        "evidence": "Give me the book."
+      }
+    ],
+    "qwenMs": 14747.6145,
+    "passed": true
+  },
+  {
+    "text": "Draw a picture.",
+    "expected": [
+      "DRAW"
+    ],
+    "predicted": [
+      "DRAW"
+    ],
+    "raw": [
+      {
+        "signId": "DRAW",
+        "evidence": "Draw a picture."
+      }
+    ],
+    "qwenMs": 14513.3817,
+    "passed": true
+  }
+]

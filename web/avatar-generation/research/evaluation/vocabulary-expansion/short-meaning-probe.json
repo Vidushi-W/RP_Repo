@@ -1,0 +1,37 @@
+[
+  {
+    "text": "She is drinking water.",
+    "sid": "DRINK",
+    "meaning": "A person drinking or sipping liquid.",
+    "expected": true,
+    "content": "{\"equivalent\": false}"
+  },
+  {
+    "text": "The boy is running.",
+    "sid": "RUN",
+    "meaning": "A person running on foot.",
+    "expected": true,
+    "content": "{\"equivalent\": false}"
+  },
+  {
+    "text": "Ask a question.",
+    "sid": "LOOK",
+    "meaning": "Directing the eyes or visual attention toward something.",
+    "expected": false,
+    "content": "{\"equivalent\": false}"
+  },
+  {
+    "text": "Run a program.",
+    "sid": "RUN",
+    "meaning": "A person running on foot.",
+    "expected": false,
+    "content": "{\"equivalent\": false}"
+  },
+  {
+    "text": "Give me the book.",
+    "sid": "TAKE",
+    "meaning": "A person reaching for and taking a physical object into their possession.",
+    "expected": false,
+    "content": "{\"equivalent\": false}"
+  }
+]

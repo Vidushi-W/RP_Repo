@@ -1,0 +1,38 @@
+[
+  {
+    "text": "Give me the book.",
+    "sid": "GIVE",
+    "expected": "yes",
+    "content": "{ \"answer\": \"yes\" }"
+  },
+  {
+    "text": "Take the bag.",
+    "sid": "TAKE",
+    "expected": "yes",
+    "content": "{ \"answer\": \"yes\" }"
+  },
+  {
+    "text": "Draw a picture.",
+    "sid": "DRAW",
+    "expected": "yes",
+    "content": "{\"answer\": \"yes\"}"
+  },
+  {
+    "text": "Ask a question.",
+    "sid": "LOOK",
+    "expected": "no",
+    "content": "{\"answer\": \"yes\"}"
+  },
+  {
+    "text": "Run a program.",
+    "sid": "RUN",
+    "expected": "no",
+    "content": "{ \"answer\": \"yes\" }"
+  },
+  {
+    "text": "Do not drink water.",
+    "sid": "DRINK",
+    "expected": "no",
+    "content": "{\"answer\": \"yes\"}"
+  }
+]

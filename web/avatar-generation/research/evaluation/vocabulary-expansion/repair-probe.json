@@ -1,0 +1,240 @@
+[
+  {
+    "input": "Eat rice, then drink water.",
+    "expected": [
+      "EAT",
+      "DRINK"
+    ],
+    "predicted": [],
+    "passed": false,
+    "inference": {
+      "provider": "ollama",
+      "model": "qwen3:1.7b",
+      "performed": true,
+      "mode": "structured-output orchestration",
+      "evalCount": 137,
+      "totalDurationNs": 36671304800,
+      "cpuOnly": true,
+      "selectionAttempts": [
+        {
+          "inference": {
+            "provider": "ollama",
+            "model": "qwen3:1.7b",
+            "performed": true,
+            "mode": "structured-output orchestration",
+            "evalCount": 115,
+            "totalDurationNs": 10659713400,
+            "cpuOnly": true
+          },
+          "rawModelMatches": [
+            {
+              "signId": "DRINK",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "EAT",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "LOOK",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "SEE",
+              "evidence": "eat rice"
+            }
+          ]
+        },
+        {
+          "inference": {
+            "provider": "ollama",
+            "model": "qwen3:1.7b",
+            "performed": true,
+            "mode": "structured-output orchestration",
+            "evalCount": 137,
+            "totalDurationNs": 26011591400,
+            "cpuOnly": true
+          },
+          "rawModelMatches": [
+            {
+              "signId": "DRINK",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "EAT",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "LOOK",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "SEE",
+              "evidence": "eat rice"
+            },
+            {
+              "signId": "TAKE",
+              "evidence": "eat rice"
+            }
+          ]
+        }
+      ]
+    },
+    "rawModelMatches": [
+      {
+        "signId": "DRINK",
+        "evidence": "eat rice"
+      },
+      {
+        "signId": "EAT",
+        "evidence": "eat rice"
+      },
+      {
+        "signId": "LOOK",
+        "evidence": "eat rice"
+      },
+      {
+        "signId": "SEE",
+        "evidence": "eat rice"
+      },
+      {
+        "signId": "TAKE",
+        "evidence": "eat rice"
+      }
+    ],
+    "missingOrRejected": [
+      {
+        "discardedProposal": {
+          "signId": "DRINK",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "EAT",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "LOOK",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "SEE",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "text": "ask",
+        "reason": "No clear eligible vocabulary meaning"
+      },
+      {
+        "text": "give",
+        "reason": "No clear eligible vocabulary meaning"
+      },
+      {
+        "text": "take",
+        "reason": "No clear eligible vocabulary meaning"
+      },
+      {
+        "discardedProposal": {
+          "signId": "DRINK",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "EAT",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "LOOK",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "SEE",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "discardedProposal": {
+          "signId": "TAKE",
+          "evidence": "eat rice"
+        },
+        "reason": "Evidence absent, overlapping or out of source order"
+      },
+      {
+        "text": "ask",
+        "reason": "No clear eligible vocabulary meaning"
+      },
+      {
+        "text": "give",
+        "reason": "No clear eligible vocabulary meaning"
+      },
+      {
+        "text": "take",
+        "reason": "No clear eligible vocabulary meaning"
+      }
+    ]
+  },
+  {
+    "input": "I see a bird, then look at the tree.",
+    "expected": [
+      "SEE",
+      "LOOK"
+    ],
+    "predicted": [
+      "LOOK",
+      "LOOK"
+    ],
+    "passed": false,
+    "inference": {
+      "provider": "ollama",
+      "model": "qwen3:1.7b",
+      "performed": true,
+      "mode": "structured-output orchestration",
+      "evalCount": 75,
+      "totalDurationNs": 9050763400,
+      "cpuOnly": true,
+      "meaningVerifications": [
+        {
+          "evidence": "see a bird",
+          "equivalent": true,
+          "evalCount": 9,
+          "totalDurationNs": 2448954300
+        }
+      ]
+    },
+    "rawModelMatches": [
+      {
+        "signId": "LOOK",
+        "evidence": "see a bird"
+      },
+      {
+        "signId": "LOOK",
+        "evidence": "look at the tree"
+      }
+    ],
+    "missingOrRejected": [
+      {
+        "text": "I see a bird, then look at the tree",
+        "reason": "No clear eligible vocabulary meaning"
+      }
+    ]
+  }
+]

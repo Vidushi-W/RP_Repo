@@ -1,6 +1,6 @@
 export interface Landmark { x: number; y: number }
 export type Hand = Landmark[] | null;
-export interface HandFrame { timestampMs: number; leftHand: Hand; rightHand: Hand }
+export interface HandFrame { timestampMs: number; leftHand: Hand; rightHand: Hand; pose?: (Landmark|null)[]|null; face?: (Landmark|null)[]|null }
 export interface HandAnimation {
   schemaVersion: 1;
   signId: string;
@@ -22,6 +22,7 @@ export interface SignEntry {
   animationUrl: string;
   datasetReference: string;
   reviewed: boolean;
+  sha256?: string;
 }
 export interface AnimationManifest { schemaVersion: 1; fixture: boolean; signs: SignEntry[] }
 export interface SignSegment { startMs: number; endMs: number; signs: string[] }

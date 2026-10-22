@@ -1,0 +1,1656 @@
+{
+  "discovered": 59,
+  "records": [
+    {
+      "signId": "RAW_ADINAWA_15B34B",
+      "conceptId": null,
+      "sourceFile": "adinawa.mp4",
+      "originalFilename": "adinawa.mp4",
+      "romanizedLabel": "adinawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "66f45b9e45bd9210f651a12ab500fb9f0401974fd6448c9e50922a53b5871c1f",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_adinawa_15b34b.json",
+      "sha256": "61c12415a42a0adc19722646d221d030469a859f40557e013d5c83b87b793590",
+      "validation": {
+        "frames": 43,
+        "durationMs": 2880,
+        "detections": {
+          "hands": 36,
+          "pose": 43,
+          "face": 43
+        }
+      },
+      "processingSeconds": 0.054
+    },
+    {
+      "signId": "RAW_ADUM_SODANAWA_9E5462",
+      "conceptId": null,
+      "sourceFile": "adum sodanawa.mp4",
+      "originalFilename": "adum sodanawa.mp4",
+      "romanizedLabel": "adum sodanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "22dd5d302f95eab2046b269ee83c5e041fbf09d055a7543e3534c7ea37899548",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_adum_sodanawa_9e5462.json",
+      "sha256": "095cfa222d45f0d9a175f820673b1b3059942a927ad9b2ada9653c82b73f0844",
+      "validation": {
+        "frames": 70,
+        "durationMs": 4680,
+        "detections": {
+          "hands": 69,
+          "pose": 70,
+          "face": 70
+        }
+      },
+      "processingSeconds": 0.155
+    },
+    {
+      "signId": "RAW_AHANAWA_149686",
+      "conceptId": null,
+      "sourceFile": "ahanawa.mp4",
+      "originalFilename": "ahanawa.mp4",
+      "romanizedLabel": "ahanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "ca682082dc8b6a80d31dc436fc2afd2b9ac412108359b1645ee29a6536384ec2",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_ahanawa_149686.json",
+      "sha256": "9ea6ed9ad500a2c28332eede2a8f482f8b496e9c9db1947b6eafd70669641943",
+      "validation": {
+        "frames": 38,
+        "durationMs": 2520,
+        "detections": {
+          "hands": 18,
+          "pose": 38,
+          "face": 38
+        }
+      },
+      "processingSeconds": 0.06
+    },
+    {
+      "signId": "RAW_AMBARANAWA_DF228E",
+      "conceptId": null,
+      "sourceFile": "ambaranawa.mp4",
+      "originalFilename": "ambaranawa.mp4",
+      "romanizedLabel": "ambaranawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "595ce67dc4580e0efbb6c2514e77cfbefc8cf8f3717a157129809cfe359cdf6a",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_ambaranawa_df228e.json",
+      "sha256": "4dc3d47a29ac61629a65ac5f45ca2f778f1337a4dcad21ae65dd068d7b02cdca",
+      "validation": {
+        "frames": 46,
+        "durationMs": 3080,
+        "detections": {
+          "hands": 40,
+          "pose": 46,
+          "face": 46
+        }
+      },
+      "processingSeconds": 0.072
+    },
+    {
+      "signId": "CRY",
+      "conceptId": "CRY",
+      "sourceFile": "andanawa.mp4",
+      "originalFilename": "andanawa.mp4",
+      "romanizedLabel": "andanawa",
+      "sinhalaLabel": "අඬනවා",
+      "englishMeaning": "cry",
+      "synonyms": [
+        "weep",
+        "weeping",
+        "crying",
+        "shedding tears"
+      ],
+      "sourceSha256": "f8452f4b241f5673e70481a9ce764e07514f5583c60392005ffe4d56f2bc2c7f",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/cry.json",
+      "sha256": "9c7ce86c26d513c1eed27754b50bf89493e5a9b363aa5776e7a6e6d142bee6d1",
+      "validation": {
+        "frames": 35,
+        "durationMs": 2360,
+        "detections": {
+          "hands": 24,
+          "pose": 35,
+          "face": 35
+        }
+      },
+      "processingSeconds": 0.04
+    },
+    {
+      "signId": "DRAW",
+      "conceptId": "DRAW",
+      "sourceFile": "andinawa(draw).mp4",
+      "originalFilename": "andinawa(draw).mp4",
+      "romanizedLabel": "andinawa(draw)",
+      "sinhalaLabel": "??????",
+      "englishMeaning": "draw",
+      "synonyms": [
+        "drawing",
+        "drew",
+        "sketch",
+        "sketching",
+        "draws",
+        "sketches"
+      ],
+      "sourceSha256": "a64b1f267612c069098464d875755999cb9186422c980f98af4d35afc58559a4",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/draw.json",
+      "sha256": "45511189551de0df3b9a6a30ff9c6db1d931ddad5c67e76703558266c34fda52",
+      "validation": {
+        "frames": 69,
+        "durationMs": 4600,
+        "detections": {
+          "hands": 73,
+          "pose": 69,
+          "face": 69
+        }
+      },
+      "processingSeconds": 0.094
+    },
+    {
+      "signId": "RAW_ATHU_GAANAWA_B62411",
+      "conceptId": null,
+      "sourceFile": "athu gaanawa.mp4",
+      "originalFilename": "athu gaanawa.mp4",
+      "romanizedLabel": "athu gaanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "d5445e7c79b999c2b6143230c29faf19d5e4d46e9b20021d3096b5a8a9a921e1",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_athu_gaanawa_b62411.json",
+      "sha256": "a328cc7d76a34f8024fc7d6825d144bddab784051cd618f576d4196ecd18412d",
+      "validation": {
+        "frames": 73,
+        "durationMs": 4840,
+        "detections": {
+          "hands": 66,
+          "pose": 73,
+          "face": 73
+        }
+      },
+      "processingSeconds": 0.132
+    },
+    {
+      "signId": "WALK",
+      "conceptId": "WALK",
+      "sourceFile": "awidinawa.mp4",
+      "originalFilename": "awidinawa.mp4",
+      "romanizedLabel": "awidinawa",
+      "sinhalaLabel": "ඇවිදිනවා",
+      "englishMeaning": "walk",
+      "synonyms": [
+        "walking",
+        "stroll",
+        "strolling"
+      ],
+      "sourceSha256": "7f274726c3a5e6a1634a43b68f094ef29d1bd4e961c16ae735c355467c5756e7",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/walk.json",
+      "sha256": "b2a73e0a6252786b77b51926352b2dc73c211d7317da045f686a33c852d2a66e",
+      "validation": {
+        "frames": 62,
+        "durationMs": 4160,
+        "detections": {
+          "hands": 41,
+          "pose": 62,
+          "face": 62
+        }
+      },
+      "processingSeconds": 0.184
+    },
+    {
+      "signId": "LOOK",
+      "conceptId": "LOOK",
+      "sourceFile": "balanawa.mp4",
+      "originalFilename": "balanawa.mp4",
+      "romanizedLabel": "balanawa",
+      "sinhalaLabel": "බලනවා",
+      "englishMeaning": "look",
+      "synonyms": [
+        "looking",
+        "look at",
+        "watch",
+        "watching"
+      ],
+      "sourceSha256": "83ab3344659bdeed26fa9bb0542d61683f694cf8bd119d04270c4a2250905c66",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/look.json",
+      "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+      "validation": {
+        "frames": 52,
+        "durationMs": 3440,
+        "detections": {
+          "hands": 25,
+          "pose": 52,
+          "face": 52
+        }
+      },
+      "processingSeconds": 0.093
+    },
+    {
+      "signId": "DRINK",
+      "conceptId": "DRINK",
+      "sourceFile": "bonawa.mp4",
+      "originalFilename": "bonawa.mp4",
+      "romanizedLabel": "bonawa",
+      "sinhalaLabel": "?????",
+      "englishMeaning": "drink",
+      "synonyms": [
+        "drinking",
+        "drank",
+        "sip",
+        "sipping",
+        "drinks",
+        "sips"
+      ],
+      "sourceSha256": "915ea3ff7be8066c02da9da010953ada8ef4c1178bcbe3b5652bb075e4a8d7a5",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/drink.json",
+      "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+      "validation": {
+        "frames": 50,
+        "durationMs": 3360,
+        "detections": {
+          "hands": 20,
+          "pose": 50,
+          "face": 50
+        }
+      },
+      "processingSeconds": 0.064
+    },
+    {
+      "signId": "SEE",
+      "conceptId": "SEE",
+      "sourceFile": "dakinawa.mp4",
+      "originalFilename": "dakinawa.mp4",
+      "romanizedLabel": "dakinawa",
+      "sinhalaLabel": "??????",
+      "englishMeaning": "see",
+      "synonyms": [
+        "seeing",
+        "saw",
+        "seen",
+        "spot",
+        "spotted"
+      ],
+      "sourceSha256": "d635c60224a67b23b0d98a0fe58d5d96cb958e0fd6161a173ceff5698777b35c",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/see.json",
+      "sha256": "6d7fe92cd409e09f84d5a809157697a7c47cd13e7d957908d03544fb9b8c4219",
+      "validation": {
+        "frames": 44,
+        "durationMs": 2920,
+        "detections": {
+          "hands": 22,
+          "pose": 44,
+          "face": 44
+        }
+      },
+      "processingSeconds": 0.054
+    },
+    {
+      "signId": "GIVE",
+      "conceptId": "GIVE",
+      "sourceFile": "denawa.mp4",
+      "originalFilename": "denawa.mp4",
+      "romanizedLabel": "denawa",
+      "sinhalaLabel": "?????",
+      "englishMeaning": "give",
+      "synonyms": [
+        "giving",
+        "gave",
+        "hand over",
+        "handing over",
+        "gives",
+        "hands over"
+      ],
+      "sourceSha256": "1cc8db7498e63095f96051ecaf2eec06c7d145efd9234a1bdcccee0e98a4cbbf",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/give.json",
+      "sha256": "cd3fc7839dd38065a940e7eccfa28e33cdde97a01c7342c874e7d2e556570113",
+      "validation": {
+        "frames": 41,
+        "durationMs": 2760,
+        "detections": {
+          "hands": 24,
+          "pose": 41,
+          "face": 41
+        }
+      },
+      "processingSeconds": 0.057
+    },
+    {
+      "signId": "RUN",
+      "conceptId": "RUN",
+      "sourceFile": "duwanawa.mp4",
+      "originalFilename": "duwanawa.mp4",
+      "romanizedLabel": "duwanawa",
+      "sinhalaLabel": "??????",
+      "englishMeaning": "run",
+      "synonyms": [
+        "running",
+        "ran",
+        "sprint",
+        "sprinting",
+        "runs",
+        "sprints"
+      ],
+      "sourceSha256": "6d90489c556667d63dbfdfc52e49dc6d7babed65cf420bfcc03170d7f476e9f8",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/run.json",
+      "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+      "validation": {
+        "frames": 56,
+        "durationMs": 3720,
+        "detections": {
+          "hands": 56,
+          "pose": 56,
+          "face": 56
+        }
+      },
+      "processingSeconds": 0.07
+    },
+    {
+      "signId": "RAW_ELLANAWA_06AF40",
+      "conceptId": null,
+      "sourceFile": "ellanawa.mp4",
+      "originalFilename": "ellanawa.mp4",
+      "romanizedLabel": "ellanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "68e9465911f850355219635ef53e6c323acff743795892434657bcab80897ef8",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_ellanawa_06af40.json",
+      "sha256": "3b452846222d8dd8fb590865e26b7537950d8d60c6c4d0223634530e296c9732",
+      "validation": {
+        "frames": 70,
+        "durationMs": 4640,
+        "detections": {
+          "hands": 67,
+          "pose": 70,
+          "face": 70
+        }
+      },
+      "processingSeconds": 0.084
+    },
+    {
+      "signId": "TAKE",
+      "conceptId": "TAKE",
+      "sourceFile": "gannawa.mp4",
+      "originalFilename": "gannawa.mp4",
+      "romanizedLabel": "gannawa",
+      "sinhalaLabel": "??????",
+      "englishMeaning": "take",
+      "synonyms": [
+        "taking",
+        "took",
+        "pick up",
+        "picking up"
+      ],
+      "sourceSha256": "2f25f1c5d7ae20b8d3e5e99a9526a7287f7ac2574fb38383eab452e05855c394",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/take.json",
+      "sha256": "dc04131a1a4de509cc557b97b01145ebecc8896d58ef95aa287f89eaa6d8ddf8",
+      "validation": {
+        "frames": 51,
+        "durationMs": 3400,
+        "detections": {
+          "hands": 26,
+          "pose": 51,
+          "face": 51
+        }
+      },
+      "processingSeconds": 0.086
+    },
+    {
+      "signId": "RAW_GAS_KAPANAWA_3EFC09",
+      "conceptId": null,
+      "sourceFile": "gas kapanawa.mp4",
+      "originalFilename": "gas kapanawa.mp4",
+      "romanizedLabel": "gas kapanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "e65e8913dc18966816d77ea17eece0182d0a1b7dcd92a41878272eb1d48723f2",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_gas_kapanawa_3efc09.json",
+      "sha256": "d302e6d5db6fd00c67ae47f6bf86a81ab3f2c678376127ef53c16977aadadfcf",
+      "validation": {
+        "frames": 50,
+        "durationMs": 3320,
+        "detections": {
+          "hands": 27,
+          "pose": 50,
+          "face": 50
+        }
+      },
+      "processingSeconds": 0.111
+    },
+    {
+      "signId": "RAW_GEYAK_HADANAWA_E3C4FA",
+      "conceptId": null,
+      "sourceFile": "geyak hadanawa.mp4",
+      "originalFilename": "geyak hadanawa.mp4",
+      "romanizedLabel": "geyak hadanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "7792eaa717342de3742953bdf744d9a626f061635b99d53f8a45e19f44a7b642",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_geyak_hadanawa_e3c4fa.json",
+      "sha256": "c4cf156dd32fd6acf50c09659d9bc9d2bb651986186725da88688df6f536e48c",
+      "validation": {
+        "frames": 67,
+        "durationMs": 4440,
+        "detections": {
+          "hands": 77,
+          "pose": 67,
+          "face": 67
+        }
+      },
+      "processingSeconds": 0.097
+    },
+    {
+      "signId": "RAW_HAARANAWA_460168",
+      "conceptId": null,
+      "sourceFile": "haaranawa.mp4",
+      "originalFilename": "haaranawa.mp4",
+      "romanizedLabel": "haaranawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "69bf2fcd82977ef4111652436775a48ad5b7b2703cc9121b9572dd958d14161e",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_haaranawa_460168.json",
+      "sha256": "fd6a77144c9ff9e41b4447c975e169ef009638f90c461038d581c463e7493469",
+      "validation": {
+        "frames": 56,
+        "durationMs": 3720,
+        "detections": {
+          "hands": 73,
+          "pose": 56,
+          "face": 56
+        }
+      },
+      "processingSeconds": 0.152
+    },
+    {
+      "signId": "RAW_HADANAWA_EX_LII_WALIN_PUTUWAK_MESAYK_0BA8CE",
+      "conceptId": null,
+      "sourceFile": "hadanawa(ex- lii walin putuwak mesayk).mp4",
+      "originalFilename": "hadanawa(ex- lii walin putuwak mesayk).mp4",
+      "romanizedLabel": "hadanawa(ex- lii walin putuwak mesayk)",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "84349630887ac83a741df51af168984cd54f99800388852de812a14fcfa3979e",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_hadanawa_ex_lii_walin_putuwak_mesayk_0ba8ce.json",
+      "sha256": "ee08113de6f10df6c74c1b8bccf3f33d69b8de3b6a551e1f0c8683c78e7d8552",
+      "validation": {
+        "frames": 58,
+        "durationMs": 3880,
+        "detections": {
+          "hands": 54,
+          "pose": 58,
+          "face": 58
+        }
+      },
+      "processingSeconds": 0.08
+    },
+    {
+      "signId": "RAW_HINAWENAWA_1ST_WAY_6EEB0B",
+      "conceptId": null,
+      "sourceFile": "hinawenawa(1st way).mp4",
+      "originalFilename": "hinawenawa(1st way).mp4",
+      "romanizedLabel": "hinawenawa(1st way)",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "25f0b65156b1d8fc93e5b6347f51f490fa545fafe002eb4e638abff8b6810d93",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_hinawenawa_1st_way_6eeb0b.json",
+      "sha256": "d38eaecadcaf963d9f7ea72bbf13321fb4369179ddbe5b8b9141c5815adf23cc",
+      "validation": {
+        "frames": 48,
+        "durationMs": 3200,
+        "detections": {
+          "hands": 22,
+          "pose": 48,
+          "face": 48
+        }
+      },
+      "processingSeconds": 0.063
+    },
+    {
+      "signId": "RAW_HINAWENAWA_2ND_WAY_DD5C4C",
+      "conceptId": null,
+      "sourceFile": "hinawenawa(2nd way).mp4",
+      "originalFilename": "hinawenawa(2nd way).mp4",
+      "romanizedLabel": "hinawenawa(2nd way)",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "1e2282d4995af747c8d76753eafbe5d3553cb805ae5524c32f7151ad2927fa9a",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_hinawenawa_2nd_way_dd5c4c.json",
+      "sha256": "f2487504f1a5d61aca1a6ad89fedeecb2bedd0db5d246105c412f42c9ec84a5c",
+      "validation": {
+        "frames": 44,
+        "durationMs": 2920,
+        "detections": {
+          "hands": 33,
+          "pose": 44,
+          "face": 44
+        }
+      },
+      "processingSeconds": 0.132
+    },
+    {
+      "signId": "RAW_IRANAWA_815E99",
+      "conceptId": null,
+      "sourceFile": "iranawa.mp4",
+      "originalFilename": "iranawa.mp4",
+      "romanizedLabel": "iranawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "a296925aeca8604f6e243b5af4b93219985c5237b06d2ff44833738e7cbcd0f6",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_iranawa_815e99.json",
+      "sha256": "8f3ae39b38290975d75f229f5c4a7a8a4773030380ef80cedfe2152898899527",
+      "validation": {
+        "frames": 54,
+        "durationMs": 3600,
+        "detections": {
+          "hands": 61,
+          "pose": 54,
+          "face": 54
+        }
+      },
+      "processingSeconds": 0.128
+    },
+    {
+      "signId": "RAW_KAAMAK_HADANAWA_F25C72",
+      "conceptId": null,
+      "sourceFile": "kaamak hadanawa.mp4",
+      "originalFilename": "kaamak hadanawa.mp4",
+      "romanizedLabel": "kaamak hadanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "fb4d7b3332a838552a77bbb4167671fa9c004005181e59f06b3c24942ae3c386",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_kaamak_hadanawa_f25c72.json",
+      "sha256": "0ae4aa88d9a970ab27d13ac24a8d0f90963f55ecb361e851b275870b2ae4f44a",
+      "validation": {
+        "frames": 74,
+        "durationMs": 4960,
+        "detections": {
+          "hands": 67,
+          "pose": 74,
+          "face": 74
+        }
+      },
+      "processingSeconds": 0.109
+    },
+    {
+      "signId": "RAW_KADANAWA_389137",
+      "conceptId": null,
+      "sourceFile": "kadanawa.mp4",
+      "originalFilename": "kadanawa.mp4",
+      "romanizedLabel": "kadanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "22ab38ac0094ee8e43c82fb65501dddc3fa7598cbae11b3f9398bb228907cd77",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_kadanawa_389137.json",
+      "sha256": "6b742085a81e31449c4d9e7f9ad5881af26451bf0f0ad4d9be98ad83021f31b4",
+      "validation": {
+        "frames": 62,
+        "durationMs": 4120,
+        "detections": {
+          "hands": 39,
+          "pose": 62,
+          "face": 62
+        }
+      },
+      "processingSeconds": 0.089
+    },
+    {
+      "signId": "EAT",
+      "conceptId": "EAT",
+      "sourceFile": "kanawa.mp4",
+      "originalFilename": "kanawa.mp4",
+      "romanizedLabel": "kanawa",
+      "sinhalaLabel": "????",
+      "englishMeaning": "eat",
+      "synonyms": [
+        "eating",
+        "ate",
+        "eat food",
+        "eating food"
+      ],
+      "sourceSha256": "b708ab66dfeada89d1c626906da768680e55b451db9d1c771500756b46ce07b1",
+      "reviewStatus": "approved",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/eat.json",
+      "sha256": "ec8e63969e304599f832a74c89114966862889856193230288337428b0d2f994",
+      "validation": {
+        "frames": 52,
+        "durationMs": 3440,
+        "detections": {
+          "hands": 18,
+          "pose": 52,
+          "face": 52
+        }
+      },
+      "processingSeconds": 0.068
+    },
+    {
+      "signId": "RAW_KASANAWA_2FE272",
+      "conceptId": null,
+      "sourceFile": "kasanawa.mp4",
+      "originalFilename": "kasanawa.mp4",
+      "romanizedLabel": "kasanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "20e52ceda2f3e16075231f815c24cc2cef4102d9e13a09296936b7b813d85268",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_kasanawa_2fe272.json",
+      "sha256": "c87c96878dbb670aeab0db977cfb367577a6ab35014603217747fb49521f58c6",
+      "validation": {
+        "frames": 62,
+        "durationMs": 4120,
+        "detections": {
+          "hands": 74,
+          "pose": 62,
+          "face": 62
+        }
+      },
+      "processingSeconds": 0.091
+    },
+    {
+      "signId": "RAW_KOTANAWA_C899D2",
+      "conceptId": null,
+      "sourceFile": "kotanawa.mp4",
+      "originalFilename": "kotanawa.mp4",
+      "romanizedLabel": "kotanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "d51097df27331da72d75cf16c8990b0634996551d9b16c73e04e496f3b090bff",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_kotanawa_c899d2.json",
+      "sha256": "2e2f429421a55084ae413b5980b148678f882d12e16454962aa128f8e2057872",
+      "validation": {
+        "frames": 60,
+        "durationMs": 4000,
+        "detections": {
+          "hands": 58,
+          "pose": 60,
+          "face": 60
+        }
+      },
+      "processingSeconds": 0.077
+    },
+    {
+      "signId": "RAW_KUNU_DAMANAWA_A17828",
+      "conceptId": null,
+      "sourceFile": "kunu damanawa.mp4",
+      "originalFilename": "kunu damanawa.mp4",
+      "romanizedLabel": "kunu damanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "e98a7ff825419399277955701963a5f93582536278f51b45704ee0f19f155463",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_kunu_damanawa_a17828.json",
+      "sha256": "355c7f10bc4d6e169fde81c37dcc0f884c99304ba3e3ae0667398b88ea51de24",
+      "validation": {
+        "frames": 47,
+        "durationMs": 3160,
+        "detections": {
+          "hands": 19,
+          "pose": 47,
+          "face": 47
+        }
+      },
+      "processingSeconds": 0.069
+    },
+    {
+      "signId": "RAW_KUNU_948111",
+      "conceptId": null,
+      "sourceFile": "kunu.mp4",
+      "originalFilename": "kunu.mp4",
+      "romanizedLabel": "kunu",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "ccd2700f536937bef9e6240d3960e75f6d4f75e4ab1b819506b26dd9b0494788",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_kunu_948111.json",
+      "sha256": "871158df62c182b9f556929bf8a428c840c07de9c54865cdbc04bc208da7ea2f",
+      "validation": {
+        "frames": 47,
+        "durationMs": 3120,
+        "detections": {
+          "hands": 30,
+          "pose": 47,
+          "face": 47
+        }
+      },
+      "processingSeconds": 0.126
+    },
+    {
+      "signId": "RAW_LIYANAWA_D3A91E",
+      "conceptId": null,
+      "sourceFile": "liyanawa.mp4",
+      "originalFilename": "liyanawa.mp4",
+      "romanizedLabel": "liyanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "eed6904fc747baac1c28c47be1ab52f87f730dbee40462501dab021bcb4aca37",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_liyanawa_d3a91e.json",
+      "sha256": "7af12e40f5351a9dec7de80d726d97e0b79277210ed0880f6071aff6a4b650d3",
+      "validation": {
+        "frames": 70,
+        "durationMs": 4640,
+        "detections": {
+          "hands": 47,
+          "pose": 70,
+          "face": 70
+        }
+      },
+      "processingSeconds": 0.454
+    },
+    {
+      "signId": "RAW_MAKANAWA_354968",
+      "conceptId": null,
+      "sourceFile": "makanawa.mp4",
+      "originalFilename": "makanawa.mp4",
+      "romanizedLabel": "makanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "2086e84ccbb9795a37cd5e30f6410549b9f4a61e6a07fbb9ebb5a7fc060fe0f6",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_makanawa_354968.json",
+      "sha256": "7a6bf2d135e8e233f7c35613603dfae8236cde0e1786cd68eaa147aeb987e173",
+      "validation": {
+        "frames": 73,
+        "durationMs": 4840,
+        "detections": {
+          "hands": 85,
+          "pose": 73,
+          "face": 73
+        }
+      },
+      "processingSeconds": 0.225
+    },
+    {
+      "signId": "RAW_MAS_MAALU_KAPANAWA_237CE2",
+      "conceptId": null,
+      "sourceFile": "mas maalu kapanawa.mp4",
+      "originalFilename": "mas maalu kapanawa.mp4",
+      "romanizedLabel": "mas maalu kapanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "5bbf313c1456d2d8a21ad75ddba0d9c3c2c1317022aceacdc16bbac37983dd5c",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_mas_maalu_kapanawa_237ce2.json",
+      "sha256": "7d84aba9f3b1db755321d0960ae2e0359de8f180627f468d3eb50d3a432a0577",
+      "validation": {
+        "frames": 63,
+        "durationMs": 4200,
+        "detections": {
+          "hands": 34,
+          "pose": 63,
+          "face": 63
+        }
+      },
+      "processingSeconds": 0.167
+    },
+    {
+      "signId": "RAW_MILADII_GANNAWA_012C9E",
+      "conceptId": null,
+      "sourceFile": "miladii gannawa.mp4",
+      "originalFilename": "miladii gannawa.mp4",
+      "romanizedLabel": "miladii gannawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "a2ac1037002c87054382953f148bcf245080a1a4ac3c5d25f2e3e1ca57a15da4",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_miladii_gannawa_012c9e.json",
+      "sha256": "e31f2cdb43549d36413c1e7911b742778a6a55fc57ad31891f54514c5a68a089",
+      "validation": {
+        "frames": 50,
+        "durationMs": 3360,
+        "detections": {
+          "hands": 30,
+          "pose": 50,
+          "face": 50
+        }
+      },
+      "processingSeconds": 0.138
+    },
+    {
+      "signId": "RAW_MUUNA_KASANAWA_5DC869",
+      "conceptId": null,
+      "sourceFile": "muuna kasanawa.mp4",
+      "originalFilename": "muuna kasanawa.mp4",
+      "romanizedLabel": "muuna kasanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "7bda0cd72b5b37bb6eab73893bc200b5d0b01d26dbeb2afc732a10ac3f1b1cc6",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_muuna_kasanawa_5dc869.json",
+      "sha256": "3e9447205271374428dd8849f560ff81a830200008e05c4f365ba4aa1c391137",
+      "validation": {
+        "frames": 49,
+        "durationMs": 3280,
+        "detections": {
+          "hands": 35,
+          "pose": 49,
+          "face": 49
+        }
+      },
+      "processingSeconds": 0.15
+    },
+    {
+      "signId": "RAW_MUUNA_SOODANAWA_596A08",
+      "conceptId": null,
+      "sourceFile": "muuna soodanawa.mp4",
+      "originalFilename": "muuna soodanawa.mp4",
+      "romanizedLabel": "muuna soodanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "67821871b75199466e5f1c219fc002869b09a7aaa0ca1640ea67868f2db0afe4",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_muuna_soodanawa_596a08.json",
+      "sha256": "56d0295adfe1f8f95af43a0cb8e298e828ba3e9c839d2a936d631a765fba82de",
+      "validation": {
+        "frames": 79,
+        "durationMs": 5240,
+        "detections": {
+          "hands": 107,
+          "pose": 79,
+          "face": 71
+        }
+      },
+      "processingSeconds": 0.201
+    },
+    {
+      "signId": "RAW_NAANAWA_9F3490",
+      "conceptId": null,
+      "sourceFile": "naanawa.mp4",
+      "originalFilename": "naanawa.mp4",
+      "romanizedLabel": "naanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "bb2a6b8f3545c00a6cdf711648e4a8ec829dc21be392095cb321d11d38103d57",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_naanawa_9f3490.json",
+      "sha256": "3dee761f348e68a70533921767778d708b015ecd059ce428b17c8b0514c5eed3",
+      "validation": {
+        "frames": 49,
+        "durationMs": 3240,
+        "detections": {
+          "hands": 44,
+          "pose": 49,
+          "face": 49
+        }
+      },
+      "processingSeconds": 0.15
+    },
+    {
+      "signId": "RAW_NAGITINAWA_FB7B95",
+      "conceptId": null,
+      "sourceFile": "nagitinawa.mp4",
+      "originalFilename": "nagitinawa.mp4",
+      "romanizedLabel": "nagitinawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "23c5f867b72d09f6f7c4bfc60d7588d7425eecf6f7627ae2ecb0c960a39a5f85",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_nagitinawa_fb7b95.json",
+      "sha256": "3dae22d8e65c5af00513f1b1baca11fed260f9458c221921b5e1b16a9006a80f",
+      "validation": {
+        "frames": 57,
+        "durationMs": 3800,
+        "detections": {
+          "hands": 54,
+          "pose": 57,
+          "face": 57
+        }
+      },
+      "processingSeconds": 0.171
+    },
+    {
+      "signId": "RAW_NURSE_9455D3",
+      "conceptId": null,
+      "sourceFile": "nurse.mp4",
+      "originalFilename": "nurse.mp4",
+      "romanizedLabel": "nurse",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "d712330ed43ef8f44361a238537c7b8f9dd47e61f8254f454b96eda0b21bb9d6",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_nurse_9455d3.json",
+      "sha256": "340ce19b94116a6d7925efd7bf9d3ee2eb30d2dc9bbd955efae23e000a10ea6b",
+      "validation": {
+        "frames": 50,
+        "durationMs": 3360,
+        "detections": {
+          "hands": 44,
+          "pose": 50,
+          "face": 50
+        }
+      },
+      "processingSeconds": 0.211
+    },
+    {
+      "signId": "RAW_OLUWA_KASANAWA_472861",
+      "conceptId": null,
+      "sourceFile": "oluwa kasanawa.mp4",
+      "originalFilename": "oluwa kasanawa.mp4",
+      "romanizedLabel": "oluwa kasanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "b48b4d556f4f06211638b5e80543fd15ae7093c20dede38bb12f9a4121ffc0ec",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_oluwa_kasanawa_472861.json",
+      "sha256": "b6e6cdc9b5aac57871f40396fc2c78c0a21796c31c4b81c650dc48481326b4c4",
+      "validation": {
+        "frames": 44,
+        "durationMs": 2960,
+        "detections": {
+          "hands": 29,
+          "pose": 44,
+          "face": 44
+        }
+      },
+      "processingSeconds": 0.187
+    },
+    {
+      "signId": "RAW_OSAWANAWA_66E2FA",
+      "conceptId": null,
+      "sourceFile": "osawanawa.mp4",
+      "originalFilename": "osawanawa.mp4",
+      "romanizedLabel": "osawanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "38086543a0cffacf3b8ede0ece6b531cd7ac16a74346e7a2f7c64f237def2279",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_osawanawa_66e2fa.json",
+      "sha256": "8128bf306fab551da6369d8d73f748171e2b4e64af70b292876f8c7124dfb76a",
+      "validation": {
+        "frames": 54,
+        "durationMs": 3600,
+        "detections": {
+          "hands": 66,
+          "pose": 54,
+          "face": 54
+        }
+      },
+      "processingSeconds": 0.154
+    },
+    {
+      "signId": "RAW_PAADAM_KARANAWA_F0DC30",
+      "conceptId": null,
+      "sourceFile": "paadam karanawa.mp4",
+      "originalFilename": "paadam karanawa.mp4",
+      "romanizedLabel": "paadam karanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "236181e5e50104d14be38267aed6e344fa32bd4a725e22d1735225bef013dea6",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_paadam_karanawa_f0dc30.json",
+      "sha256": "9cc648b1233a33a6deeda380f8ee8897d1c61fae71457522e6bc4dde0c16c667",
+      "validation": {
+        "frames": 65,
+        "durationMs": 4360,
+        "detections": {
+          "hands": 68,
+          "pose": 65,
+          "face": 65
+        }
+      },
+      "processingSeconds": 0.183
+    },
+    {
+      "signId": "RAW_PAAN_BREAD_KAPANAWA_C065BE",
+      "conceptId": null,
+      "sourceFile": "paan(bread) kapanawa.mp4",
+      "originalFilename": "paan(bread) kapanawa.mp4",
+      "romanizedLabel": "paan(bread) kapanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "4877c280027f642c4813b71efdf436eaf5ca294eae62828ce6bc62631f697205",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_paan_bread_kapanawa_c065be.json",
+      "sha256": "bc585c3eb9b8c84b392227a8a90fb4d184e551fca0618c29aa355ca5f7cf3c91",
+      "validation": {
+        "frames": 69,
+        "durationMs": 4600,
+        "detections": {
+          "hands": 69,
+          "pose": 69,
+          "face": 69
+        }
+      },
+      "processingSeconds": 0.209
+    },
+    {
+      "signId": "RAW_PANINAWA_F87F3C",
+      "conceptId": null,
+      "sourceFile": "paninawa.mp4",
+      "originalFilename": "paninawa.mp4",
+      "romanizedLabel": "paninawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "4626c2aa246fbd0ed1a63ee47a2bdf4ca48d43c3e3a9245c86a9ae4cee9d210a",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_paninawa_f87f3c.json",
+      "sha256": "c1fb2bd243e7e34707332410678e6c6d4343a8ee82aad6a9cd4bc2940249eefb",
+      "validation": {
+        "frames": 60,
+        "durationMs": 4000,
+        "detections": {
+          "hands": 51,
+          "pose": 60,
+          "face": 60
+        }
+      },
+      "processingSeconds": 0.167
+    },
+    {
+      "signId": "RAW_PEENAWA_82036B",
+      "conceptId": null,
+      "sourceFile": "peenawa.mp4",
+      "originalFilename": "peenawa.mp4",
+      "romanizedLabel": "peenawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "3f5320ee9e999c34365ea052464580acc6be2f943c3a783bcf5d58a8e1006a3d",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_peenawa_82036b.json",
+      "sha256": "48751752c1b7f69c0106c9da13508361fdaea8129188cf89684461adda1f8f7b",
+      "validation": {
+        "frames": 37,
+        "durationMs": 2440,
+        "detections": {
+          "hands": 20,
+          "pose": 37,
+          "face": 37
+        }
+      },
+      "processingSeconds": 0.128
+    },
+    {
+      "signId": "RAW_PIGANA_HODANAWA_24E797",
+      "conceptId": null,
+      "sourceFile": "pigana hodanawa.mp4",
+      "originalFilename": "pigana hodanawa.mp4",
+      "romanizedLabel": "pigana hodanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "a3f52d1ea249c2e148f82f2b56c41c8ec737b44b890172617d0f433b21ccffac",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_pigana_hodanawa_24e797.json",
+      "sha256": "243f394a2451149b98d59a333f5fc49cf7634597998e05c193ad287c632b79d1",
+      "validation": {
+        "frames": 72,
+        "durationMs": 4800,
+        "detections": {
+          "hands": 93,
+          "pose": 72,
+          "face": 72
+        }
+      },
+      "processingSeconds": 0.213
+    },
+    {
+      "signId": "RAW_PIHINANAWA_95100A",
+      "conceptId": null,
+      "sourceFile": "pihinanawa.mp4",
+      "originalFilename": "pihinanawa.mp4",
+      "romanizedLabel": "pihinanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "86a23f132ef8f08bb8bf3c194f1a72b283368567361f43960d978a744b7b3fdd",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_pihinanawa_95100a.json",
+      "sha256": "cca6f598f36b38dc2e7693b40b0c7a1934f2eb7bc0a41efe2d70bd6ee6346049",
+      "validation": {
+        "frames": 65,
+        "durationMs": 4360,
+        "detections": {
+          "hands": 45,
+          "pose": 65,
+          "face": 65
+        }
+      },
+      "processingSeconds": 0.177
+    },
+    {
+      "signId": "RAW_RANDU_KARAGANNAWA_B821B3",
+      "conceptId": null,
+      "sourceFile": "randu karagannawa.mp4",
+      "originalFilename": "randu karagannawa.mp4",
+      "romanizedLabel": "randu karagannawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "7ee5aee0c6707f9ad22c83439ee8442452795ee182cc8e45b928e96d81260dd9",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_randu_karagannawa_b821b3.json",
+      "sha256": "978dd25e8f24315aba7948fbd89c5d2a56c8b75918dc5f58c006e3d56c46be9f",
+      "validation": {
+        "frames": 64,
+        "durationMs": 4280,
+        "detections": {
+          "hands": 77,
+          "pose": 64,
+          "face": 64
+        }
+      },
+      "processingSeconds": 0.354
+    },
+    {
+      "signId": "RAW_SODANAWA_84B75C",
+      "conceptId": null,
+      "sourceFile": "sodanawa.mp4",
+      "originalFilename": "sodanawa.mp4",
+      "romanizedLabel": "sodanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "b91b5dbe222c6378728b5283fe6b681616a18f2a5dded2bef73a4f2dfcbbd09f",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_sodanawa_84b75c.json",
+      "sha256": "80af28ba9c840cab46c3f2e901c6a51c317ecd69559ec7f7594415a186ba9f4d",
+      "validation": {
+        "frames": 68,
+        "durationMs": 4560,
+        "detections": {
+          "hands": 62,
+          "pose": 68,
+          "face": 68
+        }
+      },
+      "processingSeconds": 0.246
+    },
+    {
+      "signId": "RAW_SOYNAWA_DFC849",
+      "conceptId": null,
+      "sourceFile": "soynawa.mp4",
+      "originalFilename": "soynawa.mp4",
+      "romanizedLabel": "soynawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "3a558b2b01cad6f2d79ce5ddeabe152b955ab5747e5cd9acf0c392508dc846db",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_soynawa_dfc849.json",
+      "sha256": "b555d690653f86f9979eb315ab28b5b4bad674f4f3563ba2666a8e09701942be",
+      "validation": {
+        "frames": 70,
+        "durationMs": 4640,
+        "detections": {
+          "hands": 31,
+          "pose": 70,
+          "face": 70
+        }
+      },
+      "processingSeconds": 0.204
+    },
+    {
+      "signId": "RAW_THATTU_KARANAWA_D5437F",
+      "conceptId": null,
+      "sourceFile": "thattu karanawa.mp4",
+      "originalFilename": "thattu karanawa.mp4",
+      "romanizedLabel": "thattu karanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "55d4dc54e4ef9e3b90a0c269a49fe5acaf9e01a51d1562b5b7b61c9a909d15be",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_thattu_karanawa_d5437f.json",
+      "sha256": "dcd735abae38645ba93bd99fa52632529eccd1a860adeb81aeb1a2470b927e57",
+      "validation": {
+        "frames": 54,
+        "durationMs": 3600,
+        "detections": {
+          "hands": 24,
+          "pose": 54,
+          "face": 54
+        }
+      },
+      "processingSeconds": 0.151
+    },
+    {
+      "signId": "RAW_THERUM_GANNAWA_9B6E59",
+      "conceptId": null,
+      "sourceFile": "therum gannawa.mp4",
+      "originalFilename": "therum gannawa.mp4",
+      "romanizedLabel": "therum gannawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "e17960977d05c32a476458096a2435ae7a84340e6846c05059b797770b919e33",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_therum_gannawa_9b6e59.json",
+      "sha256": "1bfa2671e9a7126804dde6b3d6f1c45bb9fea4e08c92619a11a62100b121ab91",
+      "validation": {
+        "frames": 44,
+        "durationMs": 2960,
+        "detections": {
+          "hands": 27,
+          "pose": 44,
+          "face": 44
+        }
+      },
+      "processingSeconds": 0.145
+    },
+    {
+      "signId": "RAW_THORANAWA_BA566F",
+      "conceptId": null,
+      "sourceFile": "thoranawa.mp4",
+      "originalFilename": "thoranawa.mp4",
+      "romanizedLabel": "thoranawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "14660972d8dc9293cdc4327e73d62c4e61f11bbd39b4a72b34b5b2e354aa66d6",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_thoranawa_ba566f.json",
+      "sha256": "b45839d36d886ef878701499ee8c5530d3000742b1d98c4f95631b5185aeed51",
+      "validation": {
+        "frames": 48,
+        "durationMs": 3200,
+        "detections": {
+          "hands": 43,
+          "pose": 48,
+          "face": 48
+        }
+      },
+      "processingSeconds": 0.148
+    },
+    {
+      "signId": "RAW_UDAW_KARANAWA_EB1343",
+      "conceptId": null,
+      "sourceFile": "udaw karanawa.mp4",
+      "originalFilename": "udaw karanawa.mp4",
+      "romanizedLabel": "udaw karanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "d9845acc8573e15d519dd2d9811f6b39dd7dfc33770e56ac3d64e388b704cc87",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_udaw_karanawa_eb1343.json",
+      "sha256": "4773707d69d9ea0f3109ef748abb952885f4f34426272d1ae9f948b4b0d23e55",
+      "validation": {
+        "frames": 62,
+        "durationMs": 4120,
+        "detections": {
+          "hands": 47,
+          "pose": 62,
+          "face": 62
+        }
+      },
+      "processingSeconds": 0.179
+    },
+    {
+      "signId": "RAW_UTHURANAWA_9226CD",
+      "conceptId": null,
+      "sourceFile": "uthuranawa.mp4",
+      "originalFilename": "uthuranawa.mp4",
+      "romanizedLabel": "uthuranawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "3c4e85c983e45c0038e532f2c0c6799a35cbf58274220938389a63db76b98571",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_uthuranawa_9226cd.json",
+      "sha256": "c1e7365042a5ccfca2fa1564474075d7d947b1c271599b1f6db33f41a6d50357",
+      "validation": {
+        "frames": 47,
+        "durationMs": 3160,
+        "detections": {
+          "hands": 55,
+          "pose": 47,
+          "face": 47
+        }
+      },
+      "processingSeconds": 0.128
+    },
+    {
+      "signId": "RAW_WAADI_WENAWA_8C0D7A",
+      "conceptId": null,
+      "sourceFile": "waadi wenawa.mp4",
+      "originalFilename": "waadi wenawa.mp4",
+      "romanizedLabel": "waadi wenawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "0381f38f5b79cd5f6b7bd9331027741ecff633bbf30e03b0c2c60a8b51161eb3",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_waadi_wenawa_8c0d7a.json",
+      "sha256": "a0c48cf04e0354e1351bd2e255385e4f5a60f4258071d7bda943a15d3a0cfc61",
+      "validation": {
+        "frames": 39,
+        "durationMs": 2600,
+        "detections": {
+          "hands": 38,
+          "pose": 39,
+          "face": 39
+        }
+      },
+      "processingSeconds": 0.107
+    },
+    {
+      "signId": "RAW_WADA_KARANAWA_9D00D0",
+      "conceptId": null,
+      "sourceFile": "wada karanawa.mp4",
+      "originalFilename": "wada karanawa.mp4",
+      "romanizedLabel": "wada karanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "d03dccfebe1d6cc9cda164fc008431c1058f12e7819614f75f1b6c5c32eac3d1",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_wada_karanawa_9d00d0.json",
+      "sha256": "74b9a63eb71c5928de0aebc71bab814038f99b60415c6f266522626ad92e7c89",
+      "validation": {
+        "frames": 44,
+        "durationMs": 2960,
+        "detections": {
+          "hands": 63,
+          "pose": 44,
+          "face": 44
+        }
+      },
+      "processingSeconds": 0.13
+    },
+    {
+      "signId": "RAW_WAPURANAWA_EDAE84",
+      "conceptId": null,
+      "sourceFile": "wapuranawa.mp4",
+      "originalFilename": "wapuranawa.mp4",
+      "romanizedLabel": "wapuranawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "6602d16aad0dbb52bd470a99f94dcdc6202ebb6aa49641bbbde1a07920f996f7",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_wapuranawa_edae84.json",
+      "sha256": "4e4c6a5f7ea445eb9fbb7678bfe5a96ec52d7c9818455d38bb888df43e6e7ede",
+      "validation": {
+        "frames": 58,
+        "durationMs": 3840,
+        "detections": {
+          "hands": 18,
+          "pose": 58,
+          "face": 58
+        }
+      },
+      "processingSeconds": 0.138
+    },
+    {
+      "signId": "RAW_WIYADAM_KARANAWA_D05A6B",
+      "conceptId": null,
+      "sourceFile": "wiyadam karanawa.mp4",
+      "originalFilename": "wiyadam karanawa.mp4",
+      "romanizedLabel": "wiyadam karanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "c19e9ce24fb59b6fb7c4143fa40daf2d4cd9d9fd37923016c7c40646dd1d7323",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_wiyadam_karanawa_d05a6b.json",
+      "sha256": "1e9da2533a2b459b2ab3530b72884b29f78b6e24aee2a22ce96e1a9d2302b8c0",
+      "validation": {
+        "frames": 59,
+        "durationMs": 3960,
+        "detections": {
+          "hands": 45,
+          "pose": 59,
+          "face": 59
+        }
+      },
+      "processingSeconds": 0.171
+    },
+    {
+      "signId": "RAW_YANAWA_F0A326",
+      "conceptId": null,
+      "sourceFile": "yanawa.mp4",
+      "originalFilename": "yanawa.mp4",
+      "romanizedLabel": "yanawa",
+      "sinhalaLabel": null,
+      "englishMeaning": null,
+      "synonyms": [],
+      "sourceSha256": "8de2199345b88cf301f0867281656e0485dd7f4cf759f78e31647a9de8779dc1",
+      "reviewStatus": "pending",
+      "provenance": "Owner-supplied local MP4; original file preserved",
+      "animationAvailable": true,
+      "processingStatus": "processed",
+      "animationFile": "hand-animations/recorded/batch/raw_yanawa_f0a326.json",
+      "sha256": "e3868fbe2268d84cd8f0fc0040aa05cb3ece064c45067fcc337cd12e95074164",
+      "validation": {
+        "frames": 58,
+        "durationMs": 3880,
+        "detections": {
+          "hands": 22,
+          "pose": 58,
+          "face": 58
+        }
+      },
+      "processingSeconds": 0.167
+    }
+  ]
+}

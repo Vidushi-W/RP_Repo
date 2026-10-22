@@ -1,0 +1,1524 @@
+{
+  "atUtc": "2026-10-22T21:08:53.936357+00:00",
+  "sourceType": "English text; separate audio results are required for speech claims",
+  "evaluationScope": "Prompt-development checks, not held-out linguistic accuracy",
+  "results": [
+    {
+      "input": "She is drinking water.",
+      "expected": [
+        "DRINK"
+      ],
+      "predicted": [
+        "DRINK"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 117,
+        "totalDurationNs": 10953694200,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "SEE",
+          "evidence": "drinking"
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "drinking"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "TAKE",
+            "evidence": "drinking"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 10953.6942,
+      "lookupMs": 566.01,
+      "wallMs": 16752.87
+    },
+    {
+      "input": "The boy is running.",
+      "expected": [
+        "RUN"
+      ],
+      "predicted": [
+        "RUN"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 58,
+        "totalDurationNs": 5289068100,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "RUN",
+          "evidence": "The boy is running."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take the bag",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give the book",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 5289.0681,
+      "lookupMs": 1079.24,
+      "wallMs": 13539.09
+    },
+    {
+      "input": "Give me the book.",
+      "expected": [
+        "GIVE"
+      ],
+      "predicted": [
+        "GIVE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 47,
+        "totalDurationNs": 4521874600,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "GIVE",
+          "evidence": "Give me the book."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "GIVE",
+            "label": "give",
+            "aliases": [
+              "give",
+              "giving",
+              "gave",
+              "hand over",
+              "handing over"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/give.json",
+            "sha256": "cd3fc7839dd38065a940e7eccfa28e33cdde97a01c7342c874e7d2e556570113",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 4521.8746,
+      "lookupMs": 1102.67,
+      "wallMs": 12604.29
+    },
+    {
+      "input": "Take the bag.",
+      "expected": [
+        "TAKE"
+      ],
+      "predicted": [
+        "TAKE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 46,
+        "totalDurationNs": 4744487700,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "TAKE",
+          "evidence": "Take the bag."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "TAKE",
+            "label": "take",
+            "aliases": [
+              "take",
+              "taking",
+              "took",
+              "pick up",
+              "picking up"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/take.json",
+            "sha256": "dc04131a1a4de509cc557b97b01145ebecc8896d58ef95aa287f89eaa6d8ddf8",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 4744.4877,
+      "lookupMs": 1102.65,
+      "wallMs": 12660.19
+    },
+    {
+      "input": "Ask a question.",
+      "expected": [],
+      "predicted": [],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 5597168400,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "Ask a question.",
+            "equivalent": false,
+            "evalCount": 7,
+            "totalDurationNs": 1382880200
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "LOOK",
+          "evidence": "Ask a question."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question.",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "LOOK",
+            "evidence": "Ask a question.",
+            "signId": "LOOK",
+            "senseId": "person-looking-with-eyes",
+            "support": "clear",
+            "explanation": "Context matched the registered look meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 5597.1684,
+      "lookupMs": 959.74,
+      "wallMs": 14863.09
+    },
+    {
+      "input": "I can see the house.",
+      "expected": [
+        "SEE"
+      ],
+      "predicted": [
+        "SEE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 53,
+        "totalDurationNs": 4765356300,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "SEE",
+          "evidence": "see the house"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "SEE",
+            "label": "see",
+            "aliases": [
+              "see",
+              "seeing",
+              "saw",
+              "seen",
+              "spot",
+              "spotted"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/see.json",
+            "sha256": "6d7fe92cd409e09f84d5a809157697a7c47cd13e7d957908d03544fb9b8c4219",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 4765.3563,
+      "lookupMs": 967.31,
+      "wallMs": 11833.01
+    },
+    {
+      "input": "Draw a picture.",
+      "expected": [
+        "DRAW"
+      ],
+      "predicted": [
+        "DRAW"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 14305738300,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRAW",
+          "evidence": "Draw a picture."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRAW",
+            "label": "draw",
+            "aliases": [
+              "draw",
+              "drawing",
+              "drew",
+              "sketch",
+              "sketching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/draw.json",
+            "sha256": "45511189551de0df3b9a6a30ff9c6db1d931ddad5c67e76703558266c34fda52",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 14305.7383,
+      "lookupMs": 929.08,
+      "wallMs": 21870.96
+    },
+    {
+      "input": "She is eating rice.",
+      "expected": [
+        "EAT"
+      ],
+      "predicted": [
+        "EAT"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 45,
+        "totalDurationNs": 14967094300,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "EAT",
+          "evidence": "eating rice"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "EAT",
+            "label": "eat",
+            "aliases": [
+              "eat",
+              "eating",
+              "ate",
+              "eat food",
+              "eating food"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/eat.json",
+            "sha256": "ec8e63969e304599f832a74c89114966862889856193230288337428b0d2f994",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 14967.0943,
+      "lookupMs": 1040.24,
+      "wallMs": 22642.68
+    },
+    {
+      "input": "She is crying, walking and looking.",
+      "expected": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "predicted": [
+        "CRY",
+        "WALK",
+        "LOOK"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 85,
+        "totalDurationNs": 19212742300,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "CRY",
+          "evidence": "crying"
+        },
+        {
+          "signId": "WALK",
+          "evidence": "walking"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "looking"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "CRY",
+            "label": "cry",
+            "aliases": [
+              "cry",
+              "weep",
+              "weeping",
+              "crying",
+              "shedding tears"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/cry.json",
+            "sha256": "9c7ce86c26d513c1eed27754b50bf89493e5a9b363aa5776e7a6e6d142bee6d1",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "WALK",
+            "label": "walk",
+            "aliases": [
+              "walk",
+              "walking",
+              "stroll",
+              "strolling"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/walk.json",
+            "sha256": "b2a73e0a6252786b77b51926352b2dc73c211d7317da045f686a33c852d2a66e",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "LOOK",
+            "label": "look",
+            "aliases": [
+              "look",
+              "looking",
+              "look at",
+              "watch",
+              "watching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/look.json",
+            "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 19212.7423,
+      "lookupMs": 454.36,
+      "wallMs": 25842.22
+    },
+    {
+      "input": "Drink water, then run.",
+      "expected": [
+        "DRINK",
+        "RUN"
+      ],
+      "predicted": [
+        "DRINK",
+        "RUN"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 146,
+        "totalDurationNs": 23592265800,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "Drink water"
+        },
+        {
+          "signId": "RUN",
+          "evidence": "run"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "Drink water, then run."
+        },
+        {
+          "signId": "SEE",
+          "evidence": "Drink water, then run."
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "Drink water, then run."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "Drink water, then run."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "Drink water, then run."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "TAKE",
+            "evidence": "Drink water, then run."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "Give",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "Take",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 23592.2658,
+      "lookupMs": 1240.04,
+      "wallMs": 32344.71
+    },
+    {
+      "input": "Give the book, then take the bag.",
+      "expected": [
+        "GIVE",
+        "TAKE"
+      ],
+      "predicted": [
+        "GIVE",
+        "TAKE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 69,
+        "totalDurationNs": 16261021800,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "GIVE",
+          "evidence": "Give the book"
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "take the bag"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "GIVE",
+            "label": "give",
+            "aliases": [
+              "give",
+              "giving",
+              "gave",
+              "hand over",
+              "handing over"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/give.json",
+            "sha256": "cd3fc7839dd38065a940e7eccfa28e33cdde97a01c7342c874e7d2e556570113",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "TAKE",
+            "label": "take",
+            "aliases": [
+              "take",
+              "taking",
+              "took",
+              "pick up",
+              "picking up"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/take.json",
+            "sha256": "dc04131a1a4de509cc557b97b01145ebecc8896d58ef95aa287f89eaa6d8ddf8",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 16261.0218,
+      "lookupMs": 1045.0,
+      "wallMs": 24622.09
+    },
+    {
+      "input": "Ask a question, then look at the house.",
+      "expected": [
+        "LOOK"
+      ],
+      "predicted": [
+        "LOOK"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 51,
+        "totalDurationNs": 14442521000,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "LOOK",
+          "evidence": "Ask a question, then look at the house."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "LOOK",
+            "label": "look",
+            "aliases": [
+              "look",
+              "looking",
+              "look at",
+              "watch",
+              "watching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/look.json",
+            "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 14442.521,
+      "lookupMs": 1142.12,
+      "wallMs": 22527.16
+    },
+    {
+      "input": "Draw a picture, then see the house.",
+      "expected": [
+        "DRAW",
+        "SEE"
+      ],
+      "predicted": [
+        "DRAW",
+        "SEE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 67,
+        "totalDurationNs": 16446930600,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRAW",
+          "evidence": "Draw a picture"
+        },
+        {
+          "signId": "SEE",
+          "evidence": "see the house"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRAW",
+            "label": "draw",
+            "aliases": [
+              "draw",
+              "drawing",
+              "drew",
+              "sketch",
+              "sketching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/draw.json",
+            "sha256": "45511189551de0df3b9a6a30ff9c6db1d931ddad5c67e76703558266c34fda52",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "SEE",
+            "label": "see",
+            "aliases": [
+              "see",
+              "seeing",
+              "saw",
+              "seen",
+              "spot",
+              "spotted"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/see.json",
+            "sha256": "6d7fe92cd409e09f84d5a809157697a7c47cd13e7d957908d03544fb9b8c4219",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 16446.9306,
+      "lookupMs": 605.41,
+      "wallMs": 21954.31
+    },
+    {
+      "input": "Eat rice, then drink water.",
+      "expected": [
+        "EAT",
+        "DRINK"
+      ],
+      "predicted": [],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 133,
+        "totalDurationNs": 22417193500,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "eat rice, then drink water."
+        },
+        {
+          "signId": "EAT",
+          "evidence": "eat rice, then drink water."
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "eat rice, then drink water."
+        },
+        {
+          "signId": "SEE",
+          "evidence": "eat rice, then drink water."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "DRINK",
+            "evidence": "eat rice, then drink water."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "EAT",
+            "evidence": "eat rice, then drink water."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "eat rice, then drink water."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "eat rice, then drink water."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": []
+      },
+      "qwenMs": 22417.1935,
+      "lookupMs": 572.1,
+      "wallMs": 27322.73
+    },
+    {
+      "input": "Take the book, then take the bag.",
+      "expected": [
+        "TAKE",
+        "TAKE"
+      ],
+      "predicted": [
+        "TAKE",
+        "TAKE"
+      ],
+      "passed": true,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 69,
+        "totalDurationNs": 16924297300,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "TAKE",
+          "evidence": "Take the book"
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "take the bag"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "TAKE",
+            "label": "take",
+            "aliases": [
+              "take",
+              "taking",
+              "took",
+              "pick up",
+              "picking up"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/take.json",
+            "sha256": "dc04131a1a4de509cc557b97b01145ebecc8896d58ef95aa287f89eaa6d8ddf8",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 16924.2973,
+      "lookupMs": 608.39,
+      "wallMs": 22290.48
+    },
+    {
+      "input": "I see a bird, then look at the tree.",
+      "expected": [
+        "SEE",
+        "LOOK"
+      ],
+      "predicted": [
+        "LOOK",
+        "LOOK"
+      ],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 75,
+        "totalDurationNs": 19506398300,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "see a bird",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 1717875400
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "LOOK",
+          "evidence": "see a bird"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "look at the tree"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "text": "I see a bird, then look at the tree.",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "LOOK",
+            "label": "look",
+            "aliases": [
+              "look",
+              "looking",
+              "look at",
+              "watch",
+              "watching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/look.json",
+            "sha256": "59a201e867c4025c79a4fd6e0373abc70bc6ec6cb708af073c4aa3c9ae2c202f",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 19506.3983,
+      "lookupMs": 587.89,
+      "wallMs": 27116.03
+    },
+    {
+      "input": "She sips water, sprints, hands over the book, and sketches a picture.",
+      "expected": [
+        "DRINK",
+        "RUN",
+        "GIVE",
+        "DRAW"
+      ],
+      "predicted": [
+        "DRINK",
+        "RUN",
+        "DRAW"
+      ],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 138,
+        "totalDurationNs": 32118816100,
+        "cpuOnly": true,
+        "meaningVerifications": [
+          {
+            "evidence": "sips water",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 1785031000
+          },
+          {
+            "evidence": "sprints",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 1301023400
+          },
+          {
+            "evidence": "hands over the book",
+            "equivalent": false,
+            "evalCount": 9,
+            "totalDurationNs": 1371604400
+          },
+          {
+            "evidence": "sketches a picture",
+            "equivalent": true,
+            "evalCount": 9,
+            "totalDurationNs": 1386804200
+          }
+        ]
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "sips water"
+        },
+        {
+          "signId": "RUN",
+          "evidence": "sprints"
+        },
+        {
+          "signId": "GIVE",
+          "evidence": "hands over the book"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "hands over the book"
+        },
+        {
+          "signId": "DRAW",
+          "evidence": "sketches a picture"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "hands over the book"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "asking a question",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "discardedProposal": {
+            "concept": "GIVE",
+            "evidence": "hands over the book",
+            "signId": "GIVE",
+            "senseId": "person-giving-physical-object",
+            "support": "clear",
+            "explanation": "Context matched the registered give meaning."
+          },
+          "reason": "Local Qwen meaning verification rejected equivalence"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "DRAW",
+            "label": "draw",
+            "aliases": [
+              "draw",
+              "drawing",
+              "drew",
+              "sketch",
+              "sketching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/draw.json",
+            "sha256": "45511189551de0df3b9a6a30ff9c6db1d931ddad5c67e76703558266c34fda52",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 32118.8161,
+      "lookupMs": 600.24,
+      "wallMs": 46119.87
+    },
+    {
+      "input": "Run a program. Give up. Take care. I see what you mean. Draw the curtains.",
+      "expected": [],
+      "predicted": [
+        "DRAW"
+      ],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 159,
+        "totalDurationNs": 28521284200,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRAW",
+          "evidence": "Draw the curtains."
+        },
+        {
+          "signId": "SEE",
+          "evidence": "I see what you mean."
+        },
+        {
+          "signId": "GIVE",
+          "evidence": "Give up."
+        },
+        {
+          "signId": "RUN",
+          "evidence": "Run a program."
+        },
+        {
+          "signId": "TAKE",
+          "evidence": "Take care."
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "I see what you mean."
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "I see what you mean."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "GIVE",
+            "evidence": "Give up."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "RUN",
+            "evidence": "Run a program."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "TAKE",
+            "evidence": "Take care."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "I see what you mean."
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "Ask a question",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRAW",
+            "label": "draw",
+            "aliases": [
+              "draw",
+              "drawing",
+              "drew",
+              "sketch",
+              "sketching"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/draw.json",
+            "sha256": "45511189551de0df3b9a6a30ff9c6db1d931ddad5c67e76703558266c34fda52",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 28521.2842,
+      "lookupMs": 604.92,
+      "wallMs": 33852.08
+    },
+    {
+      "input": "Do not drink water or run.",
+      "expected": [],
+      "predicted": [
+        "DRINK",
+        "RUN"
+      ],
+      "passed": false,
+      "inference": {
+        "provider": "ollama",
+        "model": "qwen3:1.7b",
+        "performed": true,
+        "mode": "structured-output orchestration",
+        "evalCount": 110,
+        "totalDurationNs": 20106438200,
+        "cpuOnly": true
+      },
+      "cacheHit": false,
+      "rawModelMatches": [
+        {
+          "signId": "DRINK",
+          "evidence": "drink"
+        },
+        {
+          "signId": "RUN",
+          "evidence": "run"
+        },
+        {
+          "signId": "LOOK",
+          "evidence": "look"
+        },
+        {
+          "signId": "SEE",
+          "evidence": "see"
+        }
+      ],
+      "missingOrRejected": [
+        {
+          "discardedProposal": {
+            "signId": "LOOK",
+            "evidence": "look"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "discardedProposal": {
+            "signId": "SEE",
+            "evidence": "see"
+          },
+          "reason": "Evidence absent, overlapping or out of source order"
+        },
+        {
+          "text": "ask",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "take",
+          "reason": "No clear eligible vocabulary meaning"
+        },
+        {
+          "text": "give",
+          "reason": "No clear eligible vocabulary meaning"
+        }
+      ],
+      "manifest": {
+        "schemaVersion": 1,
+        "fixture": false,
+        "signs": [
+          {
+            "signId": "DRINK",
+            "label": "drink",
+            "aliases": [
+              "drink",
+              "drinking",
+              "drank",
+              "sip",
+              "sipping"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/drink.json",
+            "sha256": "25dcb504141b1cd6ef4d76463bdf4c95489956a740bac8c385cc9620ab763e5b",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          },
+          {
+            "signId": "RUN",
+            "label": "run",
+            "aliases": [
+              "run",
+              "running",
+              "ran",
+              "sprint",
+              "sprinting"
+            ],
+            "animationUrl": "hand-animations/recorded/batch/run.json",
+            "sha256": "8bb3567b9ac242cf0b0a62829e6ce7d7db95706b6d9bd32df024d5ae718adaf3",
+            "datasetReference": "Owner-supplied local MP4; original file preserved",
+            "reviewed": true
+          }
+        ]
+      },
+      "qwenMs": 20106.4382,
+      "lookupMs": 568.1,
+      "wallMs": 26563.88
+    }
+  ],
+  "passed": 14,
+  "total": 19,
+  "completed": 19
+}

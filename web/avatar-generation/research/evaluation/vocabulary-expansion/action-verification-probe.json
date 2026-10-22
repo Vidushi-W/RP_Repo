@@ -1,0 +1,38 @@
+[
+  {
+    "text": "Give me the book.",
+    "sid": "GIVE",
+    "expected": true,
+    "actual": false
+  },
+  {
+    "text": "Take the bag.",
+    "sid": "TAKE",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "text": "Draw a picture.",
+    "sid": "DRAW",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "text": "She is drinking water.",
+    "sid": "DRINK",
+    "expected": true,
+    "actual": true
+  },
+  {
+    "text": "Ask a question.",
+    "sid": "LOOK",
+    "expected": false,
+    "actual": false
+  },
+  {
+    "text": "Run a program.",
+    "sid": "RUN",
+    "expected": false,
+    "actual": false
+  }
+]
