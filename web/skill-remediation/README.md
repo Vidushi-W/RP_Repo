@@ -1,10 +1,11 @@
 # Component 3: SLSL Kinematics MVP
 
-Standalone Python sign-practice prototype and API backend for Component 3. The current interface is a local OpenCV webcam client; there is no browser-based frontend yet. The API is a separate backend service. Reference templates and local data remain in this project folder.
+Browser-based SLSL sign-practice page with a Python/FastAPI backend for reference comparison and kinematic error diagnosis. The browser displays the reference, captures camera samples, and lets the learner move manually between signs. The OpenCV desktop interface remains available for research and data collection.
 
 ## Project layout
 
-- `frontend/`: OpenCV webcam practice client, its API client, and webcam data collection UI.
+- `frontend/web/`: browser learning interface (HTML, CSS, JavaScript).
+- `frontend/`: Python data collection and research utilities.
 - `backend/`: FastAPI service, scoring and reference modules, local attempt storage, and model/evaluation commands.
 - `references/`, `data/`, and `research_evaluation/`: local reference assets and research data.
 - `.env`: local API/database configuration; keep it private.
@@ -23,8 +24,7 @@ Copy-Item .env.example .env
 python -m backend.process_references
 ```
 
-The MediaPipe Tasks model `hand_landmarker.task` must be in this folder. Allow camera access when prompted.
-The webcam uses its default working resolution and preserves the input aspect ratio in the display. Optionally set both `SLSL_CAMERA_WIDTH` and `SLSL_CAMERA_HEIGHT` to request a different mode; `SLSL_CAMERA_INDEX` and `SLSL_CAMERA_BACKEND` select the device/backend. The preview draws the hand skeleton with markers only at the wrist and fingertips to keep the view clear.
+The MediaPipe Tasks model `hand_landmarker.task` must be in this folder. The browser asks for camera permission after you open the learning page.
 
 ## MongoDB API
 
@@ -45,7 +45,9 @@ cd "web/skill-remediation"
 python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
 
-Open `http://127.0.0.1:8000/health`; a successful response confirms that MongoDB is reachable. In another terminal, run the webcam demo:
+Open `http://127.0.0.1:8000/` for the browser learning experience. The browser asks for camera permission; use localhost or an HTTPS deployment. `/api/lesson` lists signs with processed references, and `/api/analyze` sends sampled camera images to Python for MediaPipe landmarks, DTW reference comparison, and the approved Random Forest model. The diagnosis model currently supports only `like`; other signs still receive reference comparison and explain that the model does not cover that sign. The reference similarity is a prototype measure, not signing accuracy. Lesson navigation is always manual, and navigating away clears prior feedback.
+
+Open `http://127.0.0.1:8000/health` to verify the MongoDB connection. If Atlas DNS or network access is down, the learning page still starts and practice results are kept in local SQLite. MongoDB is retried for new attempts once the connection is available; older SQLite-only results are not automatically uploaded. To open the separate research webcam client (not the learner-facing web page), run:
 
 ```powershell
 cd "web/skill-remediation"
@@ -73,7 +75,13 @@ Use the same pattern for `references\like`, `references\come`, and the other sig
 
 `backend/reference_loader.py` keeps frames grouped by source file and in temporal order. For a video reference, `backend/metrics.py` uses dynamic time warping (DTW) to align the learner's captured movement with the reference movement, allowing different signing speeds. A still image is a one-frame pose reference. Frames with different detected hand counts are not paired; the capture keeps its dominant hand count.
 
-## Hands-free practice UI
+## Browser learning experience
+
+Start the FastAPI service using the command above, then open `http://127.0.0.1:8000/`. The page serves the available reference images and videos and displays the webcam inside the browser. The learner presses **Sign now** to capture a short attempt; temporary camera snapshots go to Python for MediaPipe hand tracking and are not saved. Only normalized landmark data from attempts with a model-predicted error may be retained in history. Camera access requires localhost or HTTPS.
+
+The page compares attempts with processed reference sequences using DTW, and runs the approved Random Forest only for signs included in its training bundle (currently `like`). Unsupported signs still receive reference comparison. It labels reference similarity separately from model diagnosis, does not show uncalibrated confidence as a score, and never advances automatically. Previous/Next navigation clears old feedback and ignores an analysis result if the learner has changed signs. Repeated diagnosed errors can trigger a practice suggestion through the existing remediation graph.
+
+## Legacy desktop practice interface
 
 Run `python -m frontend.main`. The UI shows the actual source image, or the first frame of the source video, as its cue. For each sign it:
 
@@ -130,7 +138,8 @@ For a supported one-hand sign, the app predicts on captured frames and would use
 - `backend/metrics.py`: landmark distance, similarity mapping, DTW sequence comparison, and joint angles.
 - `backend/extract_references.py` / `backend/process_references.py`: offline landmark extraction.
 - `backend/reference_loader.py`: local template and sequence loading.
-- `frontend/main.py`: picture prompts and local webcam practice interface.
+- `frontend/web/`: browser learning page and in-browser camera controls.
+- `frontend/main.py`: separate OpenCV research and data-collection interface.
 - `backend/attempt_store.py` / `backend/app.py`: local history and MongoDB API persistence.
 - `backend/seed_mongodb.py`: test-only insert and read-back verification.
 - `backend/remediation_engine.py`: NetworkX error-to-skill-to-exercise graph.
