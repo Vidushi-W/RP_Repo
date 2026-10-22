@@ -1,0 +1,94 @@
+# Python
+backend/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Local env & database
+backend/.env
+.env
+*.db
+**/slsl_studio.db
+
+# Artifacts & generated data
+artifacts/models/*
+!artifacts/models/.gitkeep
+artifacts/evaluations/*
+!artifacts/evaluations/.gitkeep
+artifacts/studio_settings.json
+
+data/datasets/
+data/imports/staging/
+data/recordings/*.csv
+!data/recordings/.gitkeep
+
+# Legacy prototype models (use artifacts/models/)
+models/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+
+# Additional local Python environments and tool caches
+.venv/
+venv/
+.ruff_cache/
+.cache/
+
+# Machine-specific environment overrides (keep the setup template)
+.env.*
+!.env.example
+
+# SQLite sidecar files and alternate database extensions
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Downloaded local sentence models (recreated by the setup script)
+local_models/
+
+# Uploaded test motion, predictions, answer keys, and collection choices
+data/studio_tests/
+data/studio_collections.json
+
+# Other generated import/recording outputs; keep directory placeholders
+data/imports/*
+!data/imports/.gitkeep
+data/recordings/*
+!data/recordings/.gitkeep
+
+# Other runtime artifacts; keep existing checkpoint/evaluation placeholders
+artifacts/*
+!artifacts/models/
+!artifacts/evaluations/
+
+# Frontend build caches and test/coverage outputs
+*.tsbuildinfo
+frontend/.vite/
+coverage/
+htmlcov/
+.coverage
+.coverage.*
+test-results/
+playwright-report/
+
+# User-configured expression annotation rules
+data/expression_rules.json
+
+# Generated Sinhala audio (recreated from stored predictions)
+data/studio_speech/

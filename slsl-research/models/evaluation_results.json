@@ -1,0 +1,18 @@
+{
+  "synthetic_prototype_results": {
+    "validation": {
+      "sequence_accuracy": 0.0,
+      "word_error_rate": 0.6333333333333333,
+      "mean_inference_ms": 2.3971999999351588,
+      "samples": 30
+    },
+    "test": {
+      "sequence_accuracy": 0.0,
+      "word_error_rate": 0.6333333333333333,
+      "mean_inference_ms": 3.0198019999625103,
+      "samples": 50
+    },
+    "notes": "Synthetic prototype metrics only \u2014 not real SLSL performance."
+  },
+  "real_user_results": {}
+}

@@ -1,0 +1,8 @@
+// Project-local launcher override. Leaves the installed Flutter SDK unchanged.
+gradle.projectsEvaluated {
+    allprojects {
+        tasks.matching { it.hasProperty('flutterExecutable') }.configureEach {
+            flutterExecutable = new File(System.getenv('SLSL_FLUTTER_LAUNCHER'))
+        }
+    }
+}
