@@ -14,7 +14,7 @@ Standalone Python sign-practice prototype and API backend for Component 3. The c
 Use Python 3.10 or newer in a virtual environment:
 
 ```powershell
-cd "web/skill remediation"
+cd "web/skill-remediation"
 py -3.10 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
@@ -28,7 +28,7 @@ The webcam uses its default working resolution and preserves the input aspect ra
 
 ## MongoDB API
 
-Set `MONGODB_URI` in `web/skill remediation/.env` using the Atlas connection string. URL-encode special characters in the database password. Keep `.env` private; it is ignored by git. The app uses the `slsl_research_db` database and writes attempts to the `component3_kinematic_attempts` collection. Each record includes the user/sign ids, UTC timestamp, detected/expected hand counts, completion or skip status, DTW/similarity/latency metrics, measured finger angles, error codes, and any remediation recommendation. For completed attempts with detected errors, it also stores up to 120 sampled frames of normalized landmark coordinates under `kinematic_observation`; it never stores webcam images or video.
+Set `MONGODB_URI` in `web/skill-remediation/.env` using the Atlas connection string. URL-encode special characters in the database password. Keep `.env` private; it is ignored by git. The app uses the `slsl_research_db` database and writes attempts to the `component3_kinematic_attempts` collection. Each record includes the user/sign ids, UTC timestamp, detected/expected hand counts, completion or skip status, DTW/similarity/latency metrics, measured finger angles, error codes, and any remediation recommendation. For completed attempts with detected errors, it also stores up to 120 sampled frames of normalized landmark coordinates under `kinematic_observation`; it never stores webcam images or video.
 
 Verify the configured Atlas connection and insert a clearly marked test-only record (no guessed score) with:
 
@@ -41,14 +41,14 @@ The script inserts and reads back a document with `record_type: CONNECTION_TEST`
 Start the local API in one terminal:
 
 ```powershell
-cd "web/skill remediation"
+cd "web/skill-remediation"
 python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
 
 Open `http://127.0.0.1:8000/health`; a successful response confirms that MongoDB is reachable. In another terminal, run the webcam demo:
 
 ```powershell
-cd "web/skill remediation"
+cd "web/skill-remediation"
 python -m frontend.main
 ```
 

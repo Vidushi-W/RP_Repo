@@ -89,7 +89,7 @@ def _database():
     if mongo_client is None:
         raise HTTPException(
             status_code=503,
-            detail="MongoDB is not configured. Set MONGODB_URI in web/skill remediation/.env.",
+            detail="MongoDB is not configured. Set MONGODB_URI in web/skill-remediation/.env.",
         )
     try:
         mongo_client.admin.command("ping")

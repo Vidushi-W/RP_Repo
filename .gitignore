@@ -9,13 +9,13 @@ __pycache__/
 !.env.example
 
 # Component 3 standalone Python webcam demo
-web/skill remediation/.venv/
-web/skill remediation/__pycache__/
-web/skill remediation/.mpl-cache/
-web/skill remediation/hand_landmarker.task
-web/skill remediation/mediapipe-*.whl
-web/skill remediation/expert_reference.npy
-web/skill remediation/kinematic_error_classifier.joblib
-web/skill remediation/kinematic_error_classifier.pkl
-web/skill remediation/data/kinematic_dataset.csv
-web/skill remediation/data/
+web/skill-remediation/.venv/
+web/skill-remediation/__pycache__/
+web/skill-remediation/.mpl-cache/
+web/skill-remediation/hand_landmarker.task
+web/skill-remediation/mediapipe-*.whl
+web/skill-remediation/expert_reference.npy
+web/skill-remediation/kinematic_error_classifier.joblib
+web/skill-remediation/kinematic_error_classifier.pkl
+web/skill-remediation/data/kinematic_dataset.csv
+web/skill-remediation/data/
