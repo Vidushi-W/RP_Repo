@@ -1,16 +1,16 @@
 import { NavLink, Outlet } from 'react-router-dom';
-import { Hand, LayoutDashboard, Clapperboard, Library, Settings, ArrowUpRight } from 'lucide-react';
+import { Hand, Home, ScreenShare, Library, Settings, Heart } from 'lucide-react';
 import { usePreferences } from '../../hooks/usePreferences';
-const links = [{ to: '/', label: 'Overview', icon: LayoutDashboard }, { to: '/translation', label: 'Video translation', icon: Clapperboard }, { to: '/vocabulary', label: 'Vocabulary library', icon: Library }, { to: '/settings', label: 'Settings', icon: Settings }];
+const links = [{ to: '/', label: 'Home', icon: Home }, { to: '/translation', label: 'Sign Language Studio', icon: ScreenShare }, { to: '/vocabulary', label: 'Sign Library', icon: Library }, { to: '/settings', label: 'Settings', icon: Settings }];
 export function AppLayout() {
   const { preferences } = usePreferences();
   return <div className={`app ${preferences.highContrast ? 'high-contrast' : ''} ${preferences.reducedMotion ? 'reduced-motion' : ''}`}>
     <a className="skip-link" href="#main-content">Skip to main content</a>
     <aside className="sidebar"><NavLink to="/" className="brand"><span className="brand-icon"><Hand size={25}/></span><span>LankaSigns<small>AVATAR STUDIO</small></span></NavLink>
-      <p className="nav-label">WORKSPACE</p><nav aria-label="Main navigation">{links.map(({ to, label, icon: Icon }) => <NavLink end={to === '/'} key={to} to={to}><Icon size={19}/>{label}</NavLink>)}</nav>
-      <div className="sidebar-note"><span className="dot"/> RESEARCH PROTOTYPE<p>Building a more accessible learning experience, one sign at a time.</p><span>PP1 · Vidushi’s component <ArrowUpRight size={14}/></span></div>
-      <div className="profile"><span>V</span><div>Vidushi<small>Accessibility engine</small></div></div>
+      <p className="nav-label">EXPLORE LANKASIGNS</p><nav aria-label="Main navigation">{links.map(({ to, label, icon: Icon }) => <NavLink end={to === '/'} key={to} to={to}><Icon size={19}/>{label}</NavLink>)}</nav>
+      <div className="sidebar-note"><Heart size={23}/><h3>Made for connection.</h3><p>A more visual way to experience the content you love.</p><NavLink to="/translation">Visit your studio &rarr;</NavLink></div>
+      <div className="sidebar-bottom"><Hand size={16}/> A little closer, one sign at a time.</div>
     </aside>
-    <div className="workspace"><header className="topbar"><span>LankaSigns <span className="muted">/</span> Accessibility engine</span><span className="badge">Local research workspace</span></header><main id="main-content" tabIndex={-1}><Outlet/></main><footer>Sri Lankan Sign Language · Made for understanding.<span>Research prototype / v0.1</span></footer></div>
+    <div className="workspace"><header className="topbar"><span>LankaSigns <span className="muted">/</span> Avatar Studio</span><span className="badge"><Hand size={13}/> Designed for connection</span></header><main id="main-content" tabIndex={-1}><Outlet/></main><footer>Sri Lankan Sign Language &middot; Made for understanding.<span>LankaSigns Avatar Studio</span></footer></div>
   </div>;
 }

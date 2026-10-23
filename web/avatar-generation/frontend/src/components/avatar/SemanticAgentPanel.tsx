@@ -18,23 +18,23 @@ export function SemanticAgentPanel() {
     catch(e){if(!request.signal.aborted)setError(e instanceof Error?e.message:'Semantic selection failed.');}
     finally {if(!request.signal.aborted)setBusy(false);}
   }
-  return <section className="panel local-video-panel" aria-label="Semantic sign selection agent">
-    <span className="eyebrow">ENGLISH → SEMANTIC AGENT → SAVED ANIMATION</span>
-    <h2>Select signs with the AI agent</h2>
-    <p className="small muted">Local Qwen3 interprets context against registered meanings and queues only existing recordings in English mention order. This does not determine SLSL grammar.</p>
+  return <section className="panel local-video-panel" aria-label="Text to supported signs">
+    <span className="eyebrow">FROM WORDS TO SIGNS</span>
+    <h2>Find signs for your text</h2>
+    <p className="small muted">Find supported signs based on the meaning of your text. Available recordings play in mention order; this does not determine SLSL grammar.</p>
     <label className="field-label" htmlFor="semantic-transcript">English text or speech-to-text transcript</label>
     <textarea id="semantic-transcript" rows={3} maxLength={1000} value={text} onChange={e=>{clear();setText(e.target.value);}} placeholder="The nurse is working."/>
-    <label className="fixture-toggle"><input type="checkbox" checked={preview} onChange={e=>{clear();setPreview(e.target.checked);}}/> Research preview: include pending recordings</label>
-    {preview&&<p className="fixture-banner">Unreviewed research playback. NURSE sign correctness and handedness are pending expert review. Proposed synonyms are not verified SLSL mappings.</p>}
-    <button className="button primary" disabled={busy||!text.trim()} onClick={()=>void process()}>Process with AI Agent</button>
-    <p role="status" aria-live="polite">{busy?'Agent processing: checking vocabulary and context…':error?'Agent request failed':result?result.signs.length?'Validated selection · playing saved recordings':'Unsupported sign':'Ready'}</p>
+    <label className="fixture-toggle"><input type="checkbox" checked={preview} onChange={e=>{clear();setPreview(e.target.checked);}}/> Include recordings awaiting review</label>
+    {preview&&<p className="fixture-banner">Unreviewed playback. NURSE sign correctness and handedness are pending expert review. Proposed synonyms are not verified SLSL mappings.</p>}
+    <button className="button primary" disabled={busy||!text.trim()} onClick={()=>void process()}>Find Matching Signs</button>
+    <p role="status" aria-live="polite">{busy?'Finding matching vocabulary and context…':error?'Could not find signs':result?result.signs.length?'Validated selection · playing saved recordings':'Unsupported sign':'Ready'}</p>
     {error&&<p className="error" role="alert">{error}</p>}
     {result&&<>
       <p><strong>Transcript:</strong> {result.englishText}</p>
       <p><strong>Recognized concepts:</strong> {result.concepts.map(c=>c.concept+(c.animationAvailable?'':' (no playable animation)')).join(' → ')||'No supported concepts identified'}</p>
       <p><strong>Playback queue:</strong> {result.signs.join(' → ')||'Unsupported sign'}</p>
-      {result.inference&&<p className="small muted">{result.inference.performed?`Local inference: ${result.inference.model} · ${result.inference.mode}`:'Standalone registry match; no model inference performed.'}</p>}
-      <ul>{result.matches.map((m,i)=><li key={i}><strong>{m.canonicalLabel}</strong> · {m.method} · {m.reviewStatus}<br/>{m.explanation}<br/><code>{m.animationFile}</code></li>)}</ul>
+      {result.inference&&<p className="small muted">{result.inference.performed?'Text meaning processed':'Matched from the available sign library.'}</p>}
+      <ul>{result.matches.map((m,i)=><li key={i}><strong>{m.canonicalLabel}</strong> · {m.reviewStatus}<br/>{m.explanation}</li>)}</ul>
       {!!result.unsupported.length&&<p className="fixture-banner" role="status">Unsupported vocabulary: {result.unsupported.join('; ')}</p>}
       <SignSequencePlayer key={run} signs={result.signs} manifest={result.manifest} autoPlay/>
     </>}

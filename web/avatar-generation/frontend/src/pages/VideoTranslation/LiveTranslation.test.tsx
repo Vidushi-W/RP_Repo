@@ -8,14 +8,14 @@ vi.mock('../../services/liveAudio',()=>({LiveAudioClient:class{constructor(selec
 vi.mock('../../components/avatar/ContinuousAvatar',()=>({ContinuousAvatar:({selection,onSigning}:any)=>{useEffect(()=>onSigning(!!selection),[selection,onSigning]);return <div role="img" aria-label="Avatar"/>;}}));
 import LiveTranslation from './LiveTranslation';
 
-it('shows only the minimal controls and moves through idle, listening, signing and stopped states',async()=>{
+it('preserves the sharing controls and moves through idle, listening, signing and stopped states',async()=>{
   Object.assign(globalThis,{IS_REACT_ACT_ENVIRONMENT:true});const container=document.createElement('div');const root=createRoot(container);
   await act(async()=>root.render(<LiveTranslation/>));
   expect(container.querySelectorAll('textarea,input,select,video')).toHaveLength(0);
   expect(container.textContent).not.toContain('Research preview');expect(container.textContent).not.toContain('Transcript');
-  const button=container.querySelector('button')!;expect(button.textContent).toBe('Listen');
+  const button=container.querySelector('button')!;expect(button.textContent).toBe('Share Tab & See Signs');
   await act(async()=>button.click());expect(button.textContent).toBe('Stop Listening');expect(container.textContent).toContain('Listening');
   await act(async()=>state.select?.({signs:['CRY'],manifest:{}}));expect(container.textContent).toContain('Signing');
-  await act(async()=>button.click());expect(button.textContent).toBe('Listen');expect(state.captureStops).toBeGreaterThan(0);expect(state.socketStops).toBeGreaterThan(0);
+  await act(async()=>button.click());expect(button.textContent).toBe('Share Tab & See Signs');expect(state.captureStops).toBeGreaterThan(0);expect(state.socketStops).toBeGreaterThan(0);
   await act(async()=>root.unmount());
 });

@@ -51,11 +51,11 @@ export function SignSequencePlayer({signs,manifest:providedManifest,visible=true
   useEffect(()=>{onCurrentSignChange?.(current?.item.signId||null,currentOrdinal);},[current?.item.signId,currentOrdinal,onCurrentSignChange]);
 
   return <section className="sign-player">
-    <div className="player-status"><span className="eyebrow">C · SAVED 2D HAND LANDMARKS</span><span className="badge">{status}</span></div>
+    <div className="player-status"><span className="eyebrow">YOUR SIGNING PREVIEW</span><span className="badge">{status}</span></div>
     {manifest?.fixture && <p className="fixture-banner">Coordinate diagnostics only · synthetic test data · not SLSL signs</p>}
     <div className={`hand-preview ${size}`}>{visible ? <HandSkeletonCanvas frame={frame} metadata={animation?.metadata} label={current ? `Hand landmark playback for ${current.item.signId}` : 'Hand landmark player, no sign selected'}/> : <p className="hand-preview-hidden">Hand preview is hidden in Settings. Playback timing remains active.</p>}</div>
     <div className="hand-legend"><span><i className="left-hand-dot"/> Left hand</span><span><i className="right-hand-dot"/> Right hand</span><span>Full-frame positions · no mirroring</span></div>
-    <div className="current-sign" aria-live="polite"><strong>{loading ? 'Loading saved animations…' : current?.item.signId || (external ? 'No active sign at this video time' : 'No sign sequence selected')}</strong><p>{current?.item.error || (!requested.length ? 'Process text or provide agent sign identifiers to begin.' : 'Only saved landmark coordinates are replayed.')}</p></div>
+    <div className="current-sign" aria-live="polite"><strong>{loading ? 'Loading saved animations…' : current?.item.signId || (external ? 'No active sign at this video time' : 'No sign sequence selected')}</strong><p>{current?.item.error || (!requested.length ? 'Enter text or import playback instructions to begin.' : 'Playing motion from saved recordings.')}</p></div>
     <div className="sign-chips" aria-label="Sign sequence">{visibleSigns.map((id,index)=><span key={index} className={current?.index===index?'active':''} aria-current={current?.index===index?'step':undefined}>{id}</span>)}</div>
     <progress aria-label="Sign sequence progress" max={1} value={progress}/>
     <div className="sequence-controls">
@@ -65,7 +65,7 @@ export function SignSequencePlayer({signs,manifest:providedManifest,visible=true
       {onSpeedChange && <label>Speed <select value={speed} onChange={e=>onSpeedChange(Number(e.target.value))}>{[0.5,0.75,1,1.25,1.5].map(rate=><option key={rate} value={rate}>{rate}×</option>)}</select></label>}
     </div>
     <p className="small muted">{(elapsed/1000).toFixed(2)} / {(duration/1000).toFixed(2)} s · {external?'Use the video controls for play, pause, seek and replay.':'Missing signs use a labelled 0.8 s blank slot. No substitutes.'}</p>
-    {video?.clipped && <p className="fixture-banner" role="status">This segment is shorter than its saved sequence at the selected speed. Motion is clipped at the segment end, never accelerated automatically. Adjust the timestamps before evaluation.</p>}
+    {video?.clipped && <p className="fixture-banner" role="status">This segment is shorter than its saved sequence at the selected speed. Motion is clipped at the segment end, never accelerated automatically. Check the supplied video timing.</p>}
     {items.some(item=>item.error) && <ul className="missing-list">{items.filter(item=>item.error).map((item,index)=><li key={index}>{item.error}</li>)}</ul>}
     {defaultLibrary.error && providedManifest===undefined && <p role="alert" className="error">{defaultLibrary.error}</p>}
   </section>;

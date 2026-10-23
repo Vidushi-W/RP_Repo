@@ -28,9 +28,9 @@ export function RecordedAnimationPreview() {
     }
   }
   return <details className="panel local-video-panel">
-    <summary>Preview an extracted recording before review</summary>
-    <p className="small muted mt-4">Choose saved landmark JSON from the extractor. This local preview does not add it to the reviewed SLSL vocabulary.</p>
-    <label className="field-label" htmlFor="recorded-json">Extracted animation JSON</label>
+    <summary>Preview a saved recording</summary>
+    <p className="small muted mt-4">Choose a saved animation file in JSON format. This preview does not add it to the supported sign library.</p>
+    <label className="field-label" htmlFor="recorded-json">Saved animation file (JSON)</label>
     <input id="recorded-json" type="file" accept=".json,application/json" onChange={event=>{const file=event.target.files?.[0];event.target.value='';void open(file);}}/>
     {error&&<p role="alert" className="error">{error}</p>}
     {animation&&<>

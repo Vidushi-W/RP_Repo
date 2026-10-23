@@ -27,7 +27,7 @@ afterEach(async()=>{await act(async()=>root.unmount());container.remove();vi.res
 describe('hand studio integration',()=>{
   it('processes only explicit test aliases, draws both hands and supports controls in StrictMode',async()=>{
     await act(async()=>root.render(<StrictMode><PreferencesProvider><AvatarGenerationPage/></PreferencesProvider></StrictMode>));
-    expect(container.textContent).toContain('No dataset signs have been registered');
+    expect(container.textContent).toContain('No signs are available in this playback library yet.');
     const diagnostic=container.querySelector('.fixture-toggle input') as HTMLInputElement;
     await act(async()=>diagnostic.click());
     expect((container.querySelector('#english-input') as HTMLTextAreaElement).value).toBe('test-a test-b');
