@@ -61,15 +61,21 @@ async function startCamera() {
 }
 function wait(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
 async function captureSamples(generation) {
-  const samples = []; const duration = 4000; const interval = 200; const started = performance.now();
+  const samples = []; const duration = 6000; const interval = 200; const started = performance.now();
   $("capture-overlay").hidden = false;
   while (performance.now() - started < duration && generation === state.generation) {
     const remaining = Math.max(0, Math.ceil((duration - (performance.now() - started)) / 1000));
     $("capture-label").textContent = "Signing…"; $("capture-countdown").textContent = String(remaining);
     if (video.videoWidth && video.videoHeight) {
-      const scale = Math.min(1, 640 / video.videoWidth); canvas.width = Math.round(video.videoWidth * scale); canvas.height = Math.round(video.videoHeight * scale);
+      const scale = Math.min(1, 800 / video.videoWidth); canvas.width = Math.round(video.videoWidth * scale); canvas.height = Math.round(video.videoHeight * scale);
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      samples.push(canvas.toDataURL("image/jpeg", 0.72).split(",")[1]);
+      let sample = canvas.toDataURL("image/jpeg", 0.8).split(",")[1];
+      if (sample.length > 340_000) {
+        canvas.width = Math.round(canvas.width * 0.8); canvas.height = Math.round(canvas.height * 0.8);
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        sample = canvas.toDataURL("image/jpeg", 0.7).split(",")[1];
+      }
+      samples.push(sample);
     }
     await wait(interval);
   }

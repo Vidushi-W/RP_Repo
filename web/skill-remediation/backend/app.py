@@ -28,6 +28,7 @@ from mediapipe.tasks import python as mp_python
 from mediapipe.tasks.python import vision
 
 from backend.attempt_store import AttemptStore
+from backend.extract_references import _recover_two_crop_hands
 from backend.metrics import compare_pose_sequences
 from backend.ml_classifier import load_error_classifier, predict_sequence
 from backend.normalization import normalize_landmarks
@@ -136,7 +137,7 @@ def _browser_feedback(label: str | None) -> str:
         "ERR_PINKY_FLEX": "Your little finger may need a small adjustment. Watch the example and try again.",
         "ERR_INDEX_EXT": "Check your index finger position against the example, then try again.",
         "ERR_WRIST_ROTATION": "Try turning your hand a little to match the example.",
-        "UNSUPPORTED_SIGN": "The hand-position model is currently trained for LIKE only. The reference comparison is still available.",
+        "UNSUPPORTED_SIGN": "Your sign was compared with the reference. Keep practicing and try again!",
         "NO_SINGLE_HAND_DATA": "Keep one hand clearly visible in the camera while you sign.",
     }
     return messages.get(label or "", "Your attempt was compared with the reference. You can try again whenever you like.")
@@ -148,6 +149,7 @@ def analyze_browser_attempt(request: BrowserAnalysisRequest):
     references = load_reference_sequences()
     if request.sign_id not in references:
         raise HTTPException(status_code=404, detail="This sign does not have a processed reference.")
+    required_hands = len(references[request.sign_id][0][0])
     if not HAND_MODEL_PATH.exists():
         raise HTTPException(status_code=503, detail="The hand tracking model is missing. See the setup guide.")
 
@@ -160,33 +162,73 @@ def analyze_browser_attempt(request: BrowserAnalysisRequest):
         image = cv2.imdecode(np.frombuffer(image_data, dtype=np.uint8), cv2.IMREAD_COLOR)
         if image is None:
             raise HTTPException(status_code=422, detail="A camera sample is not a valid image.")
-        image_frames.append(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        image_frames.append(image)
 
     options = vision.HandLandmarkerOptions(
         base_options=mp_python.BaseOptions(model_asset_path=str(HAND_MODEL_PATH)),
-        running_mode=vision.RunningMode.IMAGE,
+        running_mode=vision.RunningMode.VIDEO,
         num_hands=2,
-        min_hand_detection_confidence=0.6,
-        min_tracking_confidence=0.6,
+        min_hand_detection_confidence=0.15,
+        min_hand_presence_confidence=0.15,
+        min_tracking_confidence=0.15,
     )
     live_frames = []
     with vision.HandLandmarker.create_from_options(options) as detector:
-        for rgb in image_frames:
-            detection = detector.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb))
+        for frame_index, bgr in enumerate(image_frames):
+            timestamp_ms = (frame_index + 1) * 200
+            rgb = cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)
+            detection = detector.detect_for_video(
+                mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb), timestamp_ms
+            )
+            detected_hands = list(detection.hand_landmarks or [])
+            if required_hands == 2 and len(detected_hands) < 2:
+                detected_hands = _recover_two_crop_hands(
+                    bgr, detector, timestamp_ms + 1, full_frame_hands=detected_hands
+                )
             hands = []
-            for hand in detection.hand_landmarks or []:
-                points = np.asarray([[point.x, point.y, point.z] for point in hand], dtype=np.float32)
-                hands.append(normalize_landmarks(points))
+            if len(detected_hands) == required_hands:
+                for hand in detected_hands:
+                    points = np.asarray([[point.x, point.y, point.z] for point in hand], dtype=np.float32)
+                    hands.append(normalize_landmarks(points))
             live_frames.append(np.stack(hands) if hands else np.empty((0, 21, 3), dtype=np.float32))
 
-    counts = Counter(len(frame) for frame in live_frames)
-    dominant_hands = max(counts, key=lambda count: (counts[count], count)) if counts else 0
-    consistent_frames = [frame for frame in live_frames if len(frame) == dominant_hands]
-    required_hands = len(references[request.sign_id][0][0])
-    if dominant_hands == 0 or len(consistent_frames) < 5:
-        return {"status": "INSUFFICIENT_DATA", "message": "I couldn't see your hands clearly enough. Move into the frame and try again.", "hands_detected": dominant_hands, "expected_hands": required_hands}
-    if dominant_hands != required_hands:
-        return {"status": "HAND_COUNT_MISMATCH", "message": f"The example uses {required_hands} hand(s). Keep {required_hands} hand(s) in view as you sign.", "hands_detected": dominant_hands, "expected_hands": required_hands}
+    count_distribution = Counter(len(frame) for frame in live_frames)
+    visible_counts = Counter({count: amount for count, amount in count_distribution.items() if count > 0})
+    expected_frames = [frame for frame in live_frames if len(frame) == required_hands]
+    if len(expected_frames) >= 5:
+        # Ignore empty and partial detections if enough frames contain the
+        # reference's required number of hands to score the attempt.
+        dominant_hands = required_hands
+        consistent_frames = expected_frames
+    elif visible_counts:
+        dominant_hands = max(visible_counts, key=lambda count: (visible_counts[count], count))
+        consistent_frames = [frame for frame in live_frames if len(frame) == dominant_hands]
+        expected_count = len(expected_frames)
+        if dominant_hands != required_hands:
+            visibility_tip = (
+                "Keep both hands inside the camera view, apart enough to distinguish, and try again."
+                if required_hands == 2
+                else "Keep one hand inside the camera view and try again."
+            )
+            message = (
+                f"I could see {dominant_hands} hand(s) in {len(consistent_frames)} of {len(live_frames)} samples; "
+                f"this example needs {required_hands}. {visibility_tip}"
+            )
+            return {"status": "HAND_COUNT_MISMATCH", "message": message, "hands_detected": dominant_hands, "expected_hands": required_hands, "expected_hand_samples": expected_count, "sample_count": len(live_frames)}
+        message = (
+            f"I detected the required {required_hands} hands in only {expected_count} of {len(live_frames)} samples. "
+            "Hold the sign clearly in view for the whole capture, then try again."
+        )
+        return {"status": "INSUFFICIENT_DATA", "message": message, "hands_detected": dominant_hands, "expected_hands": required_hands, "expected_hand_samples": expected_count, "sample_count": len(live_frames)}
+    else:
+        return {
+            "status": "INSUFFICIENT_DATA",
+            "message": "I couldn't detect any hands in the camera samples. Move into the frame, improve the light, and keep both hands visible while you sign.",
+            "hands_detected": 0,
+            "expected_hands": required_hands,
+            "expected_hand_samples": 0,
+            "sample_count": len(live_frames),
+        }
 
     best = None
     for reference in references[request.sign_id]:

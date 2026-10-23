@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import cv2
 import mediapipe as mp
@@ -46,8 +47,23 @@ def _square_crop(image: np.ndarray, x_start: int, x_end: int) -> tuple[np.ndarra
     return padded, pad_left, side
 
 
-def _recover_two_crop_hands(image: np.ndarray, landmarker, timestamp_ms: int) -> list[list]:
-    """Detect one hand in each overlapping half when full-frame detection misses one."""
+def _restore_crop_hand(hand: list, x_start: int, pad_left: int, square_side: int,
+                       width: int, height: int) -> list:
+    """Map crop-normalized landmarks back to normalized full-frame coordinates."""
+    return [
+        SimpleNamespace(
+            x=(x_start + float(point.x) * square_side - pad_left) / width,
+            y=float(point.y) * square_side / height,
+            z=float(point.z) * square_side / width,
+        )
+        for point in hand
+    ]
+
+
+def _recover_two_crop_hands(
+    image: np.ndarray, landmarker, timestamp_ms: int, full_frame_hands: list | None = None
+) -> list[list]:
+    """Combine full-frame and overlapping crop detections, deduplicating hands."""
     height, width = image.shape[:2]
     split = width // 2
     overlap = max(1, round(width * 0.20))
@@ -55,26 +71,44 @@ def _recover_two_crop_hands(image: np.ndarray, landmarker, timestamp_ms: int) ->
         (0, min(width, split + overlap // 2)),
         (max(0, split - overlap // 2), width),
     )
-    recovered: list[tuple[float, list]] = []
+    candidates: list[list] = []
+    for hand in full_frame_hands or []:
+        candidates.append(hand)
     for side, (x_start, x_end) in enumerate(regions):
         crop, pad_left, square_side = _square_crop(image, x_start, x_end)
         rgb = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)
         result = landmarker.detect_for_video(
             mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb), timestamp_ms + side
         )
-        candidates = []
         for hand in result.hand_landmarks or []:
-            center_x = x_start + (
-                float(np.mean([point.x for point in hand])) * square_side - pad_left
-            )
-            candidates.append((center_x, hand))
-        if candidates:
-            target_x = width * (0.28 if side == 0 else 0.72)
-            recovered.append(min(candidates, key=lambda item: abs(item[0] - target_x)))
+            # Convert crop-normalized coordinates back into the original
+            # frame coordinate system before normalizing the hand. Without
+            # this, square padding stretches x/y differently from a full
+            # frame detection and makes the reference incomparable to webcam
+            # landmarks.
+            candidates.append(_restore_crop_hand(hand, x_start, pad_left, square_side, width, height))
 
-    if len(recovered) == 2 and recovered[0][0] < recovered[1][0]:
-        return [recovered[0][1], recovered[1][1]]
-    return []
+    # A hand seen in the full frame and in both crops should contribute once.
+    # Compare wrist/palm centers in original image coordinates, not crop units.
+    unique: list[tuple[float, float, list]] = []
+    for hand in candidates:
+        center_x = float(np.mean([point.x for point in hand]))
+        center_y = float(np.mean([point.y for point in hand]))
+        if any(np.hypot(center_x - x, center_y - y) < 0.11 for x, y, _ in unique):
+            continue
+        unique.append((center_x, center_y, hand))
+    if len(unique) < 2:
+        return []
+
+    # Two hands can be close together (as in HOUSE), so don't require a fixed
+    # left/right ordering or distance. Prefer hands from distinct image areas.
+    best_pair = max(
+        ((first, second) for index, first in enumerate(unique) for second in unique[index + 1:]),
+        key=lambda pair: np.hypot(pair[0][0] - pair[1][0], pair[0][1] - pair[1][1]),
+    )
+    if np.hypot(best_pair[0][0] - best_pair[1][0], best_pair[0][1] - best_pair[1][1]) < 0.06:
+        return []
+    return [item[2] for item in sorted(best_pair, key=lambda item: item[0])]
 
 
 def landmarks_to_array(points: list) -> np.ndarray:

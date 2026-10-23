@@ -71,16 +71,16 @@
           <button class="primary-button" id="camera-button" type="button"><span aria-hidden="true">▶</span> Start camera</button>
           <button class="primary-button analyze-button" id="analyze-button" type="button" disabled><span aria-hidden="true">✋</span> Sign now</button>
         </div>
-        <p class="camera-note" id="camera-note">Short camera snapshots go to the learning server for hand tracking. Webcam video is not stored.</p>
+          <p class="camera-note" id="camera-note">Keep the complete sign inside the camera view while it captures. Short snapshots go to the learning server; webcam video is not stored.</p>
       </article>
     </section>
 
     <section class="feedback-card" id="feedback-card" aria-live="polite" aria-atomic="true">
       <div class="feedback-icon" id="feedback-icon" aria-hidden="true">🌼</div>
       <div class="feedback-copy"><p class="eyebrow" id="feedback-eyebrow">YOU'RE DOING GREAT</p><h2 id="feedback-title">Let's practice together!</h2><p id="feedback-message">When you're ready, show your sign in the camera.</p></div>
-      <div class="score-chip" id="similarity-chip" hidden><strong id="similarity-value">—</strong><span>reference similarity*</span></div>
+      <div class="score-chip" id="similarity-chip" hidden><strong id="similarity-value">—</strong><span>match to example*</span></div>
     </section>
-    <p class="score-note" id="score-note" hidden>*</p>
+    <p class="score-note" id="score-note" hidden>*Reference pose similarity (prototype), not calibrated sign accuracy.</p>
 
     <nav class="lesson-nav" aria-label="Lesson signs">
       <button class="nav-button previous-button" id="previous-button" type="button" disabled><span aria-hidden="true">←</span> Previous</button>
